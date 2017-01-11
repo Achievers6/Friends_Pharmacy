@@ -162,6 +162,7 @@ $t = sizeof($_SESSION['cart']);
         <script src="../public/js/jquery-2.0.0.js"></script>
         <link href="../public/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <style>
+
             .totaltxt {
                 position: absolute;
                 right: 380px;
@@ -203,11 +204,11 @@ $t = sizeof($_SESSION['cart']);
             .drugTable
             {
                 width: 750px;
-                height: 250px;
-                margin: 10px 10px 10px 0;
-                border: 3px solid #E3E3E3;
-                border-radius: 10px;
-                moz-border-radius: 10px;
+                height: 200px;
+                padding-right: 30px;
+                padding-bottom: -100px;
+                background-color: white;
+
             }
 
             .drugTable tr th, .drugTable tr td
@@ -334,7 +335,64 @@ $t = sizeof($_SESSION['cart']);
             }
             .to {
                 color: #777777;
+                position: relative;
+                top: 10px;
             }
+            .myButton {
+                position: relative; 
+                left: 125px; 
+                top:20px;
+                -moz-box-shadow: 0px 1px 0px 0px #fff6af;
+                -webkit-box-shadow: 0px 1px 0px 0px #fff6af;
+                box-shadow: 0px 1px 0px 0px #fff6af;
+                background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
+                background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
+                background-color:#ffec64;
+                -moz-border-radius:19px;
+                -webkit-border-radius:19px;
+                border-radius:19px;
+                border:2px solid #ffaa22;
+                display:inline-block;
+                cursor:pointer;
+                color:#333333;
+                font-family:Trebuchet MS;
+                font-size:16px;
+                font-weight:bold;
+                padding:7px 16px;
+                text-decoration:none;
+                text-shadow:0px 1px 0px #ffee66;
+            }
+            .myButton:hover {
+                background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
+                background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
+                background-color:#ffab23;
+            }
+            .myButton:active {
+                position: relative; 
+                left: 390px; 
+                top:300px;;
+
+            }
+            .mdh {
+                text-align:center; 
+                color: green; 
+                font-family: SourceSansPro;
+                font-size: 2.4em;
+                line-height: 1em;
+                font-weight: normal;
+                margin: 0  0 50px 0;
+            }
+
         </style>
 
 
@@ -414,7 +472,7 @@ $t = sizeof($_SESSION['cart']);
 
 
         <?php require '../includes/customer_header.php'; ?>
-        <?php require '../includes/slideshow.php';?>
+        <?php require '../includes/slideshow.php'; ?>
 
         <div class="content">
             <article>
@@ -472,14 +530,17 @@ $t = sizeof($_SESSION['cart']);
                             <tr>
                                 <td colspan='2' ><?php echo $drug->discription ?></td>
                             </tr>   
-                            <tr>
-                                <td></td>
 
-
-                                <td> <button class="product-btn-add" style="width: 100px; height: 30px;" onclick= "window.location.href = 'otc.php?id=<?php echo $drug->id ?>&page=<?php echo $page ?>'"><span>Add to Cart</span></button></td>
-                                <!--<td> <button class="product-btn-add" style="width: 100px; height: 30px;" id='myBtn' onclick='myFunction()'><span>Add to Cart</span></button></td>-->
-                            </tr>   
                         </table>
+
+
+
+
+                        <a href='#' onclick= "window.location.href = 'otc.php?id=<?php echo $drug->id ?>&page=<?php echo $page ?>'">
+                            <img src='../public/image/addCart.png' style="width: 200px; height: 110px;; position: relative; left: 590px; top:-40;" >
+                        </a>
+
+                           <!--<td> <button class="product-btn-add" style="width: 100px; height: 30px;" id='myBtn' onclick='myFunction()'><span>Add to Cart</span></button></td>-->
 
                     <?php } ?>
                     <table>
@@ -579,88 +640,95 @@ $t = sizeof($_SESSION['cart']);
 
 
                 <div id = 'myModal' class = 'modal'>
-                    <div class = 'modal-content'>
-                        <h3 style = 'text-align:center;'><?php echo $drugforcart->medicine_name ?></h3>
+                    <div class = 'modal-content' style="padding: 20px; outline-style: double;">
+                        <h2 class="mdh" style = 'text-align:center;'><?php echo $drugforcart->medicine_name ?></h2>
+                        <a href='otc.php'>
+                            <img src='../public/image/cancel.png' style="width: 35px; height: 35px; position: relative; left: 515px; top:-100px;" >
+                        </a>
+                        <div class="inter" style="position: relative; top: -40px;">
+                            <?php echo " <form name = 'myForm2' action = 'otc.php?id2=$id2&page=$page' method = 'post' onsubmit = 'return validateForm2()'>" ?>
+                            <table class = 'drugforcartTable' >
+                                <tr>
 
-                        <?php echo " <form name = 'myForm2' action = 'otc.php?id2=$id2&page=$page' method = 'post' onsubmit = 'return validateForm2()'>" ?>
-                        <table class = 'drugforcartTable'>
-                            <tr>
+                                    <?php echo "<th rowspan='6' width = '120px' ><img runat = 'server' src = '$drugforcart->image'/></th>" ?>
+                                    <td><input type="hidden" name ="medname" value=<?php echo $drugforcart->medicine_name ?>></td>
 
-                                <?php echo "<th rowspan='6' width = '150px' ><img runat = 'server' src = '$drugforcart->image' /></th>" ?>
-                                <td><input type="hidden" name ="medname" value=<?php echo $drugforcart->medicine_name ?>></td>
+                                </tr>
 
-                            </tr>
+                                <tr>
+                                    <th>Generic: </th>
+                                    <td><?php echo $drugforcart->generic_name ?></td>
 
-                            <tr>
-                                <th>Generic: </th>
-                                <td><?php echo $drugforcart->generic_name ?></td>
+                                </tr>
 
-                            </tr>
+                                <tr>
+                                    <th>Group: </th>
+                                    <td><?php echo $drugforcart->group_name ?></td>
+                                </tr>
 
-                            <tr>
-                                <th>Group: </th>
-                                <td><?php echo $drugforcart->group_name ?></td>
-                            </tr>
+                                <tr>
+                                    <th>Type: </th>
+                                    <td><?php echo $drugforcart->type ?></td>
+                                </tr>
 
-                            <tr>
-                                <th>Type: </th>
-                                <td><?php echo $drugforcart->type ?></td>
-                            </tr>
+                                <tr>
+                                    <th>Category: </th>
+                                    <td><?php echo $drugforcart->category ?></td>
+                                </tr>
 
-                            <tr>
-                                <th>Category: </th>
-                                <td><?php echo $drugforcart->category ?></td>
-                            </tr>
+                                <tr>
+                                    <td colspan='2' ><?php echo $drugforcart->discription ?></td>
+                                </tr> 
 
-                            <tr>
-                                <td colspan='2' ><?php echo $drugforcart->discription ?></td>
-                            </tr> 
-
-                            <tr>
+                                <tr>
 
 
-                                <td></td>
-                                <td>Dosage:</td>
+                                    <td></td>
+                                    <td>Dosage:</td>
 
-                                <td>
-                                    <select name = 'dosagetype' >
+                                    <td>
+                                        <select name = 'dosagetype' style="width: 173px;">
 
-                                        <?php foreach ($disdosage as $value) { ?>
-                                            <?php $drid = $disid[array_search($value, $disdosage)] ?>
-                                            <?php $drprice = $disprice[array_search($value, $disdosage)] ?>
-                                            <?php echo "<option value=$drid>$value" . " (Rs " . $disprice[array_search($value, $disdosage)] . ")" . "</option>"; ?>
-                                        <?php } ?>
-                                    </select>      
-                                </td>
+                                            <?php foreach ($disdosage as $value) { ?>
+                                                <?php $drid = $disid[array_search($value, $disdosage)] ?>
+                                                <?php $drprice = $disprice[array_search($value, $disdosage)] ?>
+                                                <?php echo "<option value=$drid>$value" . " (Rs " . $disprice[array_search($value, $disdosage)] . ")" . "</option>"; ?>
+                                            <?php } ?>
+                                        </select>      
+                                    </td>
 
-                            </tr>   
-                            <tr>
-                                <td></td>
-                                <td>Quantity:</td>
-                                <td><input type="number" name='qtybox'></td>
-                                <td>
+                                </tr>
+                                
+                                    <td></td>
+                                    <td>Quantity:</td>
+                                    <td><input type="number" name='qtybox'></td>
+                                    <td>
 
-                                </td>
+                                    </td>
 
-                            </tr>   
-                            <tr>
-                                <td><?php foreach ($disdosage as $value) { ?>
-                                        <?php echo $value . " " . $disqty[array_search($value, $disdosage)] . " unit in stock<br>"; ?>
-                                    <?php } ?></td>
-                                <td><input type = 'submit' name = 'btnsubmititem' value='Add to cart'></td>
-                                <td><a href='otc.php'> Cancel </a></td>
-                            </tr>   
+                                </tr>
 
-                        </table>
-                        <?php
-                        "</form>"
-                        ?>
+                                <tr>
+                                    <td align="center"><?php foreach ($disdosage as $value) { ?>
+                                            <?php echo $value . " " . $disqty[array_search($value, $disdosage)] . " unit in stock<br>"; ?>
+                                        <?php } ?></td>
 
+                                    <td><input type = 'submit' class="myButton" name = 'btnsubmititem' value='Add to cart'><td>
+
+
+                                </tr>   
+
+                            </table>
+                            <?php
+                            "</form>"
+                            ?>
+
+                        </div>
                     </div>
                 </div>
             <?php } else if (isset($_GET['id']) && !isset($_SESSION['email']) && empty($_SESSION['email'])) { ?>        
                 echo'<script>alert("\t\t\tYou are not logged in.\nPlease logged in before make an order.");
-                                        window.location.href = "otc.php?page=<?php echo $page ?>";</script>';
+                                window.location.href = "otc.php?page=<?php echo $page ?>";</script>';
 
             <?php } ?>
         <?php } ?>
@@ -773,3 +841,7 @@ $t = sizeof($_SESSION['cart']);
     });
 
 </script>
+
+
+
+

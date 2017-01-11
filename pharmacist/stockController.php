@@ -202,7 +202,7 @@ class stockController {
                 
                 <tr>
                     
-                    <td><a href='updateStock1.php?update=$stock->id' >Item List</td>
+                        <td><a href='updateStock1.php?update=$stock->id' >UPDATE</td>
                     <td><b>$stock->batch_no</b></td>
                     <td><b>$stock->quantity</b></td>
                     <td><b>$stock->dosage</b></td>
