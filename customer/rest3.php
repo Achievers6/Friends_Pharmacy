@@ -1,6 +1,9 @@
 <?php
 
-$nic = $_GET['nic'];
+$nic;
+if (isset($_GET['nic'])) {
+    $nic = $_GET['nic'];
+}
 $type = $_GET['type'];
 
 $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
@@ -12,28 +15,13 @@ if (!$conn) {
 
 switch($type) {
     case 'search': {
-
-        // Setup limit suffix
-        $limit = '';
-		$suffix = '';
-        if (isset($_GET['limit'])) {
-            $limit = $_GET['limit'];
-			if ($limit !== "all") {
-    	        $suffix = ' LIMIT ' . $limit;
-	        }
-        }
     
         if(isset($_GET['active'])) {
             $active = $_GET['active'];
-            $sql = "SELECT * FROM customer WHERE nic LIKE '$nic%' AND active=$active";
+            $sql = "SELECT * FROM customer WHERE active=$active";
         } else {
-            if ($nic !== '') {
-                $sql = "SELECT * FROM customer WHERE nic LIKE '$nic%'";
-            } else {
-                $sql = "SELECT * FROM customer";
-            }
+            $sql = "SELECT * FROM customer";
         }
-        $sql .= $suffix;
         $result = mysqli_query($conn, $sql);
         $res_data = array();
         while($row = mysqli_fetch_assoc($result)) {
