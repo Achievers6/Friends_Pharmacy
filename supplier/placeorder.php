@@ -50,10 +50,9 @@ if(isset($_POST['add'])){
                         <td><select>
 <!--                            <option>supplier</option>-->
                             <?php
-                                if(isset($_POST['btn'])){
+                                if(isset($_POST['medname'])){
                                     include("placeorderdb.php");
                                     $medname=$_POST['medname'];
-                                    echo "works";
                                     $query1="SELECT supplier.company_name, drug.supplier_id,drug.generic_name, supplier.supplier_id FROM supplier INNER JOIN drug ON supplier.supplier_id=drug.supplier_id where drug.generic_name='$medname'";
                                     $result1=mysqli_query($connect,$query1);
      
@@ -61,7 +60,7 @@ if(isset($_POST['add'])){
                                     while($row=mysqli_fetch_assoc($result1)){
                                         $cname=$row['company_name'];
                                         ?>
-                                    <option value="<?php echo $cname;?>"></option>    
+                                    <option value="<?php echo $cname;?>"><?php echo $cname;?></option>    
                                     <?php
                         
                                     }

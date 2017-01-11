@@ -3,10 +3,13 @@ body{
 }
 h2{
     position: absolute;
-    
-    right: 320px;
+    font-family: SourceSansPro;
+    right: 2500px;
     top:70px;
-    
+    font-size: 2.4em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0  0 10px 0;
 }
 
 #us_table th, td{
