@@ -18,7 +18,7 @@ if(isset($_POST['submit']))
 	$rows = mysqli_num_rows($query);
 	if($rows > 0)
 	{
-		echo'<script>alert("This NIC already exists."); window.location.href="register.php";</script></script>';
+		echo'<script>alert("This NIC already exists."); window.location.href="register.php";</script>';
 		exit();
 	}
 	else
@@ -29,11 +29,11 @@ if(isset($_POST['submit']))
 		
 		if(mysqli_query($conn, $sql))
 	    {
-	    	echo'<script>alert("Your account has been created."); window.location.href="index.php";</script></script>';  
+	    	echo'<script>alert("Your account has been created."); window.location.href="index.php";</script>';  
 	    }
 	    else
 	    {
-	    	echo '<script>alert("Unsuccessful); window.location.href="index.php";</script></script>';
+	    	echo '<script>alert("Unsuccessful); window.location.href="index.php";</script>';
 	    }
 
 	    mysqli_close($conn);	

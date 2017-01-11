@@ -77,7 +77,6 @@ while ($row = mysqli_fetch_array($result)) {
     array_push($drugArray, $drug);
 }
 
-<<<<<<< HEAD
 echo "<div id='notifications'>";
 echo "<h3 id='h3' style='text-align: center; color:red;'>Shopping Cart</h3>";
 
@@ -137,12 +136,8 @@ foreach ($_SESSION['name'] as $key => $item) {
 echo '</table>';
 echo "</div>";
 echo "</div>";
-=======
 
 
-
-
->>>>>>> 2f1d1c5e323fc202fe7624ae0cef0e9e027a2dad
 //print_r($_SESSION['cart']);
 //print_r($_SESSION['qty']);
 //session_destroy();

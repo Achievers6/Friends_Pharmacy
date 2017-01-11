@@ -16,8 +16,10 @@
 		<article class="description">
 				
 			<p>Ordering from our online pharmacy is easy, we promise! There is a convenient way to order your prescription medication from Friends Pharmacy. The fastest way to order is to  Create a Friends Pharmacy account on this website and place your online drug order right over the web by uploading a clear image of the prescription. You can speak to one of our friendly Patient Service Representatives by calling us at 0112556556 or simply <br><a href="contact.php">Contact Us</a>.</p> 
-				
-			<p><b>Upload Your Prescription Here</b></p>
+			
+			<hr style="margin-top: 8%">
+
+			<p style="font-size: 20px"><b>Upload Your Prescription Here</b></p>
 			
 			<form action=" " method="post" enctype="multipart/form-data">
 			    Select image to upload: <br><br>
