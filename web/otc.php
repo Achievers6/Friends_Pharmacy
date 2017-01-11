@@ -16,10 +16,16 @@ if (isset($_POST["next"])) {
     $page = 1;
 };
 
+if (isset($_GET["cat"])) {
+    $catname = $_GET["cat"];
+    $query = "SELECT COUNT(id) AS total FROM drug where category='$catname'";
+} else {
+    $query = "SELECT COUNT(id) AS total FROM drug";
+}
 
 $results_per_page = 5;
 $start_from = ($page - 1) * $results_per_page;
-$query = "SELECT COUNT(id) AS total FROM drug";
+
 $resultpage = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 $row = $resultpage->fetch_assoc();
 $total_pages = ceil($row["total"] / $results_per_page);
@@ -48,14 +54,26 @@ if (isset($_POST['btnsubmititem'])) {
         array_push($_SESSION['unitprice'], $row[1]);
         array_push($_SESSION['amount'], ($row[1] * $qty));
     }
+    $name = $_POST['medname'];
+    $dos = $_SESSION['dosage'];
+    $unit = $_SESSION['amount'];
+    echo '<script language="javascript">';
+    echo "alert('$name is added to the shopping cart')";
+    echo '</script>';
     //array_push($_SESSION['unitprice'], $_POST['dosagetype']);
     //print_r($_SESSION['cart']);
     //print_r($_SESSION['qty']);
     //session_destroy();
 }
 
+if (isset($_GET["cat"])) {
+    $catname = $_GET["cat"];
+    $query = "SELECT * FROM drug where category='$catname' ORDER BY id ASC LIMIT $start_from, $results_per_page";
+} else {
+    $query = "SELECT * FROM drug ORDER BY id ASC LIMIT $start_from, $results_per_page";
+}
 
-$query = "SELECT * FROM drug ORDER BY id ASC LIMIT $start_from, $results_per_page";
+
 
 $drugArray = array();
 $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -377,12 +395,7 @@ $t = sizeof($_SESSION['cart']);
                 filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
                 background-color:#ffab23;
             }
-            .myButton:active {
-                position: relative; 
-                left: 390px; 
-                top:300px;;
 
-            }
             .mdh {
                 text-align:center; 
                 color: green; 
@@ -540,7 +553,7 @@ $t = sizeof($_SESSION['cart']);
                             <img src='../public/image/addCart.png' style="width: 200px; height: 110px;; position: relative; left: 590px; top:-40;" >
                         </a>
 
-                           <!--<td> <button class="product-btn-add" style="width: 100px; height: 30px;" id='myBtn' onclick='myFunction()'><span>Add to Cart</span></button></td>-->
+                               <!--<td> <button class="product-btn-add" style="width: 100px; height: 30px;" id='myBtn' onclick='myFunction()'><span>Add to Cart</span></button></td>-->
 
                     <?php } ?>
                     <table>
@@ -698,13 +711,13 @@ $t = sizeof($_SESSION['cart']);
                                     </td>
 
                                 </tr>
-                                
-                                    <td></td>
-                                    <td>Quantity:</td>
-                                    <td><input type="number" name='qtybox'></td>
-                                    <td>
 
-                                    </td>
+                                <td></td>
+                                <td>Quantity:</td>
+                                <td><input type="number" name='qtybox'></td>
+                                <td>
+
+                                </td>
 
                                 </tr>
 

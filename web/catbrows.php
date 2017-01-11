@@ -331,13 +331,13 @@ $t = sizeof($_SESSION['cart']);
                     if ($count < $results_per_page / 2) {
                         echo '<table>';
                         echo '<tr>';
-                        echo "<td><a href='catbrows2.php?cat=$catname' id='cat' >$drug->category</a></td>";
+                        echo "<td><a href='otc.php?cat=$catname' id='cat' >$drug->category</a></td>";
                         echo '</tr>';
                         echo '</table>';
                     } else {
                         echo "<table style='position:relative; left:250px; top:-300px;'>";
                         echo '<tr>';
-                        echo "<td><a href='catbrows2.php?cat=$catname' id='cat'>$drug->category</a></td>";
+                        echo "<td><a href='otc.php?cat=$catname' id='cat'>$drug->category</a></td>";
                         echo ' </tr>';
                         echo '</table>';
                     }
