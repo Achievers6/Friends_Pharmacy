@@ -71,7 +71,7 @@ class stockController {
                
                 <tr>
                     
-                    <td><a href='#' onClick=showConfirm($stock->id) >Delete</td>
+                    <td><a href='#' onClick=showConfirm($stock->id) style='color:red;'>Delete</td>
                     <td><b>$stock->batch_no</b></td>
                     <td><b>$stock->quantity</b></td>
                     <td><b>$stock->price</b></td>
