@@ -138,10 +138,10 @@ while ($row = mysqli_fetch_array($result)) {
     array_push($drugArray, $drug);
 }
 
-echo "<div id='notifications'>";
+/*echo "<div id='notifications'>";
 echo "<h3 id='h3' style='text-align: center; color:red;'>Shopping Cart</h3>";
 
-echo "<p class='totaltxt' style='text-align: center  font:13px helvetica; font-weight:bold;'>Total :</p>";
+echo "<p class='totaltxt' style='text-align: center  font:13px helvetica; font-weight:bold;'>Total (Rs):</p>";
 echo "<p class='totalno' style='text-align: center' font:13px helvetica; font-weight:bold;>" . array_sum($_SESSION['amount']) . "</p>";
 
 echo "<button class='addorder'  onclick='confirmorder()'><span>Add to Order list</span></button>";
@@ -200,7 +200,7 @@ echo "</div>";
 
 //print_r($_SESSION['cart']);
 //print_r($_SESSION['qty']);
-//session_destroy();
+//session_destroy();*/
 
 $t = sizeof($_SESSION['cart']);
 ?>
