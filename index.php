@@ -4,11 +4,3 @@
     <a href="web/index.php">click here to go to the web site of the customer</a>
 </body>
 </html>
-
-<?php
-function f1($a,$b=1) {
-    echo $a;
-    echo $b;
-}
-f1(2,4);
-?>

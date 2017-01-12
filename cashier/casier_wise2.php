@@ -143,13 +143,13 @@
                     $dates2 = $_POST['dates2'];
 
 
-                    $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                    //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
 
                     $sql1 = "SELECT distinct(concat_ws(' ',staff.first_name,staff.last_name)) AS cashier,sum(bill_table.total) AS amount
                             FROM staff,bill_table WHERE bill_table.date BETWEEN '$dates' AND '$dates2' AND
                             staff.member_id=bill_table.staff_ID GROUP BY staff_ID; ";
 
-                    $result1 = mysqli_query($con, $sql1);
+                    $result1 = mysqli_query($mysqli, $sql1);
 
 
 

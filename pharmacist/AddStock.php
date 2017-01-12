@@ -152,11 +152,7 @@ if (isset($_POST['btnSubmit'])) {
     $price = $_POST['price'];
 
 
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
 
     if (!mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM drug WHERE medicine_name ='$MedicineName'"))) {

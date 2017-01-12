@@ -136,9 +136,10 @@
                 <fieldset class='explicit'>
                     <form name='myform' action="casier_wise2.php" method ='post' >
                         <?php
+                        include '../database/dbconnect.php';
                         $sql = "SELECT  * FROM staff";
-                        $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-                        $result = mysqli_query($con, $sql);
+                        //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                        $result = mysqli_query($mysqli, $sql);
                         $rows = mysqli_num_rows($result);
                         ?>
                         <table class="tableNormal" cellspacing="5" cellpadding="5">

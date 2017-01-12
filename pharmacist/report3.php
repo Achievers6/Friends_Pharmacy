@@ -114,8 +114,9 @@ $content = "<h2 style='text-align:center;'>CASHIER WISE REPORT</h2>" ?>
 					<fieldset class="explicit-width" style="background-color: rgb(229, 249, 212); height: 400px;"> 
 					
 					<?php $sql = "SELECT  * FROM staff";
-					$con = mysqli_connect("localhost","root","","friends_pharmacy");
-					$result = mysqli_query($con,$sql);
+					//$con = mysqli_connect("localhost","root","","friends_pharmacy");
+                                        include '../database/dbconnect.php';
+					$result = mysqli_query($mysqli,$sql);
 					$rows = mysqli_num_rows($result);					?>
 					<table class="tableNormal" cellspacing="0" cellpadding="0">
 					<tr><td><label>Cashier Name : </label><select name="cashier_name" required><option value="all">All</option><?php
@@ -129,7 +130,7 @@ $content = "<h2 style='text-align:center;'>CASHIER WISE REPORT</h2>" ?>
 					</tr>
 					
 					<!--<?php $sql = "SELECT * FROM drug";
-					$result = mysqli_query($con,$sql);
+					$result = mysqli_query($mysqli,$sql);
 					$rows = mysqli_num_rows($result);					?>
 					<tr><td><label>Medicine Name : </label></td><td><select name="name" required><option value="all">All</option><?php
 												if($rows > 0){
@@ -141,7 +142,7 @@ $content = "<h2 style='text-align:center;'>CASHIER WISE REPORT</h2>" ?>
 												} ?> </select></td>
 					</tr>-->
 					<!--<?php $sql = "SELECT DISTINCT(location_id) FROM location ORDER BY location_id ASC  ";
-					$result = mysqli_query($con,$sql);
+					$result = mysqli_query($mysqli,$sql);
 					$rows = mysqli_num_rows($result);					?>
 					<tr><td><label>shelf No : </label></td><td><select name="shelf" required><option value="all">All</option><?php
 												if($rows > 0){

@@ -17,11 +17,7 @@
             WHERE id='$medicine_id'";
 	
 
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli=mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
     mysqli_query($mysqli,$query) or die(mysqli_error($mysqli));
     mysqli_close($mysqli);
     

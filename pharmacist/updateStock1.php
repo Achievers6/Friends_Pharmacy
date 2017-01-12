@@ -28,12 +28,7 @@ $content = "
 
 if (isset($_GET["update"])) {
 
-    $id = ($_GET["update"]);
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
     $query = "SELECT * FROM stock WHERE id LIKE ($id)";
 
@@ -100,11 +95,7 @@ if (isset($_GET["update2"])) {
     $dosage = $_POST["txtdosage"];
     $price = $_POST['price'];
 
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
 
 

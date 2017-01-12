@@ -2,17 +2,17 @@
 
 session_start();
 	
-$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysql_error());
-
+//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysql_error());
+include '../database/dbconnect.php';
 if(isset($_POST['login']))
 { 	
-	$email=mysqli_real_escape_string($conn, $_POST['user']);
-	$password=mysqli_real_escape_string($conn, $_POST['pass']);	
+	$email=mysqli_real_escape_string($mysqli, $_POST['user']);
+	$password=mysqli_real_escape_string($mysqli, $_POST['pass']);	
 
-	$query1 = mysqli_query($conn, "SELECT * FROM customer WHERE email='$email'");
+	$query1 = mysqli_query($mysqli, "SELECT * FROM customer WHERE email='$email'");
 	$numrows1 = mysqli_num_rows($query1);
 
-	$query2 = mysqli_query($conn, "SELECT * FROM staff WHERE email='$email'");
+	$query2 = mysqli_query($mysqli, "SELECT * FROM staff WHERE email='$email'");
 	$numrows2 = mysqli_num_rows($query2);
 
 	if($numrows1 != 0)

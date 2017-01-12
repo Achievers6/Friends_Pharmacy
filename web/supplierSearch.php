@@ -1,16 +1,12 @@
 <?php 
-$host = "localhost";
-$user = "root";
-$passwd = "";
-$database = "friends_pharmacy";
-$connect=mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+include '../database/dbconnect.php';
 
    
  if(isset($_POST["query"]))  
  {  
       $output = '';  
       $query = "SELECT * FROM supplier WHERE company_name LIKE '".$_POST["query"]."%'";  
-      $result = mysqli_query($connect, $query);  
+      $result = mysqli_query($mysqli, $query);  
       $output = '<ul class="list-unstyled">';  
       if(mysqli_num_rows($result) > 0)  
       {  

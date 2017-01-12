@@ -1,14 +1,15 @@
 <?php 
 
-$con=mysqli_connect("localhost","root","") or die("Couldn't connect sql");
-mysqli_select_db($con,"friends_pharmacy") or die ("Couldn't connect to database");
+//$con=mysqli_connect("localhost","root","") or die("Couldn't connect sql");
+include '../database/dbconnect.php';
+mysqli_select_db($mysqli,"friends_pharmacy") or die ("Couldn't connect to database");
 
   
  if(isset($_POST["query"]))  
  {  
       $output = '';  
       $query = "SELECT * FROM supplier WHERE company_name LIKE '".$_POST["query"]."%'";  
-      $result = mysqli_query($con, $query);  
+      $result = mysqli_query($mysqli, $query);  
         
       if(mysqli_num_rows($result) > 0)  
       {  

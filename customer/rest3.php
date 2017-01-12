@@ -3,8 +3,9 @@
 $nic = $_GET['nic'];
 $type = $_GET['type'];
 
-$conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-if (!$conn) {
+//$conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+include '../database/dbconnect.php';
+if (!$mysqli) {
     echo "Error";
 }
 
@@ -34,7 +35,7 @@ switch($type) {
             }
         }
         $sql .= $suffix;
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($mysqli, $sql);
         $res_data = array();
         while($row = mysqli_fetch_assoc($result)) {
             
@@ -45,7 +46,7 @@ switch($type) {
     break;
     case 'details': {
         $sql = "SELECT * FROM reminder_table WHERE nic = '$nic'";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($mysqli, $sql);
         $res_data = array();
         while ($row = mysqli_fetch_assoc($result)) {
             array_push($res_data, $row);
@@ -56,12 +57,12 @@ switch($type) {
     case 'changeActive': {
         $active = $_GET['active'];
         $sql = "UPDATE customer SET active=$active WHERE nic='$nic'";
-        mysqli_query($conn, $sql);
+        mysqli_query($mysqli, $sql);
     }
     break;
     case '2': {
         $sql = "SELECT * FROM stock s, drug d WHERE s.medicine_id=d.medicine_id AND  d.medicine_name LIKE '$search%'";
-        $re10ult = mysqli_query($conn, $sql);
+        $re10ult = mysqli_query($mysqli, $sql);
         $res_data = array();
         while($row = mysqli_fetch_assoc($result)) {
             
@@ -72,7 +73,7 @@ switch($type) {
     break;
     case '3': {
         $sql = "SELECT * FROM stock s, drug d WHERE s.medicine_id=d.medicine_id AND  d.batch_no LIKE '$search%'";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($mysqli, $sql);
         $res_data = array();
         while($row = mysqli_fetch_assoc($result)) {
             

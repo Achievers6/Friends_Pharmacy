@@ -132,7 +132,8 @@
 
 
 
-                    $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                    //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                    include '../database/dbconnect.php';
 
 
                     if ($name == 'all') {
@@ -142,7 +143,7 @@
 					WHERE bill_table.date = '$dates'  AND
 					bill_table.bill_number=selling_table.bill_number GROUP BY selling_table.medicine_name,selling_table.dosage;";
 
-                        $result1 = mysqli_query($con, $sql1);
+                        $result1 = mysqli_query($mysqli, $sql1);
 
 
 
@@ -217,7 +218,7 @@
 					WHERE bill_table.date = '$dates'  AND selling_table.medicine_name='$name'
 					AND bill_table.bill_number=selling_table.bill_number GROUP BY selling_table.medicine_name,selling_table.dosage;";
 
-                        $result1 = mysqli_query($con, $sql2);
+                        $result1 = mysqli_query($mysqli, $sql2);
 
 
                         //$price2 = mysqli_query($con," SELECT SUM(quantity * selling_price) FROM selling WHERE medicine_id='$name';");

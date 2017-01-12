@@ -137,8 +137,9 @@
                         <form name='myform' action="aomcn.php" method ='post' >
                             <?php
                             $sql = "SELECT * FROM drug";
-                            $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-                            $result = mysqli_query($con, $sql);
+                            //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                            include '../database/dbconnect.php';
+                            $result = mysqli_query($mysqli, $sql);
                             $rows = mysqli_num_rows($result);
                             ?>
                             <table class="tableNormal" cellspacing="5" cellpadding="5">

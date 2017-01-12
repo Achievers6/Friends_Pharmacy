@@ -148,8 +148,9 @@
                             <div id="myDIV">
                                 <?php
                                 $sql = "SELECT * FROM drug";
-                                $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-                                $result = mysqli_query($con, $sql);
+                                //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                                include '../database/dbconnect.php';
+                                $result = mysqli_query($mysqli, $sql);
                                 $rows = mysqli_num_rows($result);
                                 ?>
                                 <tr><td><label for="name">Medicine Name</label></td><td><select name="name" required><option value="all">All</option><?php

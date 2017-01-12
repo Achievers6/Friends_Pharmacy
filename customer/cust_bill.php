@@ -159,9 +159,10 @@
                 Medicine Name: 
                 <select id='medicine_list'>
 <?php
-    $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+    include '../database/dbconnect.php';
+    //$conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
     $sql = "SELECT * FROM drug_price";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($mysqli, $sql);
     while(($row = mysqli_fetch_assoc($result)) != null) {
         echo "<option value='" . $row['id'] . "'>" . $row['medicine_name'] . " " . $row['dosage'] . "</option>";
     }

@@ -332,11 +332,7 @@
 </html>
 <?php
 if (isset($_POST['btnsubmitrem'])) {
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
 
     $nic = $_POST["txtnic"];

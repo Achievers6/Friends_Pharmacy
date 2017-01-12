@@ -3,8 +3,8 @@
 
 if(isset($_POST['submit']))
 {
-	$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysql_error());
-	
+	//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysql_error());
+	include '../database/dbconnect.php';
 	$first = mysqli_real_escape_string($conn,$_POST['fname']);
 	$last = mysqli_real_escape_string($conn,$_POST['lname']);
 	$gender = mysqli_real_escape_string($conn,$_POST['gender']);
@@ -23,8 +23,8 @@ if(isset($_POST['submit']))
 	$sql = "INSERT INTO staff (first_name, last_name, gender, birthday, nic, address, contact_number, email, password, occupation, start_date) 
 	VALUES ('$first','$last','$gender','$bday','$nic','$address','$contact','$email','$encrypt_password','$occupation','$start')";
 
-	mysqli_query($conn, $sql) or die(mysqli_error($conn));
-	mysqli_close($conn);
+	mysqli_query($mysqli, $sql) or die(mysqli_error($mysqli));
+	mysqli_close($mysqli);
 	header("Location: ../../main/main/main.php");
 }
 

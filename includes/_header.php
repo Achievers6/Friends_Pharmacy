@@ -1,10 +1,6 @@
 <?php
 require ("../Entities/stockEntityHead.php");
-$host = "localhost";
-$user = "root";
-$passwd = "";
-$database = "friends_pharmacy";
-$mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+include '../database/dbconnect.php';
 $query = mysqli_query($mysqli, "SELECT * FROM stock where 21>DATEDIFF(expire_date,CURDATE()) and 0<DATEDIFF(expire_date,CURDATE());");
 $query2 = mysqli_query($mysqli, "SELECT * FROM cust_orders where status = 'not confirmed';");
 

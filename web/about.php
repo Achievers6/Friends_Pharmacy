@@ -80,15 +80,15 @@
 				</form><br>
 				<?php
 
-					$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
-
+					//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
+                                        include '../database/dbconnect.php';
 					if(isset($_POST['comment']) && !empty($_POST['comment']))
 					{							
 						$msg = nl2br($_POST['comment']);
 						$day = date("Y-m-d");				
 
 						$sql = "INSERT INTO comment (post, day) VALUES ('$msg', '$day')";
-						if(mysqli_query($conn, $sql))
+						if(mysqli_query($mysqli, $sql))
 					    {
 					    	echo'<script>alert("Your comment is recorded successfully.\n\tThank You."); window.location.href="about.php";</script>';  
 					    }
@@ -99,7 +99,7 @@
 						
 					}
 
-					$post_query = mysqli_query($conn, "SELECT * FROM comment");
+					$post_query = mysqli_query($mysqli, "SELECT * FROM comment");
 					while ($run_post = mysqli_fetch_array($post_query)) 
 					{
 						$post_id = $run_post['id'];

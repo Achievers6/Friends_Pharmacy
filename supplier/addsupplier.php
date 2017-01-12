@@ -1,7 +1,8 @@
 
 <?php 
-   $con=mysqli_connect("localhost","root","") or die("coudn't connect") ;
-    mysqli_select_db($con,"friends_pharmacy");
+   //$con=mysqli_connect("localhost","root","") or die("coudn't connect") ;
+    include '../database/dbconnect.php';
+    mysqli_select_db($mysqli,"friends_pharmacy");
     if(isset($_POST['cname'])){
             $cname=$_POST['cname'];
         }
@@ -23,7 +24,7 @@
           
 if(isset($_POST['go'])){
     
-   $query= mysqli_query($con,"SELECT * FROM supplier WHERE company_name='$cname'");
+   $query= mysqli_query($mysqli,"SELECT * FROM supplier WHERE company_name='$cname'");
     $numrows=mysqli_num_rows($query);
     if($numrows!=0){ ?>
                 <script>
@@ -34,7 +35,7 @@ if(isset($_POST['go'])){
     }
     else{
     
-            mysqli_query($con,"INSERT INTO supplier (company_name,address,telephone,mobile,email,fax) VALUES ('$cname','$add','$mno','$lno','$mail','$fax');") or die("coudn't connect");
+            mysqli_query($mysqli,"INSERT INTO supplier (company_name,address,telephone,mobile,email,fax) VALUES ('$cname','$add','$mno','$lno','$mail','$fax');") or die("coudn't connect");
         ?>
 <script>
     alert("Added successfully");
