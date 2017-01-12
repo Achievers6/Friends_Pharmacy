@@ -160,7 +160,7 @@ $(document).ready(function(){
                 });  
            }  
       });  
-      $(document).on('click', 'li', function(){  
+      $(document).on('click', '#lim', function(){  
            $('#medicine').val($(this).text());  
            $('#medicineList').fadeOut(); 
            

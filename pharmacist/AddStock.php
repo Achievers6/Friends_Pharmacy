@@ -67,7 +67,7 @@ $content = "<h2 style='text-align:center;'>Add New Stock</h2>
                 </td>
            </tr>
           </table>
-        <div id='medicineList'></div> 
+        <div id='medicineList' style='top:-8px;'></div> 
         
         <table>
         <tr>
@@ -208,7 +208,7 @@ include 'template.php';
                 });
             }
         });
-        $(document).on('click', 'li', function() {
+        $(document).on('click', '#lim', function() {
             $('#txtMedicineName').val($(this).text());
             $('#medicineList').fadeOut();
 

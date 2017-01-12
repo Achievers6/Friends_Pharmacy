@@ -49,7 +49,7 @@ if(isset($_POST['btnSearch'])){
   $group = $row[8];
   $image  =$row[7];
   
-  $content = "<h3 style='text-align:center;'>Update Medicine</h3>
+  $content = "<h2 style='text-align:center;'>Update Medicine</h2>
     <form action='searchMedicine.php?id=$medicine_id' method ='post'>
     
       <fieldset>
@@ -163,7 +163,7 @@ $(document).ready(function(){
                 });  
            }  
       });  
-      $(document).on('click', 'li', function(){  
+      $(document).on('click', '#lim', function(){  
            $('#medicine').val($(this).text());  
            $('#medicineList').fadeOut(); 
            

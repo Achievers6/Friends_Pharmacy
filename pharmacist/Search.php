@@ -16,12 +16,12 @@ $connect=mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error())
       {  
            while($row = mysqli_fetch_array($result))  
            {  
-                $output .= '<li><a href="#" id="a" style="text-decoration:none; color:green;">'.$row["medicine_name"].'</a></li>';  
+                $output .= '<li id="lim"><a href="#" id="a" style="text-decoration:none; color:green;">'.$row["medicine_name"].'</a></li>';  
            }  
       }  
       else  
       {  
-           $output .= '<li>Medicine not found</li>';  
+           $output .= '<li id="lim">Medicine not found</li>';  
       }  
       $output .= '</ul>';  
       echo $output;  
