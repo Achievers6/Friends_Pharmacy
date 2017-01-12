@@ -149,6 +149,7 @@ $t = sizeof($_SESSION['cart']);
                 border: 3px solid #E3E3E3;
                 border-radius: 10px;
                 moz-border-radius: 10px;
+                
             }
 
             .drugTable tr th, .drugTable tr td
@@ -328,15 +329,15 @@ $t = sizeof($_SESSION['cart']);
                     <?php
                     $catname = urlencode($drug->category);
                     if ($count < $results_per_page / 2) {
-                        echo '<table >';
+                        echo '<table>';
                         echo '<tr>';
-                        echo "<td><a href='catbrows2.php?cat=$catname' id='cat' >$drug->category</a></td>";
+                        echo "<td><a href='otc.php?cat=$catname' id='cat' >$drug->category</a></td>";
                         echo '</tr>';
                         echo '</table>';
                     } else {
                         echo "<table style='position:relative; left:250px; top:-300px;'>";
                         echo '<tr>';
-                        echo "<td><a href='catbrows2.php?cat=$catname' id='cat'>$drug->category</a></td>";
+                        echo "<td><a href='otc.php?cat=$catname' id='cat'>$drug->category</a></td>";
                         echo ' </tr>';
                         echo '</table>';
                     }
@@ -350,7 +351,7 @@ $t = sizeof($_SESSION['cart']);
                         <?php if (!($page <= 1)) { ?>
                             <?php echo " <form name = 'myFormprevious' action = 'catbrows.php?page=$page' method = 'post'>" ?>
 
-                            <td><input type='submit' style=" height:25px; width: 90px; " name="previous" value="Back" class="previous"></td>
+                            <td><input type='submit' style=" height:25px; width: 90px;  " name="previous" value="Back" class="previous"></td>
 
                             <?php echo "</form>" ?>
                         <?php } ?>
