@@ -256,10 +256,16 @@ while ($row = mysqli_fetch_array($query)) {
             #lblneworders {
                 display: none;
             }
+            #lblpres {
+                display: none;
+            }
             #lblexp {
                 font:13px helvetica;
                 font-weight:bold;
                 display: none;
+            }
+            #pres_Button:hover + #lblpres {
+                display: block;
             }
             #order_Button:hover + #lblneworders {
                 display: block;
@@ -297,8 +303,7 @@ while ($row = mysqli_fetch_array($query)) {
                     <div id="lblneworders" style="position: absolute; right:60px;  top:33px; width:80px; ">new orders</div>
                 </li>
 
-
-
+               
 
 
                 <li id="noti_Container" >
@@ -333,6 +338,15 @@ while ($row = mysqli_fetch_array($query)) {
                         <div class="seeAll"><a href="../pharmacist/removeStock2.php?allOutDate=1;">All short expiry</a></div>
                     </div>
                 </li>
+                
+                 <li class="li" id="prescriptions">
+                    <div id="pres_Counter"></div> 
+                    <div id="pres_Button">
+                        <a href="../pharmacist/prescription.php"><img  src="../public/image/pres.png" style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position:relative; left:1040px; top:-25px; "></a>   
+                    </div>
+                    <div id="lblpres" style="position: absolute; right:190px;  top:50px; width:150px; ">new prescriptions</div>
+                </li>
+
 
             </ul>
         </div>
