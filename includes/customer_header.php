@@ -21,7 +21,7 @@
             <li><a href="../web/contact.php">Contact Us </a></li>
             <div class="user">
               <?php 
-                session_start();
+                
                 if(isset($_SESSION['email']) && !empty($_SESSION['email']))
                 {
                 ?>  <li>                        

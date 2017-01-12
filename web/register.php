@@ -23,7 +23,7 @@
 
 <body>
 
-	<?php require '../includes/customer_header.php';?>
+	<?php session_start(); require '../includes/customer_header.php';?>
 
 	<h3 style="text-align: center; margin-top: 3%; margin-bottom: 2%;">Create A New Account</h3>
 	<div class="signup_table">

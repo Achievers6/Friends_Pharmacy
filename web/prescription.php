@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<?php require '../includes/customer_header.php';?>
+	<?php session_start(); require '../includes/customer_header.php';?>
 	<?php require '../includes/slideshow.php';?>
 		
 	<div class="content">
@@ -34,7 +34,7 @@
 	$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
 	if(isset($_POST['submit']))
 	{
-		session_start();
+	
 		if(isset($_SESSION['email']) && !empty($_SESSION['email']))
 		{
 			//specifies the directory where the file is going to be placed

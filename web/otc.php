@@ -10,7 +10,7 @@
     }
 </script>
 <?php
-
+session_start();
 
 include '../database/dbconnect.php';
 include ("../Entities/drugEntity.php");
