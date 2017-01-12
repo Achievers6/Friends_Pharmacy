@@ -60,23 +60,22 @@ if(isset($_POST['go'])){
    <script src="js/jquery.validate.min.js"></script>
     <script src="js/addsupplier.js"></script>
 <style>
-            .error {
-                    color: #ff0000;
-                    position:relative;
-                    top:5px;
-  
-                }
+              .error {
+                color: #ff0000;
+
+
+            }
 
             label.error {
-                        display:block;
-                        height:17px;
-                        margin-left:9px;
-                        padding:1px 5px 0px 5px;
-                        font-size:medium;
-                        position:absolute;
-                        left:270px;
-    
-                }
+                display:block;
+                height:17px;
+                margin-left:9px;
+                font-size:15px;
+                position:relative;
+                top:1px;
+
+
+            }
 </style>
  
 </head>
@@ -100,7 +99,7 @@ if(isset($_POST['go'])){
             <td><input type="text" id="cname" name="cname" autocomplete="off"></td>
             </tr>
             <tr height=60>
-            <td><span class="star">*</span>Address </td>.
+            <td><span class="star">*</span>Address </td>
                 <td><textarea rows="4" cols="22" type="text" id="add" name="add" autocomplete="off"></textarea></td>
             </tr>
              <tr height=60>

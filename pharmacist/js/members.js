@@ -1,11 +1,10 @@
 $(document).ready(function(){
-   
+
         jQuery.validator.addMethod("lettersonly", function(value, element) {
   return this.optional(element) || /^[a-z]+$/i.test(value);
-}, "Letters only please"); 
-       
-  
- jQuery.validator.addMethod('NICNumber', function (value) { 
+}, "Letters only please");
+
+    jQuery.validator.addMethod('NICNumber', function (value) { 
     return this.optional(element) || /^[0-9]{9}[vV]$/.test(value); 
 }, "Please enter a valid National Identity Card Number");
         
@@ -21,8 +20,11 @@ $(document).ready(function(){
     return isNaN(value) && isNaN($(params).val()) 
         || (Number(value) > Number($(params).val())); 
 },'Must be less than {0}.');
+       
+         
+
     
-    $('#main').validate({ 
+$('#main').validate({ 
         rules:{
           
           lname:{
@@ -34,9 +36,11 @@ $(document).ready(function(){
                 required:true,
                 lettersonly:true,
                 
-                
-          },
-          nic:{
+         },
+         address:{
+                required:true,
+         },
+         nic:{
                 required:true,
                 NICNumber:true,
                 maxlength:10,
@@ -56,7 +60,14 @@ $(document).ready(function(){
          bday:{
              required:true,
              greaterThan:"today",
+             
          },
+        date:{
+             required:true,
+             greaterThan:"today",
+             
+         },
+        
          contact:{
               required:true,
               number:true,
@@ -73,7 +84,7 @@ $(document).ready(function(){
              
                
                    },
-            fnam:{
+            fname:{
                 required:"Enter your first name",
                 number:"Entered name might be wrong",
              }, 
@@ -82,6 +93,7 @@ $(document).ready(function(){
                    required:"Please enter email address",
                    },
             contact:{
+                    required:"Please enter your contact number",
                     number:"Please enter a valid contact number",  
                     maxlength:"Enterd number is  wrong",
                     minlength:"Enterd number is wrong",
@@ -93,9 +105,13 @@ $(document).ready(function(){
                 
                 },
             bday:{
-                   required:"Please enter your birthday"     
+                   required:"Please enter your birthday",
+                   
                 },
-           
+            address:{
+                required:"Please enter your home address",
+            },
+            
             password:{
                 required:"Please give a password",
                 minlength:"Password is not strong enough"

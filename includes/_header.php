@@ -30,7 +30,7 @@ while ($row = mysqli_fetch_array($query)) {
 <html>
     <head>
 
-        <script src="../public/js/jquery-2.0.0.js"></script>
+<!--        <script src="../public/js/jquery-2.0.0.js"></script>-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script>
