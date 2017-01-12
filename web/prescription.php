@@ -31,7 +31,7 @@
 	</div>
 
 <?php
-	
+	$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
 	if(isset($_POST['submit']))
 	{
 		session_start();
@@ -115,10 +115,12 @@
 			    	$image = $_FILES['fileToUpload']['tmp_name'];
 			    	$sql = "INSERT INTO prescription (email, order_date, image, status, msg) VALUES ('$email', '$order_date', '$image', '$status', '$msg')";
 
-			    	$message = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully uploaded.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-					// echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully uploaded.";
-					exit();
+			    	if(mysqli_query($conn, $sql))
+			    	{
+			    		$message = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully uploaded.";
+						echo "<script type='text/javascript'>alert('$message');</script>";					
+						exit();
+			    	}			    	
 			    } 
 			    else 
 			    {
@@ -131,7 +133,7 @@
 		}
 		else
 		{
-			echo'<script>alert("\t\t\tYou are not logged in.\nPlease logged in before uploading a prescription."); window.location.href="prescription.php";</script></script>';  
+			echo'<script>alert("\t\t\tYou are not logged in.\nPlease logged in before uploading a prescription."); window.location.href="prescription.php";</script>';  
 		}
 		
 	}	
