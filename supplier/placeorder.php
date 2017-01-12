@@ -1,148 +1,219 @@
 
-<?php
-if(isset($_POST['add'])){
-    if(isset($_POST['amnt'])){
-        $amnt=$_POST['amnt'];
-    }
-    if(isset($_POST['data'])){
-        $date=$_POST['date'];
-    }
-    if(isset($_POST['medname'])){
-        $med=$_POST['medname'];
-    }
-    
-}
-
-    
-    ?>
 
 <html>
 <head>
-    <title>Place an order</title>
-    
+	
     <?php require('../includes/_header.php'); ?>
-    <script src="js/jquery-3.1.0.min.js" type="text/javascript"></script>
-    <link href="css/placeorder.css" type="text/css" rel="stylesheet">
-
-      
-</head>
-    <body>
-        <h2>Place an order</h2>
-        <?php require_once("../includes/navigation.php") ?>
-        <?php 
-    $output='';
-    ?>
-        
-        <div id="d1">
-    <form action="placeorder.php" method="post" onsubmit="return validate()">
-   <input type="text" id="medname" name="medname" placeholder="Medicine name" autocomplete="off">
-    <div id="medList"><?php echo $output?></div>
-   <input id="load" type="submit" name="btn" value="Search">
-    </form>
-      
-        </div>
-    <div id="d2">
-     
-            <form action="placeorder.php" method="post">
-              <table>
-                    <tr height="50">
-                        <td>Supplier</td>
-                        <td><select>
-<!--                            <option>supplier</option>-->
-                            <?php
-                                if(isset($_POST['medname'])){
-                                    include("placeorderdb.php");
-                                    $medname=$_POST['medname'];
-                                    $query1="SELECT supplier.company_name, drug.supplier_id,drug.generic_name, supplier.supplier_id FROM supplier INNER JOIN drug ON supplier.supplier_id=drug.supplier_id where drug.generic_name='$medname'";
-                                    $result1=mysqli_query($connect,$query1);
-     
-                                    $num=mysqli_num_rows($result1);
-                                    while($row=mysqli_fetch_assoc($result1)){
-                                        $cname=$row['company_name'];
-                                        ?>
-                                    <option value="<?php echo $cname;?>"><?php echo $cname;?></option>    
-                                    <?php
-                        
-                                    }
-                                }
-                                
-                                
-                            ?>
-                        </select></td>
-                   </tr>
-                   <tr height="50">
-                        <td>Amount</td>
-                        <td><input type="text" id="amnt" name="amnt"></td>
-                   </tr>
-                   <tr height="50">
-                        <td>Deliver before</td>
-                        <td><input type="date" id="date" name="date"></td>
-                   </tr>
-                  
-                  
-             </table>  
-                <input type="submit" value="Add" name="add" id="add">
-            
-            
-            </form>
-        
-     
-        
-    </div>
-    <div id="cart">
-            <table>
-                   <thead>
-                       <th>Medicine</th> 
-                       <th>Amount</th>
-                       <th>Date</th>
-                   </thead>
-                   <tbody>
-                        <td width="100px"><? echo $med ?></td>
-                        <td width="100px"><? echo $amnt ?></td>
-                        <td width="100px"><? echo $date ?></td>
-                       
-                   </tbody>
-            </table>
-            
+    <link rel="stylesheet" type="text/css" href="stockStyle.css" />
+    <link rel="stylesheet" href="css/selectize.css" />
+    <script src="js/selectize.min.js"></script>
+    <title><?php echo $title; ?></title>
     
-    </div>
-        
-    </body>
+    <script>
 
+
+    function searchForm() {
+        var x = document.forms["myForm"]["txtMedicinedName"].value;
+
+
+        if (x == null || x == "" ) {
+            alert("field must be filled out");
+            return false;
+        }
+    }
+
+
+    </script>
+
+    <script>
+    var number = 1;
+    var medicines = [];
+    var total = 0;
+    function add() {
+        var quantity = $('#quantity').val();
+        var medi_id = $('#medicine_list').val();
+        var discount = $('#discount').val();
+        medicines.push(medi_id);
+
+        var unitprice;
+        var medi_name;
+        var dosage;
+        // Get unit price and name and dosage
+        $.ajax({
+            url:"bill_helper.php",
+            async:false,
+            type:"GET",
+            data : {
+                medi_id: medi_id
+             }
+        }).done(function(data) {
+            data = JSON.parse(data);
+            medi_name = data.name;
+            unitprice = data['price'];
+            dosage = data['dosage'];
+        });
+        
+        if (unitprice === '-1') {
+            alert("Medicine does not exist");
+            return;
+        }
+
+        var table = document.getElementById("tbl");
+        var row = table.insertRow(-1);
+        var numberCell = row.insertCell(0);
+        var medicineCell = row.insertCell(1);
+        var quantityCell = row.insertCell(2);
+        var dosageCell = row.insertCell(3)
+        var unitPriceCell = row.insertCell(4);
+        var totalPriceCell = row.insertCell(5);
+
+        var totalPrice = parseInt(unitprice) * parseInt(quantity);
+        // apply discount
+        totalPrice = totalPrice - (totalPrice * parseInt(discount)/100);
+
+        numberCell.innerHTML = number;
+        medicineCell.innerHTML = medi_name;
+        quantityCell.innerHTML = quantity;
+        dosageCell.innerHTML = dosage;
+        unitPriceCell.innerHTML = unitprice;
+        totalPriceCell.innerHTML = totalPrice;
+
+        total += totalPrice;
+        number += 1;
+        document.getElementById("total").innerHTML = total;
+    }
+
+    function finish() {
+        var customerNic = document.getElementById("customer_nic").value;
+        $.ajax({
+            url: "bill_helper.php",
+            async: true,
+            type: "POST",
+            data: {
+                total: total,
+                customer_nic: customerNic,
+                // NOT DONE HERE
+            }
+        }).done(function() {
+
+        })
+    }
+    
+    function printTable() {
+    	var divToPrint = document.getElementById("div_to_print");
+    	newWin = window.open("");
+    	newWin.document.write(divToPrint.outerHTML);
+    	newWin.print();
+    	newWin.close();
+    }
+    
+    </script>
+
+    <style>
+    .selectize-control {
+        width: 50%;
+    }
+    </style>
+</head>
+
+<body>
+    
+    <?php require_once("../includes/navigation.php") ?>
+    
+    <!--content goes here -->
+    <div class="customer_template_container" style=" padding-left:13px; padding-top:70px;">
+        
+        <div id="div_to_print" style="float: left; width: 60%">
+            <div style="width:100%; text-align:center; font-weight:100">
+                <h2 style="font-weight:100">Friends Pharmacy</h2>
+                <h3 style="margin-top:-16px;font-weight:100">Kirulapana</h3>
+                <div id='date'>ad</div>
+                <script>
+                $(function() {
+                    var now = new Date();
+                    var date = document.getElementById("date");
+                    var formatted = (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear();
+                    console.log(formatted);
+                    date.innerHTML = formatted;
+                });                    
+                </script>
+            </div>
+        
+            <table border=1 id="tbl" style="width:100%;border-collapse: collapse;font-weight:100">
+                <tr>
+                    <th>Number</th>
+                    <th>Medicine Name</th>
+                    <th>Quantity</th>
+                    <th>Dosage</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                </tr>
+            </table>
+            <h3 style="width:100%; text-align:center">Total: Rs.<span id="total"></span></h3>
+
+        </div>
+        <button onclick='printTable()'>Print</button>
+
+        <div style="float: right; width: 35%">
+            <form>
+                Medicine Name: 
+                <select id='medicine_list'>
+<?php
+    $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+    $sql = "SELECT * FROM drug_price";
+    $result = mysqli_query($conn, $sql);
+    while(($row = mysqli_fetch_assoc($result)) != null) {
+        echo "<option value='" . $row['id'] . "'>" . $row['medicine_name'] . " " . $row['dosage'] . "</option>";
+    }
+?>
+                </select>
+                <script>
+                $('#medicine_list').selectize({
+                    persist: false,
+                    createOnBlur: true,
+                });
+                </script>
+                <br>
+                Quantity : <input type="number" name="quantity" id="quantity" > <br>
+                Discount : <input type="number" name="discount" id="discount" /> %<br />
+                <input type="button" onclick="add()" value="Add"> <input type="reset" value="Clear">
+            </form>
+            <input type="button" onclick="finish()" value="Finish">
+        </div>
+    </div>		
+	
+    
+    <?php require_once('../includes/_footer.php') ?>
+    
+</body>
 
 </html>
-    <script>
-         function validate(){
-            var medname=document.getElementById("medname").value;
-            
-            if(medname =="" ){
-                    alert("Please enter a medicine");
-                    return false;  
-            }
-         }
 
-</script>
+
+
+
+
 <script>
 $(document).ready(function(){  
-      $('#medname').keyup(function(){  
+      $('#medicine').keyup(function(){  
            var query = $(this).val();  
            if(query != '')  
            {  
                 $.ajax({  
-                     url:"placeorderdb.php",  
+                     url:"Search.php",  
                      method:"POST",  
                      data:{query:query},  
                      success:function(data)  
                      {  
-                          $('#medList').fadeIn();  
-                          $('#medList').html(data);  
+                          $('#medicineList').fadeIn();  
+                          $('#medicineList').html(data);  
                      }  
                 });  
            }  
       });  
       $(document).on('click', 'li', function(){  
-           $('#medname').val($(this).text());  
-           $('#medList').fadeOut(); 
+           $('#medicine').val($(this).text());  
+           $('#medicineList').fadeOut(); 
            
            
         });  

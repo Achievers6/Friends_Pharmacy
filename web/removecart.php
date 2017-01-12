@@ -1,14 +1,14 @@
 <?php
 session_start();
 if (isset($_POST["query"])) {
-    $x = $_POST["query"]-1;
     
+    $x = $_POST["query"]-1;
     if($x==0 && sizeof($_SESSION['cart'])==1) {
-        $_SESSION['name'] = array();
-        $_SESSION['cart'] = array();
-        $_SESSION['qty'] = array();
-        $_SESSION['dosage'] = array();
-        $_SESSION['unitprice'] = array();
+        $_SESSION['name'] = array('1');
+        $_SESSION['cart'] = array('1');
+        $_SESSION['qty'] = array('1');
+        $_SESSION['dosage'] = array('1');
+        $_SESSION['unitprice'] = array('1');
         $_SESSION['amount'] = array();
     }
     
@@ -29,8 +29,9 @@ if (isset($_POST["query"])) {
     unset($_SESSION['unitprice'] [$x]);
     $_SESSION['unitprice'] = array_values($_SESSION['unitprice']);
     
-    unset($_SESSION['amount'] [$x]);
+    unset($_SESSION['amount'][$x]);
     $_SESSION['amount'] = array_values($_SESSION['amount']);
+
     
     
     
