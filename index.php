@@ -4,3 +4,4 @@
     <a href="web/index.php">click here to go to the web site of the customer</a>
 </body>
 </html>
+<?php header('Location: '.'web/index.php'); ?>
