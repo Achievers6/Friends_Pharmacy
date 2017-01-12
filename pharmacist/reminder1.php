@@ -30,6 +30,33 @@
                 });
 
             });
+
+            $(document).ready(function() {
+                $('#nic').keyup(function() {
+                    var query = $(this).val();
+                    if (query != '')
+                    {
+                        $.ajax({
+                            url: "searchnic.php",
+                            method: "POST",
+                            data: {query: query},
+                            success: function(data)
+                            {
+                                $('#nicList').fadeIn();
+                                $('#nicList').html(data);
+                            }
+                        });
+                    }
+                });
+                $(document).on('click', 'li', function() {
+                    $('#nic').val($(this).text());
+                    $('#nicList').fadeOut();
+
+
+                });
+            });
+
+
         </script>
     </head>
     <body>
@@ -42,7 +69,8 @@
                     <input type="text" class="inputField" name="txtmedname" autocomplete="off" placeholder="Ex: Amoxil"/><br/>
                     <p></p>
                     <label>Customer NIC: </label>
-                    <input type="text" class="inputField" name="txtnic" autocomplete="off" placeholder="Ex: XXXXXXXXXV"/><br/>
+                    <input type="text" class="inputField" name="txtnic" id="nic" class="nic" autocomplete="off" placeholder="Ex: XXXXXXXXXV"/><br/>
+                    <div id='nicList'></div> 
                     <p></p>
                     <label>Contact number: </label>
                     <input type="text" class="inputField" name="txtcontact" autocomplete="off" placeholder="Ex: Enter without zero"/><br/>
@@ -85,7 +113,7 @@
                             <p></p>
                         </div>
                         <table>
-                            
+
                             <tr>
 
                                 <td><label>Time(24 hour):</label><td>
@@ -122,7 +150,7 @@
                                         </select>
                                     </div></td>
                                 <td><div class="ts1">
-                                         minutes:<input type="number" min="0" max="60" name="min1"  />
+                                        minutes:<input type="number" min="0" max="60" name="min1"  />
                                     </div></td>
                             </tr>
                             <tr>
@@ -192,7 +220,7 @@
                                         </select><br>
                                     </div></td>
                                 <td><div class="ts3">
-                                         minutes:<input type="number" min="0" max="60" name="min3"  />
+                                        minutes:<input type="number" min="0" max="60" name="min3"  />
                                     </div></td>
                             </tr>
                         </table>
@@ -339,7 +367,7 @@ if (isset($_POST['btnsubmitrem'])) {
         $Friday = 0;
         $Satday = 0;
         $Sunday = 0;
-        
+
 
 
         if (isset($_POST["monday"])) {

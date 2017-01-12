@@ -137,7 +137,6 @@ echo '</table>';
 echo "</div>";
 echo "</div>";
 
-
 //print_r($_SESSION['cart']);
 //print_r($_SESSION['qty']);
 //session_destroy();

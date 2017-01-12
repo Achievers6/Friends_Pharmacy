@@ -3,14 +3,6 @@ body{
     background-color: #F1F8E9;    
 }
 
-.signup_table{
-  margin-left: 20%;
-}
-
-table{
-  margin-bottom: 3%;
-}
-
 table input[type="text"], table input[type="email"], table input[type="password"], 
 table input[type="date"], table input[type="tel"]{
   padding: 7px 5px;

@@ -118,7 +118,7 @@
     </style>
 
     <p></p>
-    <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 870px; height: 264px; overflow: hidden; visibility: hidden;">
+    <div id="jssor_1" style="position: relative; left: 120px; top:-17px; width: 700px; height: 364px; z-index: -1;">
         <!-- Loading Screen -->
         <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
             <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>

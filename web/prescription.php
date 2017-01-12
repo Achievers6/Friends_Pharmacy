@@ -44,6 +44,8 @@
 			//specifies the path of the file to be uploaded
 			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
+			//get the image name 
+
 			//check whether the file already exists in the "uploads" folder.
 			$uploadOk = 1;
 

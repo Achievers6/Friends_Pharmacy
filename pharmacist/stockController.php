@@ -25,11 +25,7 @@ include ("../Entities/stockEntity.php");
 class stockController {
 
     function CreateStockTables($medicine_Name) {
-        $host = "localhost";
-        $user = "root";
-        $passwd = "";
-        $database = "friends_pharmacy";
-        $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+        include '../database/dbconnect.php';
 
         $query = "SELECT * FROM stock WHERE medicine_name LIKE '$medicine_Name'";
 
@@ -55,7 +51,7 @@ class stockController {
         mysqli_close($mysqli);
         $result = "";
         $result = "
-       <h3 style='text-align:center;'>$medicine_Name<h3>
+       <h2 style='text-align:center;'>$medicine_Name<h2>
           <table class='sortable'>
                 <tr>
                     
@@ -226,11 +222,7 @@ class stockController {
     }
 
     function DeleteStock($id) {
-        $host = "localhost";
-        $user = "root";
-        $passwd = "";
-        $database = "friends_pharmacy";
-        $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+        include '../database/dbconnect.php';
         $query = "select medicine_name from stock where id=$id";
 //Execute query and close connection
         $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -261,12 +253,9 @@ class stockController {
         mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
         mysqli_close($mysqli);
     }
+
     function allOutDate() {
-    $host = "localhost";
-        $user = "root";
-        $passwd = "";
-        $database = "friends_pharmacy";
-        $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+        include '../database/dbconnect.php'; 
 
         $query = "SELECT * FROM stock where 21>DATEDIFF(expire_date,CURDATE()) and 0<DATEDIFF(expire_date,CURDATE());";
 

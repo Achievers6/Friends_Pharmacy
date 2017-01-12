@@ -9,11 +9,15 @@
 </head>
 
 <body>
+
+
 <?php
 
-$title = "Create New Account";
+include 'template.php';
 
-$content = '<form action="" method="POST" enctype="multipart/form-data">
+?>
+
+<form action="" method="POST" enctype="multipart/form-data">
 	<table>
 	
 		<tr><td>First Name: </td><td> <input type="text" name="fname" required="required"></td></tr>
@@ -31,11 +35,7 @@ $content = '<form action="" method="POST" enctype="multipart/form-data">
 		<tr><td>Joining Date: </td><td> <input type="date" name="date" required="required"></td></tr>
 		<tr><td><input type="submit" name="submit" id="submit"></td></tr>
 	</table>			
-	</form>';
-
-include 'template.php';
-
-?>
+</form>
 
 <?php
 

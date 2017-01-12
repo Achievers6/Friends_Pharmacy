@@ -275,7 +275,9 @@ while ($row = mysqli_fetch_array($query)) {
             a:visited {color:#808080;}  /* visited link */
             a:active {color:#0000FF;} 
 
-
+            .nav {
+                overflow: scroll;
+            }
 
 
         </style>
