@@ -32,7 +32,7 @@ foreach ($name as $index => $val) {
         
     }
 }
- print_r($_SESSION['dosage']);
+
 mysqli_close($mysqli);
 unset($_SESSION['name']);
 unset($_SESSION['cart']);
