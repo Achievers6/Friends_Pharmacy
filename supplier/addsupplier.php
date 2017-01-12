@@ -61,7 +61,8 @@ if(isset($_POST['go'])){
 <style>
             .error {
                     color: #ff0000;
-  
+                    position:relative;
+                    top:5px;
   
                 }
 

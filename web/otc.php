@@ -160,12 +160,13 @@ $t = sizeof($_SESSION['cart']);
 
             .totaltxt {
                 position: absolute;
-                right: 380px;
+                width: 80px;
+                right: 345px;
                 top:25px;
             }
             .totalno {
                 position: absolute;
-                right: 340px;
+                right: 320px;
                 top:25px;
             }
             .next,.previous {
@@ -396,15 +397,15 @@ $t = sizeof($_SESSION['cart']);
                 </div>
             </div>  
             <?php
+             $tot =  array_sum($_SESSION['amount']);
+            // $f = number_format((float) array_sum($_SESSION['amount']), 2, '.', '');
             echo "<div id='notifications'>";
             echo "<h3 id='h3' style='text-align: center; color:red;'>Shopping Cart</h3>";
 
-            echo "<p class='totaltxt' style='text-align: center  font:13px helvetica; font-weight:bold;'>Total :</p>";
-            echo "<p class='totalno' style='text-align: center' font:13px helvetica; font-weight:bold;>";
-            array_sum($_SESSION['amount']);
-            echo "</p>";
-
-            echo "<button class='addorder'  onclick='confirmorder()'><span>Add to Order list</span></button>";
+            echo "<p class='totaltxt' style='text-align: center  font:13px helvetica; font-weight:bold;'>Total (Rs):</p>";
+            echo "<p class='totalno' style='text-align: center' font:13px helvetica; font-weight:bold;>$tot</p>";
+            
+           echo "<button class='addorder'  onclick='confirmorder()'><span>Add to Order list</span></button>";
 
             echo "<div id=inner_noti>";
             echo '<table id="myTable" class="sortable">';
@@ -463,7 +464,7 @@ $t = sizeof($_SESSION['cart']);
         </div>
 
 
-<?php require '../includes/customer_header.php'; ?>
+        <?php require '../includes/customer_header.php'; ?>
         <?php require '../includes/slideshow.php'; ?>
 
         <div class="content">
@@ -488,12 +489,12 @@ $t = sizeof($_SESSION['cart']);
                 </table>
                 <div id="contentProduct">
 
-<?php foreach ($drugArray as $key => $drug) { ?>
+                    <?php foreach ($drugArray as $key => $drug) { ?>
 
                         <table class = 'drugTable'>
                             <tr>
 
-    <?php echo "<th rowspan='6' width = '150px' ><img runat = 'server' src = '$drug->image' /></th>" ?>
+                                <?php echo "<th rowspan='6' width = '150px' ><img runat = 'server' src = '$drug->image' /></th>" ?>
 
                                 <th width = '75px' >Brand: </th>
                                 <td><?php echo $drug->medicine_name ?> </td>
@@ -532,26 +533,26 @@ $t = sizeof($_SESSION['cart']);
                             <img src='../public/image/addCart.png' style="width: 200px; height: 110px;; position: relative; left: 590px; top:-40px;;" >
                         </a>
 
-                                                                                           <!--<td> <button class="product-btn-add" style="width: 100px; height: 30px;" id='myBtn' onclick='myFunction()'><span>Add to Cart</span></button></td>-->
+                                                                                               <!--<td> <button class="product-btn-add" style="width: 100px; height: 30px;" id='myBtn' onclick='myFunction()'><span>Add to Cart</span></button></td>-->
 
-<?php } ?>
+                    <?php } ?>
                     <table>
                         <tr>
 
 
-<?php if (!($page <= 1)) { ?>
+                            <?php if (!($page <= 1)) { ?>
                                 <?php echo " <form name = 'myFormprevious' action = 'otc.php?page=$page' method = 'post'>" ?>
 
                                 <td><input type='submit' style=" height:25px; width: 90px; " name="previous" value="Back" class="previous"></td>
 
-    <?php echo "</form>" ?>
+                                <?php echo "</form>" ?>
                             <?php } ?>
                             <?php if ($total_pages > $page) { ?>
                                 <?php echo " <form name = 'myFormnext' action = 'otc.php?page=$page' method = 'post'>" ?>
 
                                 <td><input type='submit' name="next" class="next" value="Next" style="height:25px; width: 90px;"></td>
 
-    <?php echo "</form>" ?>
+                                <?php echo "</form>" ?>
                             <?php } ?>
                         </tr>
                     </table>
@@ -567,10 +568,10 @@ $t = sizeof($_SESSION['cart']);
         </aside>
 
 
-<?php require '../includes/customer_footer.php'; ?>
+        <?php require '../includes/customer_footer.php'; ?>
 
 
-<?php if (isset($_GET['id'])) { ?>
+        <?php if (isset($_GET['id'])) { ?>
             <?php if (isset($_GET['id']) && isset($_SESSION['email']) && !empty($_SESSION['email'])) { ?>
                 <?php echo $id2 = $_GET['id']; ?>
 
@@ -641,11 +642,11 @@ $t = sizeof($_SESSION['cart']);
                                 <img src='../public/image/cancel.png' style="width: 35px; height: 35px; position: relative; left: 515px; top:-100px;" >
                             </a>
                             <div class="inter" style="position: relative; top: -40px;">
-            <?php echo " <form name = 'myForm2' action = 'otc.php?id2=$id2&page=$page' method = 'post' onsubmit = 'return validateForm2()'>" ?>
+                                <?php echo " <form name = 'myForm2' action = 'otc.php?id2=$id2&page=$page' method = 'post' onsubmit = 'return validateForm2()'>" ?>
                                 <table class = 'drugforcartTable' >
                                     <tr>
 
-            <?php echo "<th rowspan='6' width = '120px' ><img runat = 'server' src = '$drugforcart->image'/></th>" ?>
+                                        <?php echo "<th rowspan='6' width = '120px' ><img runat = 'server' src = '$drugforcart->image'/></th>" ?>
                                         <td><input type="hidden" name ="medname" value=<?php echo $drugforcart->medicine_name ?> ></td>
                                         <td><input type="hidden" name ="id" value=<?php echo $drugforcart->id; ?> ></td>
 
@@ -686,7 +687,7 @@ $t = sizeof($_SESSION['cart']);
                                         <td>
                                             <select name = 'dosagetype' style="width: 173px;">
 
-            <?php foreach ($disdosage as $value) { ?>
+                                                <?php foreach ($disdosage as $value) { ?>
                                                     <?php $drid = $disid[array_search($value, $disdosage)] ?>
                                                     <?php $drprice = $disprice[array_search($value, $disdosage)] ?>
                                                     <?php echo "<option value=$value>$value" . " (Rs " . $disprice[array_search($value, $disdosage)] . ")" . "</option>"; ?>
@@ -707,7 +708,7 @@ $t = sizeof($_SESSION['cart']);
 
                                     <tr>
                                         <td align="center"><?php foreach ($disdosage as $value) { ?>
-                <?php echo $value . " " . $disqty[array_search($value, $disdosage)] . " unit in stock<br>"; ?>
+                                                <?php echo $value . " " . $disqty[array_search($value, $disdosage)] . " unit in stock<br>"; ?>
                                             <?php } ?></td>
 
                                         <td><input type = 'submit' class="myButton" name = 'btnsubmititem' value='Add to cart'><td>
@@ -716,26 +717,26 @@ $t = sizeof($_SESSION['cart']);
                                     </tr>   
 
                                 </table>
-            <?php
-            "</form>"
-            ?>
+                                <?php
+                                "</form>"
+                                ?>
 
                             </div>
                         </div>
                     </div>
-            <?php
-        } else
-        if ((sizeof($disqty) == 0)) {
-            echo '<script language="javascript">';
-            echo "alert('This medicine is not in stock  ')";
-            echo '</script>';
-        }
-        ?>
+                    <?php
+                } else
+                if ((sizeof($disqty) == 0)) {
+                    echo '<script language="javascript">';
+                    echo "alert('This medicine is not in stock  ')";
+                    echo '</script>';
+                }
+                ?>
             <?php } else if (isset($_GET['id']) && !isset($_SESSION['email']) && empty($_SESSION['email'])) { ?>        
                 echo'<script>alert("\t\t\tYou are not logged in.\nPlease logged in before make an order.");
             window.location.href = "otc.php?page=<?php echo $page ?>";</script>';
 
-                <?php } ?>
+            <?php } ?>
         <?php } ?>
 
 
@@ -760,10 +761,10 @@ $t = sizeof($_SESSION['cart']);
     $(".cancel").click(function() {
 
         var index = $(this).closest("tr").index();
-        
+
         $('.totalno').hide();
         if (index != '')
-        {   
+        {
             $.ajax({
                 url: "removecart.php",
                 method: "POST",
@@ -771,18 +772,18 @@ $t = sizeof($_SESSION['cart']);
                 success: function(data)
                 {
                     $('.totalno').show();
-                    
+
                     $('.totalno').html(data);
                 }
 
             });
         }
-   
-             if(index>0) {
-             document.getElementById("myTable").deleteRow(index);
-             }
-             $("#myTable").show();
-        
+
+        if (index > 0) {
+            document.getElementById("myTable").deleteRow(index);
+        }
+        $("#myTable").show();
+
 
 
 
