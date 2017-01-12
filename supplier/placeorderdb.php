@@ -29,7 +29,7 @@ function sendPrice() {
 function sendSupplier(){
     $supplier =$_GET['supplier'];
      $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy")or die;
-    $sql1 ="SELECT supplier.company_name, drug.id, supplier_supplier.id, drug.supplier_id FROM supplier INNER JOIN drug ON supplier.supplier_id = drug.supplier_id"
+    $sql1 ="SELECT supplier.company_name, drug.id, supplier_supplier.id, drug.supplier_id FROM supplier INNER JOIN drug ON supplier.supplier_id = drug.supplier_id";
 }
 
 function finishBill() {

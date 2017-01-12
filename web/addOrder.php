@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 include '../database/dbconnect.php';
 $email = $_SESSION["email"];
 $name = $_SESSION['name'];

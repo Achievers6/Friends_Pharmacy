@@ -69,7 +69,7 @@
 $title = "";
 
 $content = "<h2 style='text-align:center;'>Add New Medicine</h2>
-    <form name='myForm' action='AddMedicine.php' method ='post' onsubmit='return validateForm()'>
+    <form name='myForm' action='AddMedicine.php' method ='post' onsubmit='return validateForm()' enctype='multipart/form-data'>
         <fieldset>
             <label for='Brand Name'>Brand Name: </label>
             <input type='text' class='inputField' name='txtBrandName' autocomplete='off' placeholder='Ex: Amoxil'/><br/>
@@ -103,12 +103,13 @@ $content = "<h2 style='text-align:center;'>Add New Medicine</h2>
             <textarea cols='37' rows='12' name='txtContent'></textarea></br>
             <p></p>			
             <label for='image'>Add image: </label>
-            <input type='file' name='pic' accept='image/*'>
+            <input type='file' name='fileToUpload' id='fileToUpload'>
             <p></p>
             <input type='submit' name = 'btnSubmit' location.href = 'AddMedicine.php'></span><br/> 
             <p></p>
         </fieldset>
     </form>
+   
     <button id='myBtn' onclick='myFunction()' style='position:absolute; top:300px; right:270px; background-color: rgb(106,184,42); color: white;
     padding: 5px 5px;
     border: none;
@@ -129,6 +130,18 @@ $content = "<h2 style='text-align:center;'>Add New Medicine</h2>
         </div>
 
      </div>";
+
+
+
+
+
+
+
+
+
+
+
+
 
 if (isset($_POST['btnSubmitcat'])) {
     $cat = $_POST["addcat"];
@@ -167,7 +180,7 @@ if (isset($_POST['btnSubmit'])) {
     $supplier_name = $_POST["supplier"];
     $discription = $_POST["txtContent"];
     $group = $_POST["group"];
-    $image = "../public/image/drug/".$_POST["pic"];
+    $image = "../public/image/drug/" . basename($_FILES["fileToUpload"]["name"]);
 
     $host = "localhost";
     $user = "root";
@@ -205,10 +218,70 @@ if (isset($_POST['btnSubmit'])) {
         mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
         mysqli_close($mysqli);
 
+        //specifies the directory where the file is going to be placed
+        $target_dir = "../public/image/drug/";
 
-        echo '<script language="javascript">';
-        echo 'alert("Medicine is added successfully")';
-        echo '</script>';
+
+        //specifies the path of the file to be uploaded
+        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+
+        //check whether the file already exists in the "uploads" folder.
+        $uploadOk = 1;
+
+
+        //holds the file extension of the file
+        $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+        // check a file to upload is selected or not
+        if (empty($_FILES["fileToUpload"]["name"])) {
+            $message = "Please select an image to upload..";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            $uploadOk = 0;
+        }
+
+        //check the file is already exist or not
+        if (file_exists($target_file)) {
+            $message = "Sorry, file already exists.";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            // echo "Sorry, file already exists.<br>";
+            $uploadOk = 0;
+        }
+
+        // Check file size
+        if ($_FILES["fileToUpload"]["size"] > 1000000) {
+            $message = "Sorry, your file is too large.";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            // echo "Sorry, your file is too large.<br>";
+            $uploadOk = 0;
+        }
+
+        // Allow certain file cairo_format_stride_for_width(format, width)
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.<br>";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            $message = "Sorry, your file was not uploaded.";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+
+            // echo "Sorry, your file was not uploaded.";
+        }
+        // if everything is ok, try to upload file
+        else {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                echo '<script language="javascript">';
+                echo 'alert("Medicine is added successfully")';
+                echo '</script>';
+            } else {
+                $message = "Sorry, there was an error uploading your file.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                // echo "Sorry, there was an error uploading your file.";
+            }
+        }
     }
 }
 include './MedicineTemplate.php';
