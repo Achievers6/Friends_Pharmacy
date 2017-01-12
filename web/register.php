@@ -8,8 +8,7 @@
 	<link rel="stylesheet" href="../public/css/web/register.css" type="text/css" />
     <script type="text/javascript"></script>
     <script src="../public/js/jquery-3.1.1.min.js"></script>
-    <script src="../public/js/jquery.validate.min.js"></script>
-    
+    <script src="../public/js/jquery.validate.min.js"></script>    
     <script src="../public/js/registervald.js"></script>
     
     <style>
@@ -29,7 +28,7 @@
 	<h3 style="text-align: center; margin-top: 3%; margin-bottom: 2%;">Create A New Account</h3>
 	<div class="signup_table">
 		<form id="main" action="signup.php" method="POST" enctype="multipart/form-data">
-<!--			<label"><font style="color: red">*</font> All feilds are required</label><br><br>-->
+
 			<table>				
 				<tr>
                     <td><span class="star" style="color:red">*</span>First Name: </td>
@@ -58,7 +57,7 @@
 				<tr>
                      <td><span class='star' style="color:red">*</span>Gender:</td>
                     <td><Input type="radio" name="gender1"   value="male" >Male</td>
-				    <td><Input type="radio" name="gender2"  value="female" >Female</td>
+				            <td><Input type="radio" name="gender2"  value="female" >Female</td>
                 </tr>
 				<tr>
                      <td><span class='star' style="color:red">*</span>Contact Number:</td>

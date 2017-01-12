@@ -22,7 +22,7 @@
 			<p style="font-size: 20px"><b>Upload Your Prescription Here</b></p>
 			
 			<form action=" " method="post" enctype="multipart/form-data">
-			    Select image to upload: <br><br>
+			    Select an image to upload: <br><br>
 			    <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
 			    <input type="submit" value="Upload Image" name="submit">
 			</form>
@@ -39,7 +39,14 @@
 		{
 			//specifies the directory where the file is going to be placed
 			$target_dir = "../customer/uploads/";
-
+			//get the current user email
+			$email = $_SESSION['email'];
+			//get the system date
+			$order_date = date("Y-m-d");
+			//set current state to new
+			$status = "new";
+			//set msg to be sent as 0
+			$msg = 0;
 
 			//specifies the path of the file to be uploaded
 			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -105,6 +112,9 @@
 			{
 			    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
 			    {
+			    	$image = $_FILES['fileToUpload']['tmp_name'];
+			    	$sql = "INSERT INTO prescription (email, order_date, image, status, msg) VALUES ('$email', '$order_date', '$image', '$status', '$msg')";
+
 			    	$message = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully uploaded.";
 					echo "<script type='text/javascript'>alert('$message');</script>";
 					// echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully uploaded.";

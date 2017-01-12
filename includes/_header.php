@@ -287,7 +287,7 @@ while ($row = mysqli_fetch_array($query)) {
     <body style="margin:0;padding:0;">
         <div>
             <ul class="ul">
-                <li class="li" id="logout"><a href="../web/index.php">Logout</a></li>
+                <li class="li" id="logout"><a href="logout.php">Logout</a></li>
 
                 <li class="li" id="orders">
                     <div id="order_Counter"></div> 
@@ -296,10 +296,6 @@ while ($row = mysqli_fetch_array($query)) {
                     </div>
                     <div id="lblneworders" style="position: absolute; right:60px;  top:33px; width:80px; ">new orders</div>
                 </li>
-
-
-
-
 
                 <li id="noti_Container" >
                     <div id="noti_Counter"></div>   <!--SHOW NOTIFICATIONS COUNT.-->
@@ -310,7 +306,9 @@ while ($row = mysqli_fetch_array($query)) {
                         </div>
 
                     </div>   
-                    <div id="lblexp" style="position: absolute; right:-30px;  top:33px; width:80px; ">short expiry</div>
+                    <div id="lblexp" style="position: absolute; right:-30px;  top:33px; width:80px; ">
+                        short expiry
+                    </div>
                     <div id="notifications">
                         <h3 id="h3">Short expiry</h3>
                         <?php
@@ -320,12 +318,12 @@ while ($row = mysqli_fetch_array($query)) {
                            $medname = urlencode($stock->medicine_name);
                           
                             echo "<div id=inner_noti>
-                                <table>
-                                <tr>
-                                <td style='padding:5px;'><img  src='$rowim[0]'  style='display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position: relative; top: -5px;'> </td>   
-                                <td><a href='../pharmacist/removeStock2.php?outofstock=$medname'> $stock->medicine_name  $stock->quantity quantity will expire on $stock->expire_date date according to $stock->batch_no batch number</a></td>
-                                <tr>
-</table>
+                                    <table>
+                                    <tr>
+                                    <td style='padding:5px;'><img  src='$rowim[0]'  style='display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position: relative; top: -5px;'> </td>   
+                                    <td><a href='../pharmacist/removeStock2.php?outofstock=$medname'> $stock->medicine_name  $stock->quantity quantity will expire on $stock->expire_date date according to $stock->batch_no batch number</a></td>
+                                    <tr>
+                                    </table>
                                 </div>";
                         }
                         ?>
