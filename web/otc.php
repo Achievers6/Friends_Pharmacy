@@ -594,7 +594,7 @@ $t = sizeof($_SESSION['cart']);
 
 
                         <a href='#' onclick= "window.location.href = 'otc.php?id=<?php echo $drug->id ?>&page=<?php echo $page ?>'">
-                            <img src='../public/image/addCart.png' style="width: 200px; height: 110px;; position: relative; left: 590px; top:-40px;;" >
+                            <img src='../public/image/addCart.png' style="width: 200px; height: 110px; position: relative; left: 590px; top:-40px;" >
                         </a>
 
                     <?php } ?>

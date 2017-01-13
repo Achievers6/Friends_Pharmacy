@@ -201,14 +201,7 @@ if (isset($_POST['btnSubmit'])) {
         $supplier_id = $row[0];
 
 
-        $query = "INSERT INTO drug
-            (medicine_name,generic_name,type,category,supplier_id,discription,image,group_name)
-             VALUES
-             ('$brand_name','$generic_name','$type','$category','$supplier_id','$discription','$image','$group')";
 
-
-        mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-        mysqli_close($mysqli);
 
         //specifies the directory where the file is going to be placed
         $target_dir = "../public/image/drug/";
@@ -231,13 +224,7 @@ if (isset($_POST['btnSubmit'])) {
             $uploadOk = 0;
         }
 
-        //check the file is already exist or not
-        if (file_exists($target_file)) {
-            $message = "Sorry, file already exists.";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-            // echo "Sorry, file already exists.<br>";
-            $uploadOk = 0;
-        }
+        //check the file is already exist or no
 
         // Check file size
         if ($_FILES["fileToUpload"]["size"] > 1000000) {
@@ -265,6 +252,14 @@ if (isset($_POST['btnSubmit'])) {
         // if everything is ok, try to upload file
         else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                $query = "INSERT INTO drug
+            (medicine_name,generic_name,type,category,supplier_id,discription,image,group_name)
+             VALUES
+             ('$brand_name','$generic_name','$type','$category','$supplier_id','$discription','$image','$group')";
+
+
+                mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+                mysqli_close($mysqli);
                 echo '<script language="javascript">';
                 echo 'alert("Medicine is added successfully")';
                 echo '</script>';
