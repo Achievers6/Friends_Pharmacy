@@ -1,39 +1,44 @@
-<?php
-if (isset($_GET['medi_id'])) {
-    sendPrice();
-} elseif (isset($_GET['init'])) {
-    sendDrugs();
-} elseif (isset($_POST['finish'])) {
-    finishBill();
-}
+<?php 
+$host = "localhost";
+$user = "root";
+$passwd = "";
+$database = "friends_pharmacy";
+$connect=mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+
+   
+ if(isset($_POST["query"]))  
+ {  
+      $output = '';  
+      $query = "SELECT * FROM drug WHERE generic_name LIKE '".$_POST["query"]."%'";  
+      $result = mysqli_query($connect, $query);  
+     
+      if(mysqli_num_rows($result) > 0)  
+      {  
+          $output = '<table id="us_table"><tr><th>Medicine</th></tr><ul>';
+           while($row = mysqli_fetch_array($result))  
+           {  
+                $output .= '<tr><td><li>'.$row["generic_name"].'</li></td></tr>';  
+           }  
+      }  
+      else  
+      {  
+           $output .= '<li id="notfound">Drug not found</li>';  
+      }  
+      $output .= '</ul></table>';  
+      echo $output;  
+ } 
+
+// if(isset($_POST["search"])){
+//     $companyname=$_POST['medname'];
+//     $query1="SELECT supplier.company_name, drug.supplier_id,drug.generic_name, supplier.supplier_id FROM supplier INNER JOIN drug ON supplier.supplier_id=drug.supplier_id where drug.generic_name='$medname'";
+//     $result1=mysql_query($connect,$query1);
+//     
+//    $num=mysqli_num_rows($result1);
+//    while($row=mysqli_fetch_assoc($result1)){
+//      $cname=$row['company_name'];
+//    
+//  }
+//     
+// }
  
- 
-
-
-function sendPrice() {
-    $medi_id = $_GET['medi_id'];
-    $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-    
-
-    $sql = "SELECT * FROM drug WHERE id='$medi_id'";
-
-    $result = mysqli_query($conn, $sql);
-
-    $row = mysqli_fetch_assoc($result);
-    
-    $response = array('name'=>$row['medicine_name'], 'quantity'=>$row['price'], 'dosage'=>$row['dosage']);
-    echo json_encode($response);
-}
-
-
-function sendSupplier(){
-    $supplier =$_GET['supplier'];
-     $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy")or die;
-    $sql1 ="SELECT supplier.company_name, drug.id, supplier_supplier.id, drug.supplier_id FROM supplier INNER JOIN drug ON supplier.supplier_id = drug.supplier_id";
-}
-
-function finishBill() {
-    
-}
-
-?>
+ ?>  
