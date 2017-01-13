@@ -90,6 +90,8 @@
             /* size of bullet elment */
             width: 16px;
             height: 16px;
+            margin-top: -90px;
+            margin-left: 90px;
             background: url('../public/image/slideshow/b05.png') no-repeat;
             overflow: hidden;
             cursor: pointer;
@@ -115,6 +117,7 @@
         .jssora12r:hover { background-position: -195px -37px; }
         .jssora12l.jssora12ldn { background-position: -256px -37px; }
         .jssora12r.jssora12rdn { background-position: -315px -37px; }
+    
     </style>
 
     <p></p>
@@ -129,7 +132,7 @@
                 <img data-u="image" src="../public/image/slideshow/2-bg1.jpg" />
                 <div style="position: absolute; top: 54px; left: 1px; width: 778px; height: 131px;">
                     <img data-u="caption" data-t="0" style="position: absolute; top: 0px; left: -783px; width: 778px; height: 131px;" src="../public/image/slideshow/1-021.png" />
-                    <img data-u="caption" data-t="1" style="position: absolute; top: 132px; left: 868px; width: 392px; height: 74px;" src="../public/image/slideshow/health.png" />
+                    <img data-u="caption" data-t="1" style="position: absolute; top: 132px; left: 1130px; width: 392px; height: 74px;" src="../public/image/slideshow/health.png" />
                     <img data-u="caption" data-t="2" style="position: absolute; top: 24px; left: -285px; width: 270px; height: 70px;" src="../public/image/slideshow/1-031.png" />
                 </div>
                 <div style="position: absolute; top: -40px; left: 2px; width: 350px; height: 360px;">
@@ -141,26 +144,27 @@
                 <img data-u="image" src="../public/image/slideshow/2-bg1.jpg" />
                 <div style="position: absolute; top: 5px; left: 19px; width: 410px; height: 260px;">
                     <img data-u="caption" data-t="6" style="position: absolute; top: 3px; left: -304px; width: 220px; height: 243px;" src="../public/image/slideshow/3.png" />
-                    <img data-u="caption" data-t="7" style="position: absolute; top: 225px; left: 855px; width: 220px; height: 40px;" src="../public/image/slideshow/eat.png" />
-                    <img data-u="caption" data-t="8" style="position: absolute; top: 56px; left: 1084px; width: 145px; height: 190px;" src="../public/image/slideshow/2-3.png" />
-                    <img data-u="caption" data-t="9" style="position: absolute; top: 293px; left: 184px; width: 91px; height: 71px;" src="../public/image/slideshow/2-4.png" />
+                    <img data-u="caption" data-t="7" style="position: absolute; top: 225px; left: 855px; width: 220px; height: 30px;" src="../public/image/slideshow/eat.png" />
+                    <img data-u="caption" data-t="8" style="position: absolute; top: 35px; left: 1084px; width: 160px; height: 240px;" src="../public/image/slideshow/2-3.png" />
+                    
                 </div>
                 <div style="position: absolute; top: -5px; left: 422px; width: 440px; height: 280px;">
-                    <img data-u="caption" data-t="10" style="position: absolute; top: -110px; left: 8px; width: 150px; height: 77px;" src="../public/image/slideshow/2-5.png" />
-                    <img data-u="caption" data-t="11" style="position: absolute; top: 285px; left: 38px; width: 130px; height: 32px;" src="../public/image/slideshow/2-6.png" />
+                    <img data-u="caption" data-t="10" style="position: absolute; top: -110px; left: 8px; width: 150px; height: 77px;" src="../public/image/slideshow/feel.png" />
+                    <img data-u="caption" data-t="11" style="position: absolute; top: 285px; left: 38px; width: 165px; height: 50px;" src="../public/image/slideshow/live.png" />
                     <img data-u="caption" data-t="12" style="position: absolute; top: 7px; left: 463px; width: 265px; height: 260px;" src="../public/image/slideshow/2-1.png" />
                 </div>
             </div>
             <div data-p="141.75" style="display: none;">
                 <img data-u="image" src="../public/image/slideshow/3-bg1.jpg" />
                 <div style="position: absolute; top: 2px; left: -2px; width: 310px; height: 260px;">
-                    <img data-u="caption" data-t="13" style="position: absolute; top: -1px; left: 877px; width: 300px; height: 260px;" src="../public/image/slideshow/3-1.png" />
+                    <!-- <img data-u="caption" data-t="13" style="position: absolute; top: 150px; left: 877px; width: 250px; height: 90px;" src="../public/image/slideshow/baby.png" /> -->
+                    <img data-u="caption" data-t="13" style="position: absolute; top: 20px; left: 885px; width: 190px; height: 150px;" src="../public/image/slideshow/bucket.png" />
                 </div>
                 <div style="position: absolute; top: 2px; left: 311px; width: 560px; height: 260px;">
-                    <img data-u="caption" data-t="14" style="position: absolute; top: -86px; left: 11px; width: 283px; height: 58px;" src="../public/image/slideshow/3-5.png" />
-                    <img data-u="caption" data-t="15" style="position: absolute; top: 290px; left: 6px; width: 171px; height: 36px;" src="../public/image/slideshow/3-6.png" />
-                    <img data-u="caption" data-t="16" style="position: absolute; top: 265px; left: 273px; width: 247px; height: 260px;" src="../public/image/slideshow/3-2.png" />
-                    <img data-u="caption" data-t="17" style="position: absolute; top: 220px; left: 651px; width: 102px; height: 37px;" src="../public/image/slideshow/3-4.png" />
+                    <img data-u="caption" data-t="14" style="position: absolute; top: -120px; left: 11px; width: 283px; height: 120px;" src="../public/image/slideshow/baby.png" />
+                    <img data-u="caption" data-t="15" style="position: absolute; top: 330px; left: 6px; width: 171px; height: 36px;" src="../public/image/slideshow/3-5.png" />
+                    <img data-u="caption" data-t="16" style="position: absolute; top: 340px; left: 350px; width: 290px; height: 23  0px;" src="../public/image/slideshow/3-2.png" />
+                    <img data-u="caption" data-t="17" style="position: absolute; top: 170px; left: 250px; width: 300px; height: 200px;" src="../public/image/slideshow/3-4.png" />
                 </div>
             </div>
         

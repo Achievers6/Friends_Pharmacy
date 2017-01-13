@@ -4,7 +4,8 @@
 require 'orderController.php';
 $title = "Customer orders";
 $orderController = new orderController();
-if (isset($_GET["confirm"])) {
+if (isset($_GET["confirm"])) 
+{
     $no = $_GET["order_no"];
     $content = "
         <table style='position: relative; left:950px;'>
@@ -14,12 +15,14 @@ if (isset($_GET["confirm"])) {
                 <td><a href='#' onClick=showConfirm2($no)><img  class='confirm' src='../public/image/OK.png' style='width: 25px; height: 25px;'></a></td>
                 </tr>
         </table>";
+
     $orderListTable = $orderController->orderListTable($_GET["order_no"]);
     
-    $content = $content . $orderListTable."<a href='confiredOrder.php'><img  class='confirm' src='../public/image/back.png' style='width: 100px;; height: 35px; position: relative; left:400px;'></a>
-                ";
+    $content = $content . $orderListTable."<a href='confiredOrder.php'><img  class='confirm' src='../public/image/back.png' style='width: 100px;; height: 35px; position: relative; left:400px;'></a>";
 }
-else if (isset($_GET["order_no"])) {
+
+else if (isset($_GET["order_no"])) 
+{
     $no = $_GET["order_no"];
     $content = "
         <table style='position: relative; left:950px;'>
@@ -31,9 +34,12 @@ else if (isset($_GET["order_no"])) {
         </table>";
     $orderListTable = $orderController->orderListTable($_GET["order_no"]);
     
-    $content = $content . $orderListTable."<a href='cust_orders.php'><img  class='confirm' src='../public/image/back.png' style='width: 100px;; height: 35px; position: relative; left:400px;'></a>
-                ";
-} else if (isset($_POST["btnsub"])) {
+    $content = $content . $orderListTable."<a href='cust_orders.php'><img  class='confirm' src='../public/image/back.png' style='width: 100px;; height: 35px; position: relative; left:400px;'></a>";
+
+} 
+
+else if (isset($_POST["btnsub"])) 
+{
     $no = $_POST["btnno"];
     $msg = $_POST["txtarea"];
     $orderController->reject($no, $msg);
@@ -42,11 +48,16 @@ else if (isset($_GET["order_no"])) {
     echo '</script>';
     $orderTable = $orderController->orderTable("not confirmed");
     $content = $orderTable;
-} else if (isset($_GET["confirmed"])) {
+
+} 
+else if (isset($_GET["confirmed"])) 
+{
     $orderController->confirmOrder($_GET["confirmed"]);
     $orderTable = $orderController->orderTable("not confirmed");
     $content = $orderTable;
-} else {
+} 
+else 
+{
     $orderTable = $orderController->orderTable("not confirmed");
     $content = $orderTable;
 }
@@ -66,9 +77,7 @@ $content = $content . "<div id='confirmBox' class='confirmBox'>
                     </td>
                 </tr>
 
-            </table>
-          
-          
+            </table>       
           
           <p></p>
           <input type='hidden' name = 'btnno' id = 'no'>
@@ -76,9 +85,8 @@ $content = $content . "<div id='confirmBox' class='confirmBox'>
           
           </form>
         </div>
-        
-
 </div>";
 
 include 'template.php';
+
 ?>

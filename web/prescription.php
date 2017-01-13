@@ -31,22 +31,36 @@
 	</div>
 
 <?php
+	session_start();
 	$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
+	//get the current user email
+	$email = $_SESSION['email'];
+	$current_nic = "SELECT * FROM customer WHERE email='$email'";
+	//get the system date
+	$order_date = date("Y-m-d");
+	//set current state to new
+	$status = "new";
+	//set msg to be sent as 0
+	$msg = 0;
+
 	if(isset($_POST['submit']))
-	{
-		session_start();
+	{		
 		if(isset($_SESSION['email']) && !empty($_SESSION['email']))
 		{
-			//specifies the directory where the file is going to be placed
-			$target_dir = "../customer/uploads/";
-			//get the current user email
-			$email = $_SESSION['email'];
-			//get the system date
-			$order_date = date("Y-m-d");
-			//set current state to new
-			$status = "new";
-			//set msg to be sent as 0
-			$msg = 0;
+			$target_dir = "";
+			//check if the folder is exist, otherwise create it
+			if(file_exists("../customer/uploads/" . "$current_nic"))
+			{
+				//specifies the directory where the file is going to be placed
+				$target_dir = "../customer/uploads/" . "$current_nic";
+			}
+			else
+			{
+				$dirname = "../customer/uploads/" . "$current_nic";
+				mkdir($dirname);
+				//specifies the directory where the file is going to be placed
+				$target_dir = "../customer/uploads/" . "$current_nic";
+			}			
 
 			//specifies the path of the file to be uploaded
 			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -112,7 +126,7 @@
 			{
 			    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
 			    {
-			    	$image = $_FILES['fileToUpload']['tmp_name'];
+			    	$image = $current_nic;
 			    	$sql = "INSERT INTO prescription (email, order_date, image, status, msg) VALUES ('$email', '$order_date', '$image', '$status', '$msg')";
 
 			    	if(mysqli_query($conn, $sql))

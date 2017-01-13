@@ -342,7 +342,7 @@ while ($row = mysqli_fetch_array($query)) {
                  <li class="li" id="prescriptions">
                     <div id="pres_Counter"></div> 
                     <div id="pres_Button">
-                        <a href="../pharmacist/prescription.php"><img  src="../public/image/pres.png" style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position:relative; left:1040px; top:-25px; "></a>   
+                        <a href="../pharmacist/prescription.php"><img  src="../public/image/pres.png" style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position:relative; left:1065px; top:-25px; "></a>   
                     </div>
                     <div id="lblpres" style="position: absolute; right:190px;  top:50px; width:150px; ">new prescriptions</div>
                 </li>

@@ -11,5 +11,5 @@ if (isset($_GET["id"])) {
     $newPresTable = $presController->newPresTable();
     $content = $newPresTable;
 }
-include 'template.php';
+include 'template.php';	
 ?>
