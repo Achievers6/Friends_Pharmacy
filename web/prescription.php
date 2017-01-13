@@ -7,10 +7,12 @@
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../public/css/web/prescriptionStyle.css" type="text/css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../public/js/jquery-2.0.0.js"></script>
     </head>
     <body>
         <?php session_start();
-        require '../includes/customer_header.php'; ?>
+        require '../includes/customer_header.php';
+        ?>
 <?php require '../includes/slideshow.php'; ?>
 
         <div class="content">
@@ -132,7 +134,7 @@
             <img src="../public/image/add1.jpeg">
         </aside>
 
-        <?php require '../includes/customer_footer.php'; ?>
+<?php require '../includes/customer_footer.php'; ?>
 
     </body>
 </html>

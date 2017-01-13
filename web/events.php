@@ -7,6 +7,7 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="../public/css/web/eventStyle.css" type="text/css" />	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <script src="../public/js/jquery-2.0.0.js"></script>
 	
 </head>
 
