@@ -144,8 +144,8 @@ $content = "<h2 style='text-align:center;'>Add New Medicine</h2>
             <div id='wrapper' style=padding-top:30px;'>
             <table cellspacing=1 cellpadding=3 id='data_table' border=1 style='display:none;'>
                 <tr>
-                    <th>Dosage</th>
-                    <th>Price</th>
+                    <th>Dosage (Ex: 250mg)</th>
+                    <th>Price (Rs)</th>
                 </tr>
                 
 
