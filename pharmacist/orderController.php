@@ -147,7 +147,7 @@ class orderController {
                     <td><b>$row[1]</b></td>
                     <td><b>$row[2]</b></td>
                     <td><b>$row[3]</b></td>
-                    <td><a href='cust_orders.php?order_no=$row[0]&confirm=1' >List items</td>
+                    <td><a href='cust_orders.php?order_no=$row[0]&confirm=1' style='color:blue;'>List items</td>
                     <td><a href='#' onClick=removeConfirm($row[0])><img  class='confirm' src='../public/image/remove.png' style='width: 25px; height: 25px;'></a></td>
                     <td><a href='billtmp.php?order_no=$row[0]&email=$row[1]'><img  class='confirm' src='../public/image/bill.png' style='width: 40px; height: 40px;'></a></td>
 
@@ -193,9 +193,9 @@ class orderController {
                     <td><b>$row[1]</b></td>
                     <td><b>$row[2]</b></td>
                     <td><b>$row[3]</b></td>
-                    <td><a href='cust_orders.php?order_no=$row[0]' >List items</td>
+                    <td><a href='cust_orders.php?order_no=$row[0]&confirm=1' style='color:blue;' >List items</td>
                     <td><a href='#' onClick=removeConfirm($row[0])><img  class='confirm' src='../public/image/remove.png' style='width: 25px; height: 25px;'></a></td>
-                    <td><a href='#'><img  class='confirm' src='../public/image/bill.png' style='width: 40px; height: 40px;'></a></td>
+                    <td><a href='billtmp.php?order_no=$row[0]&email=$row[1]'><img  class='confirm' src='../public/image/bill.png' style='width: 40px; height: 40px;'></a></td>
 
                  </tr>
 ";

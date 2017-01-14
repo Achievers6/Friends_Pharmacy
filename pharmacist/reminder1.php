@@ -333,8 +333,6 @@
 <?php
 if (isset($_POST['btnsubmitrem'])) {
     include '../database/dbconnect.php';
-
-
     $nic = $_POST["txtnic"];
     $contactno = $_POST["txtcontact"];
     $medname = $_POST["txtmedname"];
@@ -347,93 +345,114 @@ if (isset($_POST['btnsubmitrem'])) {
     $min1 = 100;
     $min2 = 100;
     $min3 = 100;
+    if (!(mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM drug WHERE medicine_name ='$medname'")))) {
+        echo '<script language="javascript">';
+        echo 'alert(" please enter valid medicine name")';
+        echo '</script>';
+    } else if (!(mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM customer WHERE nic ='$nic'")))) {
+        echo '<script language="javascript">';
+        echo 'alert(" please enter valid NIC")';
+        echo '</script>';
+    } 
+    else if (!isset($_POST["txtcontact"]) or strlen($contactno) != 11) {
+        echo '<script language="javascript">';
+        echo 'alert(" please enter valid contact number")';
+        echo '</script>';
+    }else if ($quantity==NULL) {
+        echo '<script language="javascript">';
+        echo 'alert(" please enter valid quantity")';
+        echo '</script>';
+    } else {
 
 
+        if (isset($_POST["daybox"])) {
+
+            if (isset($_POST["time1"])) {
+                $time1 = $_POST["daytime1"];
+                $min1 = $_POST["min1"];
+            }
+            if (isset($_POST["time2"])) {
+                $time1 = $_POST["daytime1"];
+                $time2 = $_POST["daytime2"];
+                $min1 = $_POST["min1"];
+                $min2 = $_POST["min2"];
+            }
+            if (isset($_POST["time3"])) {
+                $time1 = $_POST["daytime1"];
+                $time2 = $_POST["daytime2"];
+                $time3 = $_POST["daytime3"];
+                $min1 = $_POST["min1"];
+                $min2 = $_POST["min2"];
+                $min3 = $_POST["min3"];
+            }
+
+            $dayadd = $_POST["frq"];
 
 
-    if (isset($_POST["daybox"])) {
-
-        if (isset($_POST["time1"])) {
-            $time1 = $_POST["daytime1"];
-            $min1 = $_POST["min1"];
-        }
-        if (isset($_POST["time2"])) {
-            $time1 = $_POST["daytime1"];
-            $time2 = $_POST["daytime2"];
-            $min1 = $_POST["min1"];
-            $min2 = $_POST["min2"];
-        }
-        if (isset($_POST["time3"])) {
-            $time1 = $_POST["daytime1"];
-            $time2 = $_POST["daytime2"];
-            $time3 = $_POST["daytime3"];
-            $min1 = $_POST["min1"];
-            $min2 = $_POST["min2"];
-            $min3 = $_POST["min3"];
-        }
-
-        $dayadd = $_POST["frq"];
-
-
-        $query = "INSERT INTO reminderday
+            $query = "INSERT INTO reminderday
             (nic, contactno,medname, instruction, quantity, time1,time2,time3, startdate, enddate,min1,min2,min3)
              VALUES
              ('$nic', '$contactno','$medname', '$instruction', '$quantity', '$time1','$time2','$time3', CURDATE(), CURDATE()+ $dayadd,'$min1','$min2','$min3')";
 
 
-        if (mysqli_query($mysqli, $query)) {
-            echo '<script language="javascript">';
-            echo 'alert(" Day reminder is added Successfully")';
-            echo '</script>';
-        }
-    } else {
+            if (mysqli_query($mysqli, $query)) {
+                echo '<script language="javascript">';
+                echo 'alert(" Day reminder is added Successfully")';
+                echo '</script>';
+            }
+        } else {
 
-        $time = $_POST["weektime"];
-        $startdate = $_POST["startdate"];
-        $enddate = $_POST["enddate"];
-        $min = $_POST["min"];
-        $Monday = 0;
-        $Tuesday = 0;
-        $Wednesday = 0;
-        $Thursday = 0;
-        $Friday = 0;
-        $Satday = 0;
-        $Sunday = 0;
+            $time = $_POST["weektime"];
+            $startdate = $_POST["startdate"];
+            $enddate = $_POST["enddate"];
+            $min = $_POST["min"];
+            $Monday = 0;
+            $Tuesday = 0;
+            $Wednesday = 0;
+            $Thursday = 0;
+            $Friday = 0;
+            $Satday = 0;
+            $Sunday = 0;
 
 
 
-        if (isset($_POST["monday"])) {
-            $Monday = 1;
-        }
-        if (isset($_POST["tuesday"])) {
-            $Tuesday = 1;
-        }
-        if (isset($_POST["wednesday"])) {
-            $Wednesday = 1;
-        }
-        if (isset($_POST["thursday"])) {
-            $Thursday = 1;
-        }
-        if (isset($_POST["friday"])) {
-            $Friday = 1;
-        }
-        if (isset($_POST["satday"])) {
-            $Satday = 1;
-        }
-        if (isset($_POST["sunday"])) {
-            $Sunday = 1;
-        }
+            if (isset($_POST["monday"])) {
+                $Monday = 1;
+            }
+            if (isset($_POST["tuesday"])) {
+                $Tuesday = 1;
+            }
+            if (isset($_POST["wednesday"])) {
+                $Wednesday = 1;
+            }
+            if (isset($_POST["thursday"])) {
+                $Thursday = 1;
+            }
+            if (isset($_POST["friday"])) {
+                $Friday = 1;
+            }
+            if (isset($_POST["satday"])) {
+                $Satday = 1;
+            }
+            if (isset($_POST["sunday"])) {
+                $Sunday = 1;
+            }
 
-        $query = "INSERT INTO reminderweekday
+            $query = "INSERT INTO reminderweekday
             (nic, contactno,medname, instruction, quantity,time,startdate,enddate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,min)
              VALUES
              ('$nic', '$contactno','$medname', '$instruction', '$quantity','$time','$startdate','$enddate','$Monday','$Tuesday','$Wednesday','$Thursday','$Friday','$Satday','$Sunday',$min)";
 
 
-        if (mysqli_query($mysqli, $query)) {
-            echo '<script language="javascript">';
-            echo 'alert(" week reminder is added Successfully")';
-            echo '</script>';
+            if (mysqli_query($mysqli, $query)) {
+                echo '<script language="javascript">';
+                echo 'alert(" week reminder is added Successfully")';
+                echo '</script>';
+            } else {
+                echo '<script language="javascript">';
+                echo 'alert(" please enter valid data")';
+                echo '</script>';
+            }
         }
     }
 

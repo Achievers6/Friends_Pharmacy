@@ -72,6 +72,27 @@ $content = "<h2 style='text-align:center;'>Add New Stock</h2>
         <table>
         <tr>
             <td>
+            <label class='lblf' >Dosage : </label>
+            </td>
+            <td>
+              
+                 
+                    <div id='dosageList' style='top:-8px;'>.</div> 
+                   
+               
+                    
+           </td>
+        </tr>
+        <tr>
+            <td>
+            <label class='lblf' >Retail price(Rs) : </label>
+            </td>
+            <td>
+            <input type='number' class='inputField' name='price' autocomplete='off' /><br/>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label class='lblf' for='batch_number'>Batch Number: </label>
             </td>
             <td>
@@ -87,22 +108,7 @@ $content = "<h2 style='text-align:center;'>Add New Stock</h2>
         </td>
         
         </tr>
-        <tr>
-            <td>
-            <label class='lblf' >Dosage : </label>
-            </td>
-            <td>
-           <input type='text' class='inputField' name='txtdosage' autocomplete='off' placeholder='Ex: 250mg'/><br/>
-           </td>
-        </tr>
-        <tr>
-            <td>
-            <label class='lblf' >Price(Rs) : </label>
-            </td>
-            <td>
-            <input type='number' class='inputField' name='price' autocomplete='off' /><br/>
-            </td>
-        </tr>
+        
         <tr>
             <td>
             <label class='lblf' for='Entry_date'>Entry Date: </label>
@@ -186,7 +192,6 @@ include 'template.php';
 <script>
 
 
-
     $(document).ready(function() {
         $('#txtMedicineName').keyup(function() {
             var query = $(this).val();
@@ -200,6 +205,16 @@ include 'template.php';
                     {
                         $('#medicineList').fadeIn();
                         $('#medicineList').html(data);
+                    }
+                });
+                $.ajax({
+                    url: "dropdowndosage.php",
+                    method: "POST",
+                    data: {query: query},
+                    success: function(data)
+                    {
+                        $('#dosageList').fadeIn();
+                        $('#dosageList').html(data);
                     }
                 });
             }

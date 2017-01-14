@@ -27,7 +27,7 @@ $content = "
 ";
 
 if (isset($_GET["update"])) {
-
+    $id = $_GET["update"];
     include '../database/dbconnect.php';
 
     $query = "SELECT * FROM stock WHERE id LIKE ($id)";

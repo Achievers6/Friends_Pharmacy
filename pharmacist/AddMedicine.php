@@ -144,8 +144,8 @@ $content = "<h2 style='text-align:center;'>Add New Medicine</h2>
             <div id='wrapper' style=padding-top:30px;'>
             <table cellspacing=1 cellpadding=3 id='data_table' border=1 style='display:none;'>
                 <tr>
-                    <th>Dosage</th>
-                    <th>Price</th>
+                    <th>Dosage(Ex: 250mg)</th>
+                    <th>Price(MRP)</th>
                 </tr>
                 
 
@@ -299,11 +299,11 @@ if (isset($_POST['btnSubmit'])) {
              ('$brand_name','$generic_name','$type','$category','$supplier_id','$discription','$image','$group')";
             mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
-            $q = "SELECT id FROM drug WHERE medicine_name ='$brand_name'";
-            $result = mysqli_query($mysqli, $q) or die(mysqli_error($mysqli));
-            $rowy = mysqli_fetch_array($result);
-
-            $idm = $rowy[0];
+//            $q = "SELECT id FROM drug WHERE medicine_name ='$brand_name'";
+//            $result = mysqli_query($mysqli, $q) or die(mysqli_error($mysqli));
+//            $rowy = mysqli_fetch_array($result);
+//
+//            $idm = $rowy[0];
             if (isset($_POST['dcount'])) {
                 $x = $_POST['dcount'];
                 for ($i = 1; $i <= $x; $i++) {
@@ -316,9 +316,9 @@ if (isset($_POST['btnSubmit'])) {
                         $dosa = $_POST[$d];
                         $pri = $_POST[$p];
                         $queryd = "INSERT INTO drug_price
-            (medicine_id,dosage,price)
+            (medicine_name,dosage,price)
              VALUES
-             ('$idm','$dosa','$pri')";
+             ('$brand_name','$dosa','$pri')";
                         mysqli_query($mysqli, $queryd) or die(mysqli_error($mysqli));
                     }
                 }
