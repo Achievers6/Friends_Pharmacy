@@ -1,10 +1,6 @@
 <?php
 require ("../Entities/stockEntityHead.php");
-$host = "localhost";
-$user = "root";
-$passwd = "";
-$database = "friends_pharmacy";
-$mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+include '../database/dbconnect.php';
 $query = mysqli_query($mysqli, "SELECT * FROM stock where 21>DATEDIFF(expire_date,CURDATE()) and 0<DATEDIFF(expire_date,CURDATE());");
 $query2 = mysqli_query($mysqli, "SELECT * FROM cust_orders where status = 'not confirmed';");
 
@@ -34,7 +30,7 @@ while ($row = mysqli_fetch_array($query)) {
 <html>
     <head>
 
-        <script src="../public/js/jquery-2.0.0.js"></script>
+<!--        <script src="../public/js/jquery-2.0.0.js"></script>-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script>
@@ -256,10 +252,16 @@ while ($row = mysqli_fetch_array($query)) {
             #lblneworders {
                 display: none;
             }
+            #lblpres {
+                display: none;
+            }
             #lblexp {
                 font:13px helvetica;
                 font-weight:bold;
                 display: none;
+            }
+            #pres_Button:hover + #lblpres {
+                display: block;
             }
             #order_Button:hover + #lblneworders {
                 display: block;
@@ -275,7 +277,9 @@ while ($row = mysqli_fetch_array($query)) {
             a:visited {color:#808080;}  /* visited link */
             a:active {color:#0000FF;} 
 
-
+            .nav {
+                overflow: scroll;
+            }
 
 
         </style>
@@ -285,7 +289,7 @@ while ($row = mysqli_fetch_array($query)) {
     <body style="margin:0;padding:0;">
         <div>
             <ul class="ul">
-                <li class="li" id="logout"><a href="../web/index.php">Logout</a></li>
+                <li class="li" id="logout"><a href="logout.php">Logout</a></li>
 
                 <li class="li" id="orders">
                     <div id="order_Counter"></div> 
@@ -294,9 +298,6 @@ while ($row = mysqli_fetch_array($query)) {
                     </div>
                     <div id="lblneworders" style="position: absolute; right:60px;  top:33px; width:80px; ">new orders</div>
                 </li>
-
-
-
 
 
                 <li id="noti_Container" >
@@ -308,7 +309,9 @@ while ($row = mysqli_fetch_array($query)) {
                         </div>
 
                     </div>   
-                    <div id="lblexp" style="position: absolute; right:-30px;  top:33px; width:80px; ">short expiry</div>
+                    <div id="lblexp" style="position: absolute; right:-30px;  top:33px; width:80px; ">
+                        short expiry
+                    </div>
                     <div id="notifications">
                         <h3 id="h3">Short expiry</h3>
                         <?php
@@ -318,12 +321,12 @@ while ($row = mysqli_fetch_array($query)) {
                            $medname = urlencode($stock->medicine_name);
                           
                             echo "<div id=inner_noti>
-                                <table>
-                                <tr>
-                                <td style='padding:5px;'><img  src='$rowim[0]'  style='display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position: relative; top: -5px;'> </td>   
-                                <td><a href='../pharmacist/removeStock2.php?outofstock=$medname'> $stock->medicine_name  $stock->quantity quantity will expire on $stock->expire_date date according to $stock->batch_no batch number</a></td>
-                                <tr>
-</table>
+                                    <table>
+                                    <tr>
+                                    <td style='padding:5px;'><img  src='$rowim[0]'  style='display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position: relative; top: -5px;'> </td>   
+                                    <td><a href='../pharmacist/removeStock2.php?outofstock=$medname'> $stock->medicine_name  $stock->quantity quantity will expire on $stock->expire_date date according to $stock->batch_no batch number</a></td>
+                                    <tr>
+                                    </table>
                                 </div>";
                         }
                         ?>
@@ -331,6 +334,15 @@ while ($row = mysqli_fetch_array($query)) {
                         <div class="seeAll"><a href="../pharmacist/removeStock2.php?allOutDate=1;">All short expiry</a></div>
                     </div>
                 </li>
+                
+                 <li class="li" id="prescriptions">
+                    <div id="pres_Counter"></div> 
+                    <div id="pres_Button">
+                        <a href="../pharmacist/prescription.php"><img  src="../public/image/pres.png" style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position:relative; left:1040px; top:-25px; "></a>   
+                    </div>
+                    <div id="lblpres" style="position: absolute; right:190px;  top:50px; width:150px; ">new prescriptions</div>
+                </li>
+
 
             </ul>
         </div>

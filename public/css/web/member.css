@@ -1,0 +1,37 @@
+body{
+    line-height: 1.5;
+    background-color: #F1F8E9;    
+}
+
+table input[type="text"], table input[type="email"], table input[type="password"], 
+table input[type="date"], table input[type="tel"]{
+  padding: 7px 5px;
+  margin: 10px 0;
+  height: 20px;
+  width: 250px;
+  display: block;
+  border-radius: 5px;
+  border-color: #e6f2da;
+  border-width: 2px;
+  -webkit-transition: 0.3s linear;
+  -moz-transition: 0.3s linear;
+  -o-transition: 0.3s linear;
+  transition: 0.3s linear;
+}
+
+table input[type="submit"]{
+  background: #66B223;
+  padding: 10px;
+  font-size: 15px;
+  display: block;
+  width: 99%;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 104%;
+}
+
+table input[type="submit"]:hover {
+  background: #61A526;
+}

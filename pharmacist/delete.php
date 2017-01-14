@@ -34,11 +34,7 @@ if(isset($_POST['btnView'])){
     
      $medicine_Name =  $_POST["txtBrandName"];
   
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli=mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
     
      if (!mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM drug WHERE medicine_name ='$medicine_Name'")))
     {	
@@ -160,7 +156,7 @@ $(document).ready(function(){
                 });  
            }  
       });  
-      $(document).on('click', 'li', function(){  
+      $(document).on('click', '#lim', function(){  
            $('#medicine').val($(this).text());  
            $('#medicineList').fadeOut(); 
            

@@ -3,6 +3,17 @@
         <?php require("../includes/_header.php"); ?>
         <link rel="stylesheet" type="text/css" href="css/reminder.css" />
         <title>Reminders</title>
+        <style>
+            #medicineList {
+                background-color: white;
+                width: 280px;
+                position: relative;
+                left: 160px;
+                top: -15px;
+                list-style: none;
+
+            }
+        </style>
         <script>
             $(document).ready(function() {
                 $("#ch1").click(function() {
@@ -30,6 +41,57 @@
                 });
 
             });
+            $(document).ready(function() {
+                $('#txtmedname').keyup(function() {
+                    var query = $(this).val();
+                    if (query != '')
+                    {
+                        $.ajax({
+                            url: "Search.php",
+                            method: "POST",
+                            data: {query: query},
+                            success: function(data)
+                            {
+                                $('#medicineList').fadeIn();
+                                $('#medicineList').html(data);
+                            }
+                        });
+                    }
+                });
+                $(document).on('click', '#lim', function() {
+                    $('#txtmedname').val($(this).text());
+                    $('#medicineList').fadeOut();
+
+
+                });
+            });
+
+            $(document).ready(function() {
+                $('#nic').keyup(function() {
+                    var query = $(this).val();
+                    if (query != '')
+                    {
+                        $.ajax({
+                            url: "searchnic.php",
+                            method: "POST",
+                            data: {query: query},
+                            success: function(data)
+                            {
+                                $('#nicList').fadeIn();
+                                $('#nicList').html(data);
+                            }
+                        });
+                    }
+                });
+                $(document).on('click', '#lin', function() {
+                    $('#nic').val($(this).text());
+                    $('#nicList').fadeOut();
+
+
+                });
+            });
+
+
         </script>
     </head>
     <body>
@@ -39,10 +101,12 @@
             <form name="myForm" action="#" method ="post">
                 <fieldset>
                     <label>Medicine Name: </label>
-                    <input type="text" class="inputField" name="txtmedname" autocomplete="off" placeholder="Ex: Amoxil"/><br/>
+                    <input type="text" class="inputField" name="txtmedname" id='txtmedname' autocomplete="off" placeholder="Ex: Amoxil"/><br/>
+                    <div id='medicineList'></div> 
                     <p></p>
                     <label>Customer NIC: </label>
-                    <input type="text" class="inputField" name="txtnic" autocomplete="off" placeholder="Ex: XXXXXXXXXV"/><br/>
+                    <input type="text" class="inputField" name="txtnic" id="nic" class="nic" autocomplete="off" placeholder="Ex: XXXXXXXXXV"/><br/>
+                    <div id='nicList'></div> 
                     <p></p>
                     <label>Contact number: </label>
                     <input type="text" class="inputField" name="txtcontact" autocomplete="off" placeholder="Ex: Enter without zero"/><br/>
@@ -85,7 +149,7 @@
                             <p></p>
                         </div>
                         <table>
-                            
+
                             <tr>
 
                                 <td><label>Time(24 hour):</label><td>
@@ -122,7 +186,7 @@
                                         </select>
                                     </div></td>
                                 <td><div class="ts1">
-                                         minutes:<input type="number" min="0" max="60" name="min1"  />
+                                        minutes:<input type="number" min="0" max="60" name="min1"  />
                                     </div></td>
                             </tr>
                             <tr>
@@ -192,7 +256,7 @@
                                         </select><br>
                                     </div></td>
                                 <td><div class="ts3">
-                                         minutes:<input type="number" min="0" max="60" name="min3"  />
+                                        minutes:<input type="number" min="0" max="60" name="min3"  />
                                     </div></td>
                             </tr>
                         </table>
@@ -268,11 +332,7 @@
 </html>
 <?php
 if (isset($_POST['btnsubmitrem'])) {
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
 
     $nic = $_POST["txtnic"];
@@ -339,7 +399,7 @@ if (isset($_POST['btnsubmitrem'])) {
         $Friday = 0;
         $Satday = 0;
         $Sunday = 0;
-        
+
 
 
         if (isset($_POST["monday"])) {

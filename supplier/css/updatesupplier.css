@@ -23,10 +23,15 @@ body{
 	width: 90%;
 }
 h2{
+    font-family: SourceSansPro;
      position: absolute;
     float: right;
     right:600px;
     top:50px;
+    font-size: 2.4em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0  0 10px 0;
     
 }
 li{

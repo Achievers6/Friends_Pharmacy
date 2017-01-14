@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 include '../database/dbconnect.php';
 $email = $_SESSION["email"];
 $name = $_SESSION['name'];
@@ -32,7 +33,7 @@ foreach ($name as $index => $val) {
         
     }
 }
- print_r($_SESSION['dosage']);
+
 mysqli_close($mysqli);
 unset($_SESSION['name']);
 unset($_SESSION['cart']);

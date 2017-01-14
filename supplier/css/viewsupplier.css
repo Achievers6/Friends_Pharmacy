@@ -16,10 +16,15 @@ body{
     font-size: 18px;
 }
 h2{
+    font-family: SourceSansPro;
+    font-size: 2.4em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0  0 10px 0;
     position: relative;
     float: right;
     right:550px;
-    top:40px;
+    top:45px;
 }
 .d2 table {
     border-collapse: collapse;

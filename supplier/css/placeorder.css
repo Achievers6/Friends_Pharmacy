@@ -1,6 +1,6 @@
 #d1{
     position:absolute;
-    left:500px;
+    left:950px;
     top:170px;
     width: 20%;
 	border-top: 1px solid #CFD8DC;
@@ -11,18 +11,23 @@
    }
 
 h2{
+    font-family: SourceSansPro;
     position: absolute;
     left: 670px;
     top:45px;
+    font-size: 2.4em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0  0 10px 0;
 }
 #d2{
     position:absolute;
-    left:500px;
+    left:950px;
     top:350px;
 }
 #cart{
     position:absolute;
-    left:950px;
+    left:350px;
     top:240px;
     
 }
@@ -35,7 +40,7 @@ h2{
     width: 70px;
     height: 30px;
     position: fixed;
-    left: 590px;
+    left: 1050px;
     top:270px;
     background-color: rgb(106,184,42);
     color: white;

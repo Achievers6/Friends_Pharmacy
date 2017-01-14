@@ -1,3 +1,17 @@
+#nicList {
+    background-color: white;
+    width: 280px;
+    left: 160px;
+    position: relative;
+    text-align: center;
+    top: -16px;
+
+}
+ul {
+    list-style-type: none;
+
+   
+}
 .timeselect {
     position: relative;
     left: 200px;
@@ -5,7 +19,7 @@
 
 }
 .ch1 {
-    
+
     padding-top: 10px;
     position: relative;
     left: 160px;
@@ -61,17 +75,17 @@ fieldset{
     display: none;
 }
 .ts1{
-   display: none;
+    display: none;
 }
 
 .ts2 {
     display: none;
-    
+
 }
 .ts3 {
     display: none;
-    
-    
+
+
 }
 input[type=submit] {
     width: 100px;
@@ -104,11 +118,11 @@ root {
 }
 
 h2 {
-  text-align:center; 
-  color: #777777; 
-  font-family: SourceSansPro;
-  font-size: 2.4em;
-  line-height: 1em;
-  font-weight: normal;
-  margin: 0  0 10px 0;
+    text-align:center; 
+    color: #777777; 
+    font-family: SourceSansPro;
+    font-size: 2.4em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0  0 10px 0;
 }

@@ -19,8 +19,9 @@ switch($period) {
     }
     break;
 }
-$conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-if (!$conn) {
+//$conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+include '../database/dbconnect.php';
+if (!$mysqli) {
     echo "Error";
 }
 $sql = '';
@@ -70,7 +71,7 @@ switch($med_type) {
 }
 echo $sql;
 // echo "<br>";
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($mysqli, $sql);
 echo($result);
 $res_data = array();
 while($row = mysqli_fetch_assoc($result)) {

@@ -1,12 +1,12 @@
 <?php
-	$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
-	
+	//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
+	include '../database/dbconnect.php';
 	if($_GET['code'])
 	{
 		$get_email = $_GET['email'];
 		$get_code = $_GET['code'];
 		
-		$query = mysqli_query($conn, "SELECT * FROM customer WHERE email='$get_email'");
+		$query = mysqli_query($mysqli, "SELECT * FROM customer WHERE email='$get_email'");
 		
 		while($row = mysqli_fetch_assoc($query))
 		{
@@ -33,8 +33,8 @@
 		if(isset($_POST['submit']))
 		{
 			
-			$email = mysqli_real_escape_string($conn, $_POST['email']);
-			$query = mysqli_query($conn, "SELECT * FROM customer WHERE email='$email'");
+			$email = mysqli_real_escape_string($mysqli, $_POST['email']);
+			$query = mysqli_query($mysqli, "SELECT * FROM customer WHERE email='$email'");
 			$numrows = mysqli_num_rows($query);
 			if($numrows != 0)
 			{
@@ -48,7 +48,7 @@
 				$body = "Click the link below to reset your password.
 				http://localhost/friends_pharmacy/forget.php?code=$code&email=$email";
 				
-				mysqli_query($conn, "UPDATE customer SET reset='$code' WHERE email='$email'")or die(mysqli_error($conn));
+				mysqli_query($mysqli, "UPDATE customer SET reset='$code' WHERE email='$email'")or die(mysqli_error($mysqli));
 				
 				mail($to,$subject,$body);
 				echo "Check Your Emails";

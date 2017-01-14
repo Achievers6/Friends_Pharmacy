@@ -6,12 +6,7 @@ $stockController = new stockController();
 
 if(isset($_POST['btnView'])){
     $medicine_Name = $_POST["txtMedicinedName"];
-    
-     $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli=mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+   include '../database/dbconnect.php';
     
     if (!mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM stock WHERE medicine_name ='$medicine_Name'")))
     {	

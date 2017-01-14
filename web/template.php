@@ -17,7 +17,7 @@ function searchForm() {
 <html>
 <head>
 	
-    <?php require('../../includes/_header.php'); ?>
+    <?php session_start(); require('../../includes/_header.php'); ?>
     <link rel="stylesheet" type="text/css" href="stockStyle.css" />
     <title><?php echo $title; ?></title>
 </head>

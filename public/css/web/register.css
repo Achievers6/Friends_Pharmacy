@@ -4,8 +4,10 @@ body{
 }
 
 .signup_table{
-  margin-left: 20%;
+      margin-left: 20%;
+
 }
+
 
 table{
   margin-bottom: 3%;
@@ -37,9 +39,12 @@ table input[type="submit"]{
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 104%;
+  margin-left: 240%;
 }
 
 table input[type="submit"]:hover {
   background: #61A526;
+}
+.error{
+    color:red;
 }

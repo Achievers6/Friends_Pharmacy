@@ -54,8 +54,8 @@
 							//$times2=$_POST['times2'];
 							$as=$_POST['as'];
 							
-							$con = mysqli_connect("localhost","root","","friends_pharmacy");
-							
+							//$con = mysqli_connect("localhost","root","","friends_pharmacy");
+							include '../database/dbconnect.php';
 							
 							
 								if($as=='Cashier Name'&& $methode=='Price' && $mode=='Details'  ){
@@ -64,7 +64,7 @@
 									if($cashier_name=='all'){
 										$sql1 = "SELECT bill_table.date,staff.first_name,staff.last_name,bill_table.total,bill_table.discount,(bill_table.total - bill_table.discount) AS amount FROM staff,bill_table WHERE bill_table.date = '$dates'  AND staff.member_id=bill_table.staff_ID GROUP BY date,bill_number; ";
 										
-										$result1 = mysqli_query($con,$sql1);
+										$result1 = mysqli_query($mysqli,$sql1);
 									
 										
 										//$price1 = mysqli_query($con,"SELECT SUM(cashier_amount) FROM location WHERE date BETWEEN '$dates' AND '$dates2' AND (end_time <> '$times2' OR start_time ='$times');");
@@ -73,10 +73,10 @@
 									}else{
 										$sql2 = "SELECT bill_table.date,staff.first_name,staff.last_name,bill_table.total,bill_table.discount,(bill_table.total - bill_table.discount) AS amount FROM staff,bill_table WHERE bill_table.date = '$dates'  AND staff.member_id='$cashier_name' AND staff.member_id=bill_table.staff_ID GROUP BY date,bill_number;";
 										
-										$result1 = mysqli_query($con,$sql2);
+										$result1 = mysqli_query($mysqli,$sql2);
 									
 										
-										//$price2 = mysqli_query($con,"SELECT SUM(cashier_amount) FROM location WHERE (date BETWEEN '$dates' AND '$dates2' AND (end_time <> '$times2' OR start_time ='$times')) AND cashier_id ='$cashier_name';");
+										//$price2 = mysqli_query($mysqli,"SELECT SUM(cashier_amount) FROM location WHERE (date BETWEEN '$dates' AND '$dates2' AND (end_time <> '$times2' OR start_time ='$times')) AND cashier_id ='$cashier_name';");
 										//$result = mysqli_fetch_array($price2);
 										
 									}
@@ -102,19 +102,19 @@
 									if($name=='all'){
 											$sql1 = "  SELECT bill_table.date,selling_table.bill_number,selling_table.medicine_name,selling_table.quantity,selling_table.unit_price,selling_table.dosage,(selling_table.quantity * selling_table.unit_price) AS amount FROM bill_table,selling_table WHERE bill_table.date = '$dates'  AND bill_table.bill_number=selling_table.bill_number GROUP BY bill_number;";
 											
-											$result1 = mysqli_query($con,$sql1);
+											$result1 = mysqli_query($mysqli,$sql1);
 										
 											
-											//$price1 = mysqli_query($con,"SELECT SUM(quantity * selling_price) FROM selling WHERE date BETWEEN '$dates' AND '$dates2';");
+											//$price1 = mysqli_query($mysqli,"SELECT SUM(quantity * selling_price) FROM selling WHERE date BETWEEN '$dates' AND '$dates2';");
 											//$result = mysqli_fetch_array($price1);
 											
 										}else{
 											$sql2 = "  SELECT bill_table.date,selling_table.bill_number,selling_table.medicine_name,selling_table.quantity,selling_table.unit_price,selling_table.dosage,(selling_table.quantity * selling_table.unit_price) AS amount FROM bill_table,selling_table WHERE bill_table.date = '$dates'  AND selling_table.medicine_name='$name' AND bill_table.bill_number=selling_table.bill_number GROUP BY bill_number;";
 											
-											$result1 = mysqli_query($con,$sql2);
+											$result1 = mysqli_query($mysqli,$sql2);
 										
 											
-											//$price2 = mysqli_query($con," SELECT SUM(quantity * selling_price) FROM selling WHERE medicine_id='$name';");
+											//$price2 = mysqli_query($mysqli," SELECT SUM(quantity * selling_price) FROM selling WHERE medicine_id='$name';");
 											//$result = mysqli_fetch_array($price2);
 											
 										}
@@ -148,7 +148,7 @@
 									if($cashier_name=='all'){
 										$sql1 = "select bill_table.date,concat(staff.first_name,' ',staff.last_name)as cashier_name,selling_table.medicine_name,selling_table.dosage,selling_table.quantity from staff,bill_table,selling_table where bill_table.date ='$dates' and staff.member_id=bill_table.staff_ID AND bill_table.bill_number=selling_table.bill_number group by bill_table.date,bill_table.bill_number;";
 										
-										$result1 = mysqli_query($con,$sql1);
+										$result1 = mysqli_query($mysqli,$sql1);
 									
 										
 										//$price1 = mysqli_query($con,"SELECT SUM(cashier_amount) FROM location WHERE date BETWEEN '$dates' AND '$dates2' AND (end_time <> '$times2' OR start_time ='$times');");
@@ -157,7 +157,7 @@
 									}else{
 										$sql2 = "select bill_table.date,concat(staff.first_name,' ',staff.last_name)as cashier_name,selling_table.medicine_name,selling_table.dosage,selling_table.quantity from staff,bill_table,selling_table where bill_table.date ='$dates' and staff.member_id='$cashier_name' and staff.member_id=bill_table.staff_ID AND bill_table.bill_number=selling_table.bill_number group by bill_table.date,bill_table.bill_number;";
 										
-										$result1 = mysqli_query($con,$sql2);
+										$result1 = mysqli_query($mysqli,$sql2);
 									
 										
 										//$price2 = mysqli_query($con,"SELECT SUM(cashier_amount) FROM location WHERE (date BETWEEN '$dates' AND '$dates2' AND (end_time <> '$times2' OR start_time ='$times')) AND cashier_id ='$cashier_name';");
@@ -186,7 +186,7 @@
 									if($name=='all'){
 											$sql1 = "  SELECT bill_table.date,selling_table.bill_number,selling_table.medicine_name,selling_table.dosage,selling_table.quantity FROM bill_table,selling_table WHERE bill_table.date = '$dates'   AND bill_table.bill_number=selling_table.bill_number GROUP BY date,bill_number;";
 											
-											$result1 = mysqli_query($con,$sql1);
+											$result1 = mysqli_query($mysqli,$sql1);
 										
 											
 											//$price1 = mysqli_query($con,"SELECT SUM(quantity * selling_price) FROM selling WHERE date BETWEEN '$dates' AND '$dates2';");
@@ -195,7 +195,7 @@
 										}else{
 											$sql2 = " SELECT bill_table.date,selling_table.bill_number,selling_table.medicine_name,selling_table.dosage,selling_table.quantity FROM bill_table,selling_table WHERE bill_table.date = '$dates'   AND selling_table.medicine_name='$name' AND bill_table.bill_number=selling_table.bill_number GROUP BY date,bill_number;";
 											
-											$result1 = mysqli_query($con,$sql2);
+											$result1 = mysqli_query($mysqli,$sql2);
 										
 											
 											//$price2 = mysqli_query($con," SELECT SUM(quantity * selling_price) FROM selling WHERE medicine_id='$name';");

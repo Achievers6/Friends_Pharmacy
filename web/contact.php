@@ -6,10 +6,11 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="../public/css/web/contactStyle.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <script src="../public/js/jquery-2.0.0.js"></script>
 </head>
 <body>
 	
-    <?php require '../includes/customer_header.php';?>
+    <?php session_start(); require '../includes/customer_header.php';?>
     <?php require '../includes/slideshow.php';?>
     
 	<div class="mainContent">	
@@ -59,11 +60,11 @@
 		$email = $_POST['email'];
 		$msg = $_POST['msg'];
 		$day = date("Y-m-d");	
-		$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
+		//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
 		
 		$sql = "INSERT INTO feedback (name, email, message, day) VALUES ('$name', '$email', '$msg', '$day')";
 
-		if(mysqli_query($conn, $sql))
+		if(mysqli_query($mysqli, $sql))
 	    {
 	    	echo'<script>alert("Your feedback is submited successfully.\nThank You."); window.location.href="contact.php";</script>';  
 	    }
@@ -72,7 +73,7 @@
 	    	echo '<script>alert("Your feedback was not submited.\nPlease try again.); window.location.href="contact.php";</script>';
 	    }
 
-	    mysqli_close($conn);	
+	    mysqli_close($mysqli);	
 	}
 
 ?>

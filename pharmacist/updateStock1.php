@@ -19,7 +19,7 @@ $content = "
       <fieldset>
         <label class='lblf' for='medicineName'>Medicine name: </label>
         <input type ='text' class='inputField' id='medicine' class='drugBox' name='txtMedicinedName' autocomplete='off' ><br/>
-        <div id='medicineList'></div> 
+        <div id='medicineList' style='top:0px; position:relative; left:200px;'></div> 
         <p></p>
         <input type='submit' name = 'btnView' value='View' >
       </fieldset>
@@ -28,12 +28,7 @@ $content = "
 
 if (isset($_GET["update"])) {
 
-    $id = ($_GET["update"]);
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
     $query = "SELECT * FROM stock WHERE id LIKE ($id)";
 
@@ -100,11 +95,7 @@ if (isset($_GET["update2"])) {
     $dosage = $_POST["txtdosage"];
     $price = $_POST['price'];
 
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
 
 
@@ -135,4 +126,4 @@ include 'template.php';
         }
     }
 
-</script>>
+</script>

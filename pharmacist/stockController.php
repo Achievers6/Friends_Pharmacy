@@ -3,7 +3,7 @@
     function showConfirm(id)
     {
         // build the confirmation box
-        var c = confirm("Are you sure you wish to Delete this item?");
+        var c = confirm("Are you sure, you wish to Delete this item?");
 
         // if true, delete item and refresh
         if (c)
@@ -25,11 +25,7 @@ include ("../Entities/stockEntity.php");
 class stockController {
 
     function CreateStockTables($medicine_Name) {
-        $host = "localhost";
-        $user = "root";
-        $passwd = "";
-        $database = "friends_pharmacy";
-        $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+        include '../database/dbconnect.php';
 
         $query = "SELECT * FROM stock WHERE medicine_name LIKE '$medicine_Name'";
 
@@ -55,7 +51,7 @@ class stockController {
         mysqli_close($mysqli);
         $result = "";
         $result = "
-       <h3 style='text-align:center;'>$medicine_Name<h3>
+       <h2 style='text-align:center;'>$medicine_Name<h2>
           <table class='sortable'>
                 <tr>
                     
@@ -75,7 +71,7 @@ class stockController {
                
                 <tr>
                     
-                    <td><a href='#' onClick=showConfirm($stock->id) >Delete</td>
+                    <td><a href='#' onClick=showConfirm($stock->id) style='color:red;'>DELETE</td>
                     <td><b>$stock->batch_no</b></td>
                     <td><b>$stock->quantity</b></td>
                     <td><b>$stock->price</b></td>
@@ -185,7 +181,7 @@ class stockController {
         $result = "";
         $result = "
        
-       <h3 style='text-align:center;'>$medicine_Name<h3>
+       <h2 style='text-align:center;'>$medicine_Name<h3>
         
           <table class='sortable'>
                 <tr>
@@ -206,7 +202,7 @@ class stockController {
                 
                 <tr>
                     
-                    <td><a href='updateStock1.php?update=$stock->id' >Item List</td>
+                        <td><a href='updateStock1.php?update=$stock->id' style='color:blue;'>UPDATE</td>
                     <td><b>$stock->batch_no</b></td>
                     <td><b>$stock->quantity</b></td>
                     <td><b>$stock->dosage</b></td>
@@ -226,11 +222,7 @@ class stockController {
     }
 
     function DeleteStock($id) {
-        $host = "localhost";
-        $user = "root";
-        $passwd = "";
-        $database = "friends_pharmacy";
-        $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+        include '../database/dbconnect.php';
         $query = "select medicine_name from stock where id=$id";
 //Execute query and close connection
         $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -261,12 +253,9 @@ class stockController {
         mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
         mysqli_close($mysqli);
     }
+
     function allOutDate() {
-    $host = "localhost";
-        $user = "root";
-        $passwd = "";
-        $database = "friends_pharmacy";
-        $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+        include '../database/dbconnect.php'; 
 
         $query = "SELECT * FROM stock where 21>DATEDIFF(expire_date,CURDATE()) and 0<DATEDIFF(expire_date,CURDATE());";
 

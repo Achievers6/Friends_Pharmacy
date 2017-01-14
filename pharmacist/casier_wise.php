@@ -51,8 +51,8 @@
 							//$times=$_POST['times'];
 							//$times2=$_POST['times2'];
 							
-							$con = mysqli_connect("localhost","root","","friends_pharmacy");
-							
+							//$con = mysqli_connect("localhost","root","","friends_pharmacy");
+							include '../database/dbconnect.php';
 							
 							
 								if($mode=='Details'){
@@ -61,16 +61,16 @@
 									if($cashier_name=='all' ){
 										$sql1 = "SELECT bill_table.date,staff.first_name,staff.last_name,bill_table.total,bill_table.discount,(bill_table.total - bill_table.discount) AS amount FROM staff,bill_table WHERE bill_table.date BETWEEN '$dates' AND '$dates2' AND staff.member_id=bill_table.staff_ID GROUP BY date,bill_number; ";
 										
-										$result1 = mysqli_query($con,$sql1);
+										$result1 = mysqli_query($mysqli,$sql1);
 									
 										
-										//$price1 = mysqli_query($con,"SELECT SUM(cashier_amount) FROM location WHERE date BETWEEN '$dates' AND '$dates2' AND (end_time <> '$times2' OR start_time ='$times');");
+										//$price1 = mysqli_query($mysqli,"SELECT SUM(cashier_amount) FROM location WHERE date BETWEEN '$dates' AND '$dates2' AND (end_time <> '$times2' OR start_time ='$times');");
 										//$result = mysqli_fetch_array($price1);
 										
 									}else{
 										$sql2 = "SELECT bill_table.date,staff.first_name,staff.last_name,bill_table.total,bill_table.discount,(bill_table.total - bill_table.discount) AS amount FROM staff,bill_table WHERE bill_table.date BETWEEN '$dates' AND '$dates2' AND staff.member_id='$cashier_name' AND staff.member_id=bill_table.staff_ID GROUP BY date,bill_number;";
 										
-										$result1 = mysqli_query($con,$sql2);
+										$result1 = mysqli_query($mysqli,$sql2);
 									
 										
 										//$price2 = mysqli_query($con,"SELECT SUM(cashier_amount) FROM location WHERE (date BETWEEN '$dates' AND '$dates2' AND (end_time <> '$times2' OR start_time ='$times')) AND cashier_id ='$cashier_name';");

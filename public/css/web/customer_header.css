@@ -132,6 +132,7 @@ fieldset {
     text-decoration: none;
     display: block;
     font-size: 16px;
+    z-index: -1;
 }
 .dropdown-content a:hover{
   background-color: #f1f1f1;

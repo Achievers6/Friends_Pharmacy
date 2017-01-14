@@ -1,5 +1,17 @@
+<script>
+    function showConfirm()
+    {
+        // build the confirmation box
+        var c = confirm("Are you sure you wish to delete this item?");
+
+        // if true, delete item and refresh
+        if (c)
+            window.location = "otc.php";
+    }
+</script>
 <?php
 session_start();
+
 include '../database/dbconnect.php';
 include ("../Entities/drugEntity.php");
 include ("../Entities/stockEntity.php");
@@ -16,16 +28,22 @@ if (isset($_POST["next"])) {
     $page = 1;
 };
 
+if (isset($_GET["cat"])) {
+    $catname = $_GET["cat"];
+    $query = "SELECT COUNT(id) AS total FROM drug where category='$catname'";
+} else {
+    $query = "SELECT COUNT(id) AS total FROM drug";
+}
 
 $results_per_page = 5;
 $start_from = ($page - 1) * $results_per_page;
-$query = "SELECT COUNT(id) AS total FROM drug";
+
 $resultpage = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 $row = $resultpage->fetch_assoc();
 $total_pages = ceil($row["total"] / $results_per_page);
 
 
-if (empty($_SESSION['cart'])) {
+if (empty($_SESSION['amount'])) {
     $_SESSION['name'] = array();
     $_SESSION['cart'] = array();
     $_SESSION['qty'] = array();
@@ -36,26 +54,69 @@ if (empty($_SESSION['cart'])) {
 //session_destroy();
 if (isset($_POST['btnsubmititem'])) {
 
-    array_push($_SESSION['name'], $_POST['medname']);
-    array_push($_SESSION['cart'], $_POST['dosagetype']);
-    array_push($_SESSION['qty'], $_POST['qtybox']);
-    $stockid = $_POST['dosagetype'];
-    $qty = $_POST['qtybox'];
-    $query = "SELECT dosage,price FROM stock where id = $stockid";
-    $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-    while ($row = mysqli_fetch_array($result)) {
-        array_push($_SESSION['dosage'], $row[0]);
-        array_push($_SESSION['unitprice'], $row[1]);
-        array_push($_SESSION['amount'], ($row[1] * $qty));
+
+
+    $name = $_POST['medname'];
+    $dosagetype = $_POST['dosagetype'];
+    $id = $_POST['id'];
+
+    $query6 = "SELECT sum(quantity) from stock where dosage='$dosagetype' AND medicine_name='$name'";
+    $result6 = mysqli_query($mysqli, $query6) or die(mysqli_error($mysqli));
+    $row = mysqli_fetch_array($result6);
+    $stockqty = $row[0];
+    $needqty = $_POST['qtybox'];
+
+    if ("" == trim($_POST['qtybox'])) {
+        $idx = $_GET['id2'];
+        $page = $_GET['page'];
+        echo '<script language="javascript">';
+        echo "var c = confirm('please enter valid quantity');";
+        echo 'if (c)';
+        echo "window.location = 'otc.php?id=$idx';";
+        echo '</script>';
+    } else if ($stockqty < $needqty) {
+        $idx = $_GET['id2'];
+        $page = $_GET['page'];
+
+        echo '<script language="javascript">';
+        echo "var c = confirm('$name $dosagetype only $stockqty units in the stock,please order low quantity');";
+        echo 'if (c)';
+        echo "window.location = 'otc.php?id=$idx';";
+        echo '</script>';
+    } else if (in_array($name, $_SESSION['name'])) {
+        echo '<script language="javascript">';
+        echo "var c = confirm('$name is already added to the shopping cart');";
+        echo 'if (c)';
+        echo "window.location = 'otc.php';";
+        echo '</script>';
+    } else {
+        $query = "SELECT price from stock where dosage='$dosagetype' AND medicine_name='$name' AND entry_date = (select max(entry_date) from stock where medicine_name='$name' AND dosage='$dosagetype')";
+        $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+
+        $row = mysqli_fetch_array($result);
+        array_push($_SESSION['name'], $_POST['medname']);
+        array_push($_SESSION['cart'], $id);
+        array_push($_SESSION['qty'], $_POST['qtybox']);
+        array_push($_SESSION['dosage'], $dosagetype);
+        array_push($_SESSION['unitprice'], $row[0]);
+        array_push($_SESSION['amount'], ($row[0] * $needqty));
+
+
+
+        echo '<script language="javascript">';
+        echo "alert('$name is added to the shopping cart')";
+        echo '</script>';
     }
-    //array_push($_SESSION['unitprice'], $_POST['dosagetype']);
-    //print_r($_SESSION['cart']);
-    //print_r($_SESSION['qty']);
-    //session_destroy();
+}
+
+if (isset($_GET["cat"])) {
+    $catname = $_GET["cat"];
+    $query = "SELECT * FROM drug where category='$catname' ORDER BY id ASC LIMIT $start_from, $results_per_page";
+} else {
+    $query = "SELECT * FROM drug ORDER BY id ASC LIMIT $start_from, $results_per_page";
 }
 
 
-$query = "SELECT * FROM drug ORDER BY id ASC LIMIT $start_from, $results_per_page";
 
 $drugArray = array();
 $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -77,11 +138,10 @@ while ($row = mysqli_fetch_array($result)) {
     array_push($drugArray, $drug);
 }
 
-<<<<<<< HEAD
-echo "<div id='notifications'>";
+/*echo "<div id='notifications'>";
 echo "<h3 id='h3' style='text-align: center; color:red;'>Shopping Cart</h3>";
 
-echo "<p class='totaltxt' style='text-align: center  font:13px helvetica; font-weight:bold;'>Total :</p>";
+echo "<p class='totaltxt' style='text-align: center  font:13px helvetica; font-weight:bold;'>Total (Rs):</p>";
 echo "<p class='totalno' style='text-align: center' font:13px helvetica; font-weight:bold;>" . array_sum($_SESSION['amount']) . "</p>";
 
 echo "<button class='addorder'  onclick='confirmorder()'><span>Add to Order list</span></button>";
@@ -137,15 +197,11 @@ foreach ($_SESSION['name'] as $key => $item) {
 echo '</table>';
 echo "</div>";
 echo "</div>";
-=======
 
-
-
-
->>>>>>> 2f1d1c5e323fc202fe7624ae0cef0e9e027a2dad
 //print_r($_SESSION['cart']);
 //print_r($_SESSION['qty']);
-//session_destroy();
+//session_destroy();*/
+
 $t = sizeof($_SESSION['cart']);
 ?>
 
@@ -165,14 +221,16 @@ $t = sizeof($_SESSION['cart']);
         <script src="../public/js/jquery-2.0.0.js"></script>
         <link href="../public/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <style>
+
             .totaltxt {
                 position: absolute;
-                right: 380px;
+                width: 80px;
+                right: 345px;
                 top:25px;
             }
             .totalno {
                 position: absolute;
-                right: 340px;
+                right: 320px;
                 top:25px;
             }
             .next,.previous {
@@ -206,11 +264,11 @@ $t = sizeof($_SESSION['cart']);
             .drugTable
             {
                 width: 750px;
-                height: 250px;
-                margin: 10px 10px 10px 0;
-                border: 3px solid #E3E3E3;
-                border-radius: 10px;
-                moz-border-radius: 10px;
+                height: 200px;
+                padding-right: 30px;
+                padding-bottom: -100px;
+                background-color: white;
+
             }
 
             .drugTable tr th, .drugTable tr td
@@ -281,9 +339,7 @@ $t = sizeof($_SESSION['cart']);
                 background-color: #caf7a3;
 
             }
-            #inner_noti:hover {
-                background-color: #a9f26a;
-            }
+
             #bbc {
                 color: #0066cc;
 
@@ -337,7 +393,59 @@ $t = sizeof($_SESSION['cart']);
             }
             .to {
                 color: #777777;
+                position: relative;
+                top: 10px;
             }
+            .myButton {
+                position: relative; 
+                left: 125px; 
+
+                -moz-box-shadow: 0px 1px 0px 0px #fff6af;
+                -webkit-box-shadow: 0px 1px 0px 0px #fff6af;
+                box-shadow: 0px 1px 0px 0px #fff6af;
+                background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
+                background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
+                background-color:#ffec64;
+                -moz-border-radius:19px;
+                -webkit-border-radius:19px;
+                border-radius:19px;
+                border:2px solid #ffaa22;
+                display:inline-block;
+                cursor:pointer;
+                color:#333333;
+                font-family:Trebuchet MS;
+                font-size:16px;
+                font-weight:bold;
+                padding:7px 16px;
+                text-decoration:none;
+                text-shadow:0px 1px 0px #ffee66;
+            }
+            .myButton:hover {
+                background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
+                background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
+                background-color:#ffab23;
+            }
+
+            .mdh {
+                text-align:center; 
+                color: green; 
+                font-family: SourceSansPro;
+                font-size: 2.4em;
+                line-height: 1em;
+                font-weight: normal;
+                margin: 0  0 50px 0;
+            }
+
         </style>
 
 
@@ -353,13 +461,15 @@ $t = sizeof($_SESSION['cart']);
                 </div>
             </div>  
             <?php
+             $tot =  array_sum($_SESSION['amount']);
+            // $f = number_format((float) array_sum($_SESSION['amount']), 2, '.', '');
             echo "<div id='notifications'>";
             echo "<h3 id='h3' style='text-align: center; color:red;'>Shopping Cart</h3>";
 
-            echo "<p class='totaltxt' style='text-align: center  font:13px helvetica; font-weight:bold;'>Total :</p>";
-            echo "<p class='totalno' style='text-align: center' font:13px helvetica; font-weight:bold;>" . array_sum($_SESSION['amount']) . "</p>";
-
-            echo "<button class='addorder'  onclick='confirmorder()'><span>Add to Order list</span></button>";
+            echo "<p class='totaltxt' style='text-align: center  font:13px helvetica; font-weight:bold;'>Total (Rs):</p>";
+            echo "<p class='totalno' style='text-align: center' font:13px helvetica; font-weight:bold;>$tot</p>";
+            
+           echo "<button class='addorder'  onclick='confirmorder()'><span>Add to Order list</span></button>";
 
             echo "<div id=inner_noti>";
             echo '<table id="myTable" class="sortable">';
@@ -387,6 +497,7 @@ $t = sizeof($_SESSION['cart']);
 
 
             foreach ($_SESSION['name'] as $key => $item) {
+
                 echo '<tr>';
 
                 echo '<td>';
@@ -407,6 +518,7 @@ $t = sizeof($_SESSION['cart']);
                 echo '<td>';
                 echo '<img  class="cancel" src="../public/image/cancel.png" style="width: 20px; height: 20px;">';
                 echo '</td>';
+
                 echo '</tr>';
             }
             echo '</table>';
@@ -417,7 +529,7 @@ $t = sizeof($_SESSION['cart']);
 
 
         <?php require '../includes/customer_header.php'; ?>
-        <?php require '../includes/slideshow.php';?>
+        <?php require '../includes/slideshow.php'; ?>
 
         <div class="content">
             <article>
@@ -475,14 +587,15 @@ $t = sizeof($_SESSION['cart']);
                             <tr>
                                 <td colspan='2' ><?php echo $drug->discription ?></td>
                             </tr>   
-                            <tr>
-                                <td></td>
 
-
-                                <td> <button class="product-btn-add" style="width: 100px; height: 30px;" onclick= "window.location.href = 'otc.php?id=<?php echo $drug->id ?>&page=<?php echo $page ?>'"><span>Add to Cart</span></button></td>
-                                <!--<td> <button class="product-btn-add" style="width: 100px; height: 30px;" id='myBtn' onclick='myFunction()'><span>Add to Cart</span></button></td>-->
-                            </tr>   
                         </table>
+
+
+
+
+                        <a href='#' onclick= "window.location.href = 'otc.php?id=<?php echo $drug->id ?>&page=<?php echo $page ?>'">
+                            <img src='../public/image/addCart.png' style="width: 200px; height: 110px; position: relative; left: 590px; top:-40px;" >
+                        </a>
 
                     <?php } ?>
                     <table>
@@ -519,6 +632,7 @@ $t = sizeof($_SESSION['cart']);
 
         <?php require '../includes/customer_footer.php'; ?>
 
+
         <?php if (isset($_GET['id'])) { ?>
             <?php if (isset($_GET['id']) && isset($_SESSION['email']) && !empty($_SESSION['email'])) { ?>
                 <?php echo $id2 = $_GET['id']; ?>
@@ -546,6 +660,8 @@ $t = sizeof($_SESSION['cart']);
                 $result3 = mysqli_query($mysqli, $query3) or die(mysqli_error($mysqli));
                 $disdosage = array();
 
+
+
                 while ($row = mysqli_fetch_array($result3)) {
                     array_push($disdosage, $row[0]);
                 }
@@ -568,7 +684,7 @@ $t = sizeof($_SESSION['cart']);
                 }
                 $disqty = array();
                 foreach ($disdosage as $val) {
-                    $query6 = "SELECT quantity from stock where dosage='$val' AND medicine_name='$drugforcart->medicine_name' AND expire_date = (select MIN(expire_date) from stock where medicine_name='$drugforcart->medicine_name' AND dosage='$val')";
+                    $query6 = "SELECT sum(quantity) from stock where dosage='$val' AND medicine_name='$drugforcart->medicine_name'";
                     $result6 = mysqli_query($mysqli, $query6) or die(mysqli_error($mysqli));
                     while ($row = mysqli_fetch_array($result6)) {
                         array_push($disqty, $row[0]);
@@ -579,94 +695,113 @@ $t = sizeof($_SESSION['cart']);
 
                 mysqli_close($mysqli);
                 ?>
+                <?php if (sizeof($disqty) > 0) { ?>
+
+                    <div id = 'myModal' class = 'modal'>
+                        <div class = 'modal-content' style="padding: 20px; outline-style: double;">
+                            <h2 class="mdh" style = 'text-align:center;'><?php echo $drugforcart->medicine_name ?></h2>
+                            <a href='otc.php'>
+                                <img src='../public/image/cancel.png' style="width: 35px; height: 35px; position: relative; left: 515px; top:-100px;" >
+                            </a>
+                            <div class="inter" style="position: relative; top: -40px;">
+                                <?php echo " <form name = 'myForm2' action = 'otc.php?id2=$id2&page=$page' method = 'post' onsubmit = 'return validateForm2()'>" ?>
+                                <table class = 'drugforcartTable' >
+                                    <tr>
+
+                                        <?php echo "<th rowspan='6' width = '120px' ><img runat = 'server' src = '$drugforcart->image'/></th>" ?>
+                                        <td><input type="hidden" name ="medname" value=<?php echo $drugforcart->medicine_name ?> ></td>
+                                        <td><input type="hidden" name ="id" value=<?php echo $drugforcart->id; ?> ></td>
 
 
-                <div id = 'myModal' class = 'modal'>
-                    <div class = 'modal-content'>
-                        <h3 style = 'text-align:center;'><?php echo $drugforcart->medicine_name ?></h3>
+                                    </tr>
 
-                        <?php echo " <form name = 'myForm2' action = 'otc.php?id2=$id2&page=$page' method = 'post' onsubmit = 'return validateForm2()'>" ?>
-                        <table class = 'drugforcartTable'>
-                            <tr>
+                                    <tr>
+                                        <th>Generic: </th>
+                                        <td><?php echo $drugforcart->generic_name ?></td>
 
-                                <?php echo "<th rowspan='6' width = '150px' ><img runat = 'server' src = '$drugforcart->image' /></th>" ?>
-                                <td><input type="hidden" name ="medname" value=<?php echo $drugforcart->medicine_name ?>></td>
+                                    </tr>
 
-                            </tr>
+                                    <tr>
+                                        <th>Group: </th>
+                                        <td><?php echo $drugforcart->group_name ?></td>
+                                    </tr>
 
-                            <tr>
-                                <th>Generic: </th>
-                                <td><?php echo $drugforcart->generic_name ?></td>
+                                    <tr>
+                                        <th>Type: </th>
+                                        <td><?php echo $drugforcart->type ?></td>
+                                    </tr>
 
-                            </tr>
+                                    <tr>
+                                        <th>Category: </th>
+                                        <td><?php echo $drugforcart->category ?></td>
+                                    </tr>
 
-                            <tr>
-                                <th>Group: </th>
-                                <td><?php echo $drugforcart->group_name ?></td>
-                            </tr>
+                                    <tr>
+                                        <td colspan='2' ><?php echo $drugforcart->discription ?></td>
+                                    </tr> 
 
-                            <tr>
-                                <th>Type: </th>
-                                <td><?php echo $drugforcart->type ?></td>
-                            </tr>
-
-                            <tr>
-                                <th>Category: </th>
-                                <td><?php echo $drugforcart->category ?></td>
-                            </tr>
-
-                            <tr>
-                                <td colspan='2' ><?php echo $drugforcart->discription ?></td>
-                            </tr> 
-
-                            <tr>
+                                    <tr>
 
 
-                                <td></td>
-                                <td>Dosage:</td>
+                                        <td></td>
+                                        <td>Dosage:</td>
 
-                                <td>
-                                    <select name = 'dosagetype' >
+                                        <td>
+                                            <select name = 'dosagetype' style="width: 173px;">
 
-                                        <?php foreach ($disdosage as $value) { ?>
-                                            <?php $drid = $disid[array_search($value, $disdosage)] ?>
-                                            <?php $drprice = $disprice[array_search($value, $disdosage)] ?>
-                                            <?php echo "<option value=$drid>$value" . " (Rs " . $disprice[array_search($value, $disdosage)] . ")" . "</option>"; ?>
-                                        <?php } ?>
-                                    </select>      
-                                </td>
+                                                <?php foreach ($disdosage as $value) { ?>
+                                                    <?php $drid = $disid[array_search($value, $disdosage)] ?>
+                                                    <?php $drprice = $disprice[array_search($value, $disdosage)] ?>
+                                                    <?php echo "<option value=$value>$value" . " (Rs " . $disprice[array_search($value, $disdosage)] . ")" . "</option>"; ?>
+                                                <?php } ?>
+                                            </select>      
+                                        </td>
 
-                            </tr>   
-                            <tr>
-                                <td></td>
-                                <td>Quantity:</td>
-                                <td><input type="number" name='qtybox'></td>
-                                <td>
+                                    </tr>
 
-                                </td>
+                                    <td></td>
+                                    <td>Quantity:</td>
+                                    <td><input type="number" name='qtybox'></td>
+                                    <td>
 
-                            </tr>   
-                            <tr>
-                                <td><?php foreach ($disdosage as $value) { ?>
-                                        <?php echo $value . " " . $disqty[array_search($value, $disdosage)] . " unit in stock<br>"; ?>
-                                    <?php } ?></td>
-                                <td><input type = 'submit' name = 'btnsubmititem' value='Add to cart'></td>
-                                <td><a href='otc.php'> Cancel </a></td>
-                            </tr>   
+                                    </td>
 
-                        </table>
-                        <?php
-                        "</form>"
-                        ?>
+                                    </tr>
 
+                                    <tr>
+                                        <td align="center"><?php foreach ($disdosage as $value) { ?>
+                                                <?php echo $value . " " . $disqty[array_search($value, $disdosage)] . " unit in stock<br>"; ?>
+                                            <?php } ?></td>
+
+                                        <td><input type = 'submit' class="myButton" name = 'btnsubmititem' value='Add to cart'><td>
+
+
+                                    </tr>   
+
+                                </table>
+                                <?php
+                                "</form>"
+                                ?>
+
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <?php
+                } else
+                if ((sizeof($disqty) == 0)) {
+                    echo '<script language="javascript">';
+                    echo "alert('This medicine is not in stock  ')";
+                    echo '</script>';
+                }
+                ?>
             <?php } else if (isset($_GET['id']) && !isset($_SESSION['email']) && empty($_SESSION['email'])) { ?>        
                 echo'<script>alert("\t\t\tYou are not logged in.\nPlease logged in before make an order.");
-                                        window.location.href = "otc.php?page=<?php echo $page ?>";</script>';
+            window.location.href = "otc.php?page=<?php echo $page ?>";</script>';
 
             <?php } ?>
         <?php } ?>
+
+
     </body>
 </html>
 
@@ -686,7 +821,9 @@ $t = sizeof($_SESSION['cart']);
     }
 
     $(".cancel").click(function() {
+
         var index = $(this).closest("tr").index();
+
         $('.totalno').hide();
         if (index != '')
         {
@@ -697,18 +834,19 @@ $t = sizeof($_SESSION['cart']);
                 success: function(data)
                 {
                     $('.totalno').show();
+
                     $('.totalno').html(data);
                 }
 
             });
         }
 
-        var here = this;
+        if (index > 0) {
+            document.getElementById("myTable").deleteRow(index);
+        }
+        $("#myTable").show();
 
-        $(this).closest('tr').find('td').fadeOut('fast',
-                function(here) {
-                    $(here).parents('tr:first').remove();
-                });
+
 
 
     });
@@ -776,3 +914,7 @@ $t = sizeof($_SESSION['cart']);
     });
 
 </script>
+
+
+
+

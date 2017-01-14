@@ -1,10 +1,10 @@
 $(document).ready(function()
 {
-    alert("enter");
+    
 		$('.reply').keyup(function(e)
 		{
 			if (e.keyCode == 13) 
-			{       alert("enter");
+			{       
 				var post_id = $(this).attr('post_id');
 				var reply = $(this).val();
 

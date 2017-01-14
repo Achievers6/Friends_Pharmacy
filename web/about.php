@@ -6,12 +6,13 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="../public/css/web/aboutStyle.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script scr="../public/js/jquery-2.0.0.js" ></script>
-	<script scr="../public/js/comment.js"></script>
+        <script src="../public/js/jquery-2.0.0.js"></script>
+        <script src="../public/js/comment.js"></script>    
+       
 </head>
 <body>
 
-    <?php require '../includes/customer_header.php';?>
+    <?php  session_start(); require '../includes/customer_header.php';?>
     <?php require '../includes/slideshow.php';?>
     
 	<div class="content">
@@ -80,15 +81,15 @@
 				</form><br>
 				<?php
 
-					$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
-
+					//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
+                                        include '../database/dbconnect.php';
 					if(isset($_POST['comment']) && !empty($_POST['comment']))
 					{							
 						$msg = nl2br($_POST['comment']);
 						$day = date("Y-m-d");				
 
 						$sql = "INSERT INTO comment (post, day) VALUES ('$msg', '$day')";
-						if(mysqli_query($conn, $sql))
+						if(mysqli_query($mysqli, $sql))
 					    {
 					    	echo'<script>alert("Your comment is recorded successfully.\n\tThank You."); window.location.href="about.php";</script>';  
 					    }
@@ -99,7 +100,7 @@
 						
 					}
 
-					$post_query = mysqli_query($conn, "SELECT * FROM comment");
+					$post_query = mysqli_query($mysqli, "SELECT * FROM comment");
 					while ($run_post = mysqli_fetch_array($post_query)) 
 					{
 						$post_id = $run_post['id'];

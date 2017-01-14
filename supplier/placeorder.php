@@ -10,6 +10,7 @@ if(isset($_POST['add'])){
     if(isset($_POST['medname'])){
         $med=$_POST['medname'];
     }
+    if(isset($POST['cname']))
     
 }
 
@@ -32,7 +33,10 @@ if(isset($_POST['add'])){
         <?php 
     $output='';
     ?>
+       <?php
+            session_start();
         
+        ?>
         <div id="d1">
     <form action="placeorder.php" method="post" onsubmit="return validate()">
    <input type="text" id="medname" name="medname" placeholder="Medicine name" autocomplete="off">
@@ -44,16 +48,15 @@ if(isset($_POST['add'])){
     <div id="d2">
      
             <form action="placeorder.php" method="post">
-              <table>
+              <table bode>
                     <tr height="50">
                         <td>Supplier</td>
                         <td><select>
 <!--                            <option>supplier</option>-->
                             <?php
-                                if(isset($_POST['btn'])){
+                                if(isset($_POST['medname'])){
                                     include("placeorderdb.php");
                                     $medname=$_POST['medname'];
-                                    echo "works";
                                     $query1="SELECT supplier.company_name, drug.supplier_id,drug.generic_name, supplier.supplier_id FROM supplier INNER JOIN drug ON supplier.supplier_id=drug.supplier_id where drug.generic_name='$medname'";
                                     $result1=mysqli_query($connect,$query1);
      
@@ -61,7 +64,7 @@ if(isset($_POST['add'])){
                                     while($row=mysqli_fetch_assoc($result1)){
                                         $cname=$row['company_name'];
                                         ?>
-                                    <option value="<?php echo $cname;?>"></option>    
+                                    <option value="<?php echo $cname;?>"><?php echo $cname;?></option>    
                                     <?php
                         
                                     }
@@ -86,18 +89,24 @@ if(isset($_POST['add'])){
             
             
             </form>
-        
-     
-        
+      <?php
+     $_SESSION["$med"]=$med1;
+     $_SESSION["$cname"]=$cname1;
+     $_SESSION["$amnt"]=$amnt1;
+     $_SESSION["$date"]=$date1;
+        ?>
     </div>
     <div id="cart">
-            <table>
+            <table id="tbl2" border="1">
                    <thead>
+                       <th>Supplier</th>
                        <th>Medicine</th> 
                        <th>Amount</th>
                        <th>Date</th>
+                       
                    </thead>
                    <tbody>
+                        <td width="100px"></td>
                         <td width="100px"><? echo $med ?></td>
                         <td width="100px"><? echo $amnt ?></td>
                         <td width="100px"><? echo $date ?></td>
