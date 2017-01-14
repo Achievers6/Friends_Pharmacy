@@ -22,6 +22,21 @@
             });    
         });
         
+        function getUsage() {
+            var packet = {};
+            packet['medicine'] = $('#drug').val();
+            packet['duration'] = $('#duration').val();
+            $.ajax({
+                url: "getusage_rest.php",
+                async: true,
+                type: "GET",
+                data: packet
+            })
+            .done(function(data) {
+                console.log(JSON.stringify(data));
+            });
+        }
+        
     </script>
         
 </head>
@@ -39,7 +54,7 @@
         <div class="content" style="margin-top:10px; padding-right:40px; padding-left:40px;">
             <table>
                 <td>
-                Search <select id="drug">
+                Search <select id="drug" onchange="getUsage()">
             <?php
             include '../database/dbconnect.php';
             $sql = "SELECT * FROM drug";
@@ -51,7 +66,7 @@
             ?>
                     </select>
                 </td><td>
-                Duration <select id="duration">
+                Duration <select id="duration" onchange="getUsage()">
                                 <option value="1">One day</option>
                                 <option value="7">One week</option>
                                 <option value="30">One month</option>

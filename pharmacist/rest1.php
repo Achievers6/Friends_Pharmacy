@@ -2,7 +2,7 @@
 
 $med_type = $_GET['medtype'];
 $search = $_GET['search'];
-$action = $_GET['action']; 
+$action = $_GET['action'];  
 $period = $_GET['period'];
 $date = date_create(date("o-m-d"));
 switch($period) {
