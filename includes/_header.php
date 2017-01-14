@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require ("../Entities/stockEntityHead.php");
 include '../database/dbconnect.php';
 $query = mysqli_query($mysqli, "SELECT * FROM stock where 21>DATEDIFF(expire_date,CURDATE()) and 0<DATEDIFF(expire_date,CURDATE());");
@@ -289,7 +292,19 @@ while ($row = mysqli_fetch_array($query)) {
     <body style="margin:0;padding:0;">
         <div>
             <ul class="ul">
-                <li class="li" id="logout"><a href="logout.php">Logout</a></li>
+                <?php
+                if(isset($_SESSION['email']) && !empty($_SESSION['email']))
+                {
+                ?>  
+                <li class="li"> 
+                    <div>
+                        <a href="">Signed in as <?php echo "$_SESSION['email']"; ?></a>
+                    </div>
+                </li>
+                <?php
+                }
+                ?>
+                <li class="li" id="logout"><a href="../web/logout.php">Logout</a></li>
 
                 <li class="li" id="orders">
                     <div id="order_Counter"></div> 
