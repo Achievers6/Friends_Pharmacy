@@ -10,12 +10,11 @@
         <script src="js/addcustomer.js"></script>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
-        <script>
-            $(function() {
-                $("#dob").datepicker();
-            });
-
-        </script>
+       <script>
+ $(function() {
+    $( "#dob" ).datepicker({  maxDate: new Date() });
+  });
+    </script>
 
         <style>
             .radio-left {
@@ -43,16 +42,26 @@
             }
             #btn{
                 position:relative;
-                top:450px;
+                top:440px;
                 float:right;
                 right:250px;
                 height:30px;
+                background-color: rgb(106,184,42);
+                color: white;
+                padding: 10px 10px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
             }
             #tbl{
                 position: relative;
                 float:right;
                 right:100px;
 
+            }
+            #tbl tr{
+                height:60px;
             }
             h2{
                 position:relative;
@@ -94,6 +103,12 @@
                 margin: 0  0 10px 0;
                 margin-bottom: 30px;
             }
+            .input{
+                width:200px;
+                height:25px;
+               
+                
+            }
 
         </style>
 
@@ -110,19 +125,19 @@
                     <table id="tbl">
                         <tr >
                             <td><span class="star">*</span>NIC</td>
-                            <td><input type="text" name="nic"></td>
+                            <td><input type="text" name="nic" class="input"></td>
                         </tr>
                         <tr >
                             <td><span class="star">*</span>First name</td>
-                            <td><input type="text" name="fname" ><td>
+                            <td><input type="text" name="fname" class="input" ><td>
                         </tr>
                         <tr > 
                             <td><span class="star">*</span>Last Name</td>
-                            <td><input type="text" name="lname" ></td>
+                            <td><input type="text" name="lname" class="input" ></td>
                         </tr>
                         <tr>
                             <td><span class="star">*</span>Date Of Birth</td>
-                            <td><input type="date" name="dob" id="dob"></td>
+                            <td><input type="text" name="dob" id="dob" class="input"></td>
                         </tr>
                         <tr>
                             <td>Gender</td>
@@ -133,11 +148,11 @@
                         <tr>
 
                             <td><span class="star">*</span>Email Address</td>
-                            <td><input type="email" name="email"></td>
+                            <td><input type="email" name="email" class="input"></td>
                         </tr>
                         <tr>        
                             <td><span class="star">*</span>Contact Number</td>
-                            <td><input type="text" name="mobile"></td>
+                            <td><input type="text" name="mobile" class="input"></td>
                         </tr>
                         <br>
 <!--                        <br>-->
