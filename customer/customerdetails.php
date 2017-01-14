@@ -97,18 +97,18 @@
         <fieldset style="border: 2px solid rgb(106,184,42);">
         <div class="top bar">
         <div class="left-float" style="padding-top:5px;">
-            <div style="float:left">
-            NIC
-            <input type="text" name="nic" id="nic" placeholder="search" oninput="loadcustomers()"/>
-            </div>
+            <!--<div style="float:left">-->
+            <!--NIC-->
+            <!--<input type="text" name="nic" id="nic" placeholder="search" oninput="loadcustomers()"/>-->
+            <!--</div>-->
 
-            <div style="float: right">
-            Show
-            <select id='limit' onchange="loadcustomers()">
-                <option value="20">20</option>
-                <option value="all">All</option>
-            </select> results
-            </div>
+            <!--<div style="float: right">-->
+            <!--Show-->
+            <!--<select id='limit' onchange="loadcustomers()">-->
+                <!--<option value="20">20</option>-->
+                <!--<option value="all">All</option>-->
+            <!--</select> results-->
+            <!--</div>-->
         
             <div class="left-float" style="float:left">
             <span class="icon" onclick="loadcustomers()">

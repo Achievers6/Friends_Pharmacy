@@ -1,10 +1,14 @@
 $(document).ready(function()
 {
-    alert("enter");
+    
 		$('.reply').keyup(function(e)
 		{
 			if (e.keyCode == 13) 
+<<<<<<< HEAD
 			{
+=======
+			{       
+>>>>>>> 14012b55763a7c0da40d548d6bb371f66bebe22e
 				var post_id = $(this).attr('post_id');
 				var reply = $(this).val();
 

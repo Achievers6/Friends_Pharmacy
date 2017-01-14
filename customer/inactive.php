@@ -2,7 +2,12 @@
 <head>
     
     <link rel="stylesheet" href="css/styles.css"/>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/tempStyle.css" />
+    <link rel="stylesheet" type="text/css" href="../public/css/application.css"/>
+
+    <script src="js/jquery-2.0.0.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
     <style>
         h2{
             position: relative;
@@ -20,8 +25,7 @@
         }
         
     </style>
-    <link rel="stylesheet" type="text/css" href="css/tempStyle.css" />
-    <link rel="stylesheet" type="text/css" href="../public/css/application.css"/>
+    
     
     <?php require('../includes/_header.php'); ?>    
         <script>
@@ -68,6 +72,8 @@
                         row += "</tr>";
                         tbl_bdy.innerHTML += row;
                     }
+
+                    $('#customer-table').DataTable();
                 });
             }
 
@@ -149,20 +155,11 @@
         <div class="top bar">
         <div class="left-float" style="padding-top:5px;">
             <div >
-                NIC
-                <input type="text" name="nic" id="nic" placeholder="search" oninput="loadcustomers()"/>
                 View only
                 <select id='active' onchange='loadcustomers()'>
                     <option value='1'>Active</option>
                     <option value='0'>Inactive</option>
                 </select> customers
-                <div style="float: right">
-                Show
-                <select id='limit' onchange="loadcustomers()">
-                    <option value="20">20</option>
-                    <option value="all">All</option>
-                </select> results
-                </div>
             </div>
             </div>
         </div>

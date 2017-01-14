@@ -1,7 +1,7 @@
 <?php
 $title = "";
 $content = "<h2 style='text-align:center;'>Update Medicine</h2>
-    <form action='SearchMedicine.php' method ='post'>
+    <form action='SearchMedicine2.php' method ='post'>
     
       <fieldset>
         <label for='Search' style='font-size:20px;'>Search: </label>
@@ -43,7 +43,7 @@ if (isset($_POST['btnSearch'])) {
         $image = $row[7];
 
         $content = "<h2 style='text-align:center;'>Update Medicine</h2>
-    <form action='searchMedicine.php?id=$medicine_id' method ='post'>
+    <form action='searchMedicine.php?id=$medicine_id' method ='post' enctype='multipart/form-data'>
     
       <fieldset>
         <label for='medicine Name'>Medicine Name: </label>
@@ -84,8 +84,13 @@ if (isset($_POST['btnSearch'])) {
 	<textarea cols='33' rows='12' name='txtContent'>$discription</textarea></br>
 	<p></p>			
          
-        <label for='image'>Add image: </label>
-        <input type='file' name='pic' accept='image/*'>
+        <label for='image' >Add image: </label>
+        <img src='$image'  style='width: 100px; height: 110px;>
+        
+       
+        <label for='im ' ></label>
+        <td><input type='file' name='fileToUpload' id='fileToUpload'></td>
+        
         <p></p>
         
         <input type='submit' name = 'btnUpdate' value='update' ></span><br/> 
@@ -103,13 +108,9 @@ if (isset($_GET["id"])) {
     $supplier_id = $_POST["suppliers"];
     $discription = $_POST["txtContent"];
     $group = $_POST["groups"];
-    $image = $_POST["pic"];
+    $image = "../public/image/drug/" . basename($_FILES["fileToUpload"]["name"]);
 
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
 
     if (mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM drug WHERE medicine_name ='$brand_name' AND id!=$medicine_id "))) {
@@ -117,18 +118,65 @@ if (isset($_GET["id"])) {
         echo 'alert("Medicine name is exist")';
         echo '</script>';
     } else {
-        $query = "UPDATE drug
+
+        if (empty($_FILES["fileToUpload"]["name"])) {
+            $query = "UPDATE drug
+            SET medicine_name='$brand_name', generic_name='$generic_name',type='$type',category='$category',supplier_id='$supplier_id',discription='$discription',group_name='$group'
+            WHERE id='$medicine_id'";
+            mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+            mysqli_close($mysqli);
+
+            echo '<script language="javascript">';
+            echo 'alert("Successfully empty image updated")';
+            echo '</script>';
+        } else {
+            $target_dir = "../public/image/drug/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+            if ($_FILES["fileToUpload"]["size"] > 1000000) {
+                $message = "Sorry, your file is too large.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                // echo "Sorry, your file is too large.<br>";
+                $uploadOk = 0;
+            }
+
+            // Allow certain file cairo_format_stride_for_width(format, width)
+            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+                $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.<br>";
+                $uploadOk = 0;
+            }
+
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                $message = "Sorry, your file was not uploaded.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+
+                // echo "Sorry, your file was not uploaded.";
+            } else {
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    $query = "UPDATE drug
             SET medicine_name='$brand_name', generic_name='$generic_name',type='$type',category='$category',supplier_id='$supplier_id',discription='$discription',group_name='$group',image='$image'
             WHERE id='$medicine_id'";
 
 
-        mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-        mysqli_close($mysqli);
+                    mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+                    mysqli_close($mysqli);
 
-        //header("Location:searchMedicine.php");
-        echo '<script language="javascript">';
-        echo 'alert("Successfully updated")';
-        echo '</script>';
+                    //header("Location:searchMedicine.php");
+                    echo '<script language="javascript">';
+                    echo 'alert("Successfully updated")';
+                    echo '</script>';
+                } else {
+                    $message = "Sorry, there was an error uploading your file.";
+                    echo "<script type='text/javascript'>alert('$message');</script>";
+                    // echo "Sorry, there was an error uploading your file.";
+                }
+            }
+        }
     }
 }
 

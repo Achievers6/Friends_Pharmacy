@@ -3,8 +3,10 @@
     
 	
     <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css" />
     
     <script src="js/jquery-2.0.0.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
         
         <script>
             $(function(){
@@ -37,12 +39,15 @@
                         row += records[i].email + "\",";
                         row += records[i].contact_number + ")'>";
                         row += "<td>" + records[i].nic +"</td>";
-                        row += "<td>" +  name + "</td>";
+                        row += "<td>" +  records[i].first_name + "</td>";
+                        row += "<td>" +  records[i].last_name + "</td>";
                         row +="<td>" + records[i].email + "</td>";
                         row +="<td>" + records[i].contact_number + "</td>";
                         row += "</tr>";
                         tbl_bdy.innerHTML += row;
                     }
+
+                    $('#customer_table').DataTable();   
                 });
             }
 
@@ -192,8 +197,8 @@
         <div class="top bar">
         <div class="left-float" style="padding-top:5px;">
             <div style="margin-top:20px;">
-            NIC:
-            <input type="text" name="nic" id="nic" placeholder="search" oninput="loadcustomers()"/>
+            <!--NIC:-->
+            <!--<input type="text" name="nic" id="nic" placeholder="search" oninput="loadcustomers()"/>-->
             
             </div>
         
@@ -205,11 +210,12 @@
         <br>
         
         <div class="content">
-            <table border="1" style='width:500px; margin: 0 auto; width: 700px;'>
+            <table id="customer_table" border="1" style='width:500px; margin: 0 auto; width: 700px;'>
                 <thead>
                     <tr>
                         <th>NIC</th>
-                        <th>Customer Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Email Address</th>
                         <th>Contact Number</th>
                     </tr>

@@ -1,17 +1,16 @@
 <?php
         
             if($_SERVER["REQUEST_METHOD"] == "POST") {
-                /*$server = 'localhost';
+                $server = 'localhost';
                 $username = 'root';
                 $password = '';
                 $database = 'friends_pharmacy';
 
                 //create connection
-                $conn = mysqli_connect($server, $username, $password, $database);*/
-                include '../database/dbconnect.php';
+                $conn = mysqli_connect($server, $username, $password, $database);
 
                 //check connection
-                if (!$mysqli){
+                if (!$conn){
                     die("Connection faied: ".mysqli_connect_error());
                 }
 //                echo "connected successfully";
@@ -27,7 +26,7 @@
                
                 $sql = "INSERT INTO customer (nic,first_name,last_name,birthday,gender,email,contact_number) VALUES ('$nic', '$firstname', '$lastname', '$dob', '$gender', '$email', '$mobile')";
 
-                if (mysqli_query($mysqli, $sql)) {
+                if (mysqli_query($conn, $sql)) {
 //                    echo "insert successful";
 				} else {
 //                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);

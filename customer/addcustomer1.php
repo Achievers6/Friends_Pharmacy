@@ -140,7 +140,7 @@
                             <td><input type="text" name="mobile"></td>
                         </tr>
                         <br>
-                        <br>
+<!--                        <br>-->
 
                         <input id="btn" type="submit" value="Next">
                     </table> 

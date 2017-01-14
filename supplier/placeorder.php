@@ -1,170 +1,158 @@
+
+<?php
+if(isset($_POST['add'])){
+    if(isset($_POST['amnt'])){
+        $amnt=$_POST['amnt'];
+    }
+    if(isset($_POST['data'])){
+        $date=$_POST['date'];
+    }
+    if(isset($_POST['medname'])){
+        $med=$_POST['medname'];
+    }
+    if(isset($POST['cname']))
+    
+}
+
+    
+    ?>
+
 <html>
 <head>
-	
+    <title>Place an order</title>
+    
     <?php require('../includes/_header.php'); ?>
-    <link rel="stylesheet" type="text/css" href="stockStyle.css" />
-    <link rel="stylesheet" href="css/selectize.css" />
-    <script src="js/selectize.min.js"></script>
-    <title>Place order</title>
-    
-    <script>
-
-
-    function searchForm() {
-        var x = document.forms["myForm"]["txtMedicinedName"].value;
-
-
-        if (x == null || x == "" ) {
-            alert("field must be filled out");
-            return false;
-        }
-    }
-
-
-    </script>
-
-    <script>
-    var number = 1;
-    var medicines = [];
-  
-    function add() {
-        var dosage = $('#dosage').val();
-        var medi_id = $('#medicine_list').val();
-        var date = $('#date').val();
-//        var supplier =$('#supplier').val;
-        medicines.push(medi_id);
+    <script src="js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <link href="css/placeorder.css" type="text/css" rel="stylesheet">
 
       
-        var medi_name;
-        var dosage;
-      
-        $.ajax({
-            url:"placeorderdb.php",
-            async:false,
-            type:"GET",
-            data : {
-                medi_id: medi_id
-             }
-        }).done(function(data) {
-            data = JSON.parse(data);
-            medi_name = data.name;
-           
-            dosage = data['dosage'];
-        });
-        
-        
-        var table = document.getElementById("tbl");
-        var row = table.insertRow(-1);
-        var supplierCell = row.insertCell(0);
-        var medicineCell = row.insertCell(1);
-        var dosageCell = row.insertCell(2);
-        var quantityCell = row.insertCell(3)
-       
-
-        supplierCell.innerHTML = number;
-        medicineCell.innerHTML = medi_name;
-        dosageCell.innerHTML = dosage;
-        quantityCell.innerHTML = quantity;
-        
-    }
-
-   
-    
-    
-    </script>
-
-    <style>
-    .selectize-control {
-        width: 50%;
-    }
-    </style>
 </head>
-
-<body>
-    
-    <?php require_once("../includes/navigation.php") ?>
-    
-    <!--content goes here -->
-    <div class="customer_template_container" style=" padding-left:13px; padding-top:70px;">
+    <body>
+        <h2>Place an order</h2>
+        <?php require_once("../includes/navigation.php") ?>
+        <?php 
+    $output='';
+    ?>
+       <?php
+            session_start();
         
-        <div id="div_to_print" style="float: left; width: 60%">
-           
-        
-            <table border=1 id="tbl" style="width:100%;border-collapse: collapse;font-weight:100">
-                <tr>
-                    <th>Supplier</th>
-                    <th>Medicine Name</th>
-                    <th>Quantity</th>
-                    <th>Dosage</th>
-                    <th>Date</th>
-                    
-                </tr>
+        ?>
+        <div id="d1">
+    <form action="placeorder.php" method="post" onsubmit="return validate()">
+   <input type="text" id="medname" name="medname" placeholder="Medicine name" autocomplete="off">
+    <div id="medList"><?php echo $output?></div>
+   <input id="load" type="submit" name="btn" value="Search">
+    </form>
+      
+        </div>
+    <div id="d2">
+     
+            <form action="placeorder.php" method="post">
+              <table bode>
+                    <tr height="50">
+                        <td>Supplier</td>
+                        <td><select>
+<!--                            <option>supplier</option>-->
+                            <?php
+                                if(isset($_POST['medname'])){
+                                    include("placeorderdb.php");
+                                    $medname=$_POST['medname'];
+                                    $query1="SELECT supplier.company_name, drug.supplier_id,drug.generic_name, supplier.supplier_id FROM supplier INNER JOIN drug ON supplier.supplier_id=drug.supplier_id where drug.generic_name='$medname'";
+                                    $result1=mysqli_query($connect,$query1);
+     
+                                    $num=mysqli_num_rows($result1);
+                                    while($row=mysqli_fetch_assoc($result1)){
+                                        $cname=$row['company_name'];
+                                        ?>
+                                    <option value="<?php echo $cname;?>"><?php echo $cname;?></option>    
+                                    <?php
+                        
+                                    }
+                                }
+                                
+                                
+                            ?>
+                        </select></td>
+                   </tr>
+                   <tr height="50">
+                        <td>Amount</td>
+                        <td><input type="text" id="amnt" name="amnt"></td>
+                   </tr>
+                   <tr height="50">
+                        <td>Deliver before</td>
+                        <td><input type="date" id="date" name="date"></td>
+                   </tr>
+                  
+                  
+             </table>  
+                <input type="submit" value="Add" name="add" id="add">
+            
+            
+            </form>
+      <?php
+     $_SESSION["$med"]=$med1;
+     $_SESSION["$cname"]=$cname1;
+     $_SESSION["$amnt"]=$amnt1;
+     $_SESSION["$date"]=$date1;
+        ?>
+    </div>
+    <div id="cart">
+            <table id="tbl2" border="1">
+                   <thead>
+                       <th>Supplier</th>
+                       <th>Medicine</th> 
+                       <th>Amount</th>
+                       <th>Date</th>
+                       
+                   </thead>
+                   <tbody>
+                        <td width="100px"></td>
+                        <td width="100px"><? echo $med ?></td>
+                        <td width="100px"><? echo $amnt ?></td>
+                        <td width="100px"><? echo $date ?></td>
+                       
+                   </tbody>
             </table>
             
-        </div>
-       
+    
+    </div>
+        
+    </body>
 
-        <div style="float: right; width: 35%">
-            <form>
-                Medicine Name: 
-                <select id='medicine_list'>
-<?php
-    $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-    $sql = "SELECT * FROM drug";
-    $result = mysqli_query($conn, $sql);
-    while(($row = mysqli_fetch_assoc($result)) != null) {
-        echo "<option value='" . $row['id'] . "'>" . $row['generic_name'] . " " .  "</option>";
-    }
-?>
-                </select>
-                <script>
-                $('#medicine_list').selectize({
-                    persist: false,
-                    createOnBlur: true,
-                });
-                </script>
-                <br>
-               Dosage : <input type="number" name="dosage" id="dosage" > <br>
-                Amount : <input type="number" name="discount" id="discount" /><br>
-                Date :<input type="date" name="date" id="date"><br />
-                <input type="button" onclick="add()" value="Add"> <input type="reset" value="Clear">
-            </form>
-           
-        </div>
-    </div>		
-	
-    
-    <?php require_once('../includes/_footer.php') ?>
-    
-</body>
 
 </html>
+    <script>
+         function validate(){
+            var medname=document.getElementById("medname").value;
+            
+            if(medname =="" ){
+                    alert("Please enter a medicine");
+                    return false;  
+            }
+         }
 
-
-
-
-
+</script>
 <script>
 $(document).ready(function(){  
-      $('#medicine').keyup(function(){  
+      $('#medname').keyup(function(){  
            var query = $(this).val();  
            if(query != '')  
            {  
                 $.ajax({  
-                     url:"Search.php",  
+                     url:"placeorderdb.php",  
                      method:"POST",  
                      data:{query:query},  
                      success:function(data)  
                      {  
-                          $('#medicineList').fadeIn();  
-                          $('#medicineList').html(data);  
+                          $('#medList').fadeIn();  
+                          $('#medList').html(data);  
                      }  
                 });  
            }  
       });  
       $(document).on('click', 'li', function(){  
-           $('#medicine').val($(this).text());  
-           $('#medicineList').fadeOut(); 
+           $('#medname').val($(this).text());  
+           $('#medList').fadeOut(); 
            
            
         });  

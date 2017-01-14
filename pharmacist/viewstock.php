@@ -55,6 +55,8 @@
         
         <h2>View Stock</h2>
 
+
+<!--
         <div class="top-bar">
             <div class="left-float" style="padding-top:5px;">
                 Search By:
@@ -72,8 +74,10 @@
                 
             </div>
         </div>
-        
-        <div class="content">
+-->
+
+        <h2 style="text-align:center; margin-top:56px;">View stock</h2>
+        <div class="content" style="margin-top:10px; padding-right:40px; padding-left:40px;">
             <table id="stock_table" border="0">
                 <thead>
                     <tr>

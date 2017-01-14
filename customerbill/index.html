@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Customer Bill</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img src="../public/image/logo_green.png">
+      </div>
+      <div id="company">
+        <h2 class="name">Friends Pharmacy</h2>
+        <div> No:65, Main street</div>
+        <div>Kirulapana</div>
+        <div><a href="mailto:company@example.com">friendsPharmacy@gmail.com</a></div>
+      </div>
+        
+    </header>
+      
+    <main>
+      <div id="details" class="clearfix">
+        <div id="client">
+          <div class="to">INVOICE TO:</div>
+          <h2 class="name">mithsen</h2>
+          <div class="email"><a href="mailto:john@example.com">mithsen@gmail.com</a></div>
+        </div>
+        <div id="invoice">
+          <h1>INVOICE</h1>
+          <div class="date">Date of Invoice: 01/06/2014</div>
+        </div>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="no">#</th>
+            <th class="desc">DESCRIPTION</th>
+            <th class="dosage">DOSAGE</th>
+            <th class="unit">UNIT PRICE</th>
+            <th class="qty">QUANTITY</th>
+            <th class="total">AMOUNT</th>
+          </tr>
+        </thead>
+          
+        <tbody>
+          <tr>
+            <td class="no">01</td>
+            <td class="desc">piriton</td>
+            <td class="dosage">10</td>
+            <td class="unit">Rs 2.00</td>
+            <td class="qty">30</td>
+            <td class="total">Rs 60.00</td>
+          </tr>
+            
+          <tr>
+            <td class="no">02</td>
+            <td class="desc">Panadol</td>
+            <td class="dosage">10</td>
+            <td class="unit">Rs 5.00</td>
+            <td class="qty">8</td>
+            <td class="total">Rs 40.00</td>
+          </tr>
+            
+          <tr>
+            <td class="no">03</td>
+            <td class="desc">Amoxil</td>
+            <td class="dosage">250</td>
+            <td class="unit">5.00</td>
+            <td class="qty">2</td>
+            <td class="total">Rs 10.00</td>
+          </tr>
+        </tbody>
+          
+        <tfoot>
+          <tr>
+            <td colspan="1"></td>
+            <td colspan="4">SUBTOTAL</td>
+            <td>Rs 200.00</td>
+          </tr>
+            
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="3">DISCOUNT</td>
+            <td><input type="number" name="discount" id="discount" value="0" style="width:30px; direction: rtl;">%</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="3">GRAND TOTAL</td>
+              <td><p id="p1">Rs.0.00</p></td>
+          </tr>
+        </tfoot>
+      </table>
+        
+      <div id="thanks">Thank you!</div>
+        <a title="Print Screen" onclick="window.print();" target="_blank" style="cursor:pointer;">PRINT</a>
+    </main>
+    <footer>
+      Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+  </body>
+</html>

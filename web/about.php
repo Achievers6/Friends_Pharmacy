@@ -10,8 +10,14 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="../public/css/web/aboutStyle.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 	<script src="../public/js/jquery-2.0.0.js" ></script>
 	<script src="../public/js/comment.js"></script>
+=======
+        <script src="../public/js/jquery-2.0.0.js"></script>
+        <script src="../public/js/comment.js"></script>    
+       
+>>>>>>> 14012b55763a7c0da40d548d6bb371f66bebe22e
 </head>
 <body>
 

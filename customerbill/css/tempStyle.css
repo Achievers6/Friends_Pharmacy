@@ -1,0 +1,185 @@
+
+
+.type {
+    width: 280px;
+    padding: 4px;
+    
+}
+
+
+ul {
+ list-style-type: none;
+ list-style-position: inside;
+ margin: 0 0 3px 0;
+ }
+#medicineList {
+    background-color: lavender;
+    width: 280px;
+    left: 725px;
+    margin-top: -22px;
+    position: relative; 
+    
+}
+.overViewTable
+{
+    width: 900px;
+    border: 2px solid rgb(255,232,57);
+    margin:auto;
+}
+
+.overViewTable tr
+{
+    padding: 7px;
+}
+
+.overViewTable td
+{
+    padding: 4px;
+    border: 1px solid #E3E3E3;
+}
+.inputField
+{
+    width: 280px;
+    padding: 4px;
+}
+.drugBox {
+    width: 280px;
+    padding: 4px;
+}
+label
+{
+    float: left;
+    width: 200px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+fieldset{
+  border: 2px solid rgb(255,232,57);
+  width: 600px;
+  margin:auto;
+  text-align: center;
+ 
+}
+.date {
+    width: 165px;
+}
+
+
+.menu{
+	float:left;
+	width:32px;
+	height:32px;
+    padding: 13px;
+}
+.logo {
+	height:100%;
+	margin-left:2%;
+    
+}
+.note{
+	padding-top:15px;	
+	padding-right:30px;
+}
+
+.number{
+	float:left;	
+	padding-left:100px;
+	border-radius: 60px;    
+    background-color:#fed7b0;
+	padding: 6px 12px; 
+}
+
+.task{
+	padding-left:0px;
+}
+
+/*.sidenav {
+    height: 88%;
+    width: 0;
+    position:left;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:#263238;
+    overflow-x: hidden;
+    padding-top: 20px;
+	margin-top:60px;
+	position:fixed;	
+}*/
+.stock {
+    position:fixed;	
+}
+
+.content{
+	
+    padding-left:13px;
+    padding-top:20px;
+    margin-top:2.28%;
+	
+}
+
+.dropbtn{
+	border:none;
+	padding-left:20px;	
+	
+}
+.dropdown-content{
+	display:none;
+	position:absolute;	
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+#stock1{padding-left: 10px;}
+
+.dropdown-content a {
+    padding-left:30px;
+    display: block;
+	width:210px;
+	padding-left:42px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+Footer{
+	width:100%;
+    margin-top: 8px;
+    margin-left: -8px;
+	position: absolute;
+	background-color:black;
+  
+ }
+Footer a{
+	color:#f9a046;
+	text-decoration:none;
+ }
+Footer a:hover{
+	color:#FFF2E7;
+}
+Footer p{
+	padding-left:250px;
+    color: white;
+ }
+.dropdown:hover .dropdown-content {
+    display: block;
+    color: #ffeb99
+}
+h2 {
+  text-align:center; 
+  color: #777777; 
+  font-family: SourceSansPro;
+  font-size: 2.4em;
+  line-height: 1em;
+  font-weight: normal;
+  margin: 0  0 10px 0;
+}

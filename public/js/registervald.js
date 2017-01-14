@@ -5,7 +5,7 @@ $(document).ready(function(){
 }, "Letters only please"); 
        
   
- jQuery.validator.addMethod('NICNumber', function (value) { 
+ jQuery.validator.addMethod('NICNumber', function (value,element) { 
     return this.optional(element) || /^[0-9]{9}[vV]$/.test(value); 
 }, "Please enter a valid National Identity Card Number");
         
@@ -39,8 +39,8 @@ $(document).ready(function(){
           nic:{
                 required:true,
                 NICNumber:true,
-                maxlength:10,
-                minlength:10
+//                maxlength:10,
+//                minlength:10
                 },
          
          password:{

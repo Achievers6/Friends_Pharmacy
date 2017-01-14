@@ -1,4 +1,33 @@
 <script>
+
+    function delete_row(no)
+    {
+        document.getElementById("row" + no + "").outerHTML = "";
+        var table = document.getElementById("data_table");
+
+    }
+
+    function add_row()
+    {
+        var new_name = document.getElementById("new_name").value;
+        var new_country = document.getElementById("new_country").value;
+//                var new_age = document.getElementById("new_age").value;
+
+        var table = document.getElementById("data_table");
+        var table_len = (table.rows.length) - 1;
+        var row = table.insertRow(table_len).outerHTML =
+                "<tr id='row" + table_len + "'>\n\
+                            <td id='name_row" + table_len + "'><input type='text' name=dosage" + table_len + " value=" + new_name + "></td>\n\
+                            <td id='country_row" + table_len + "'><input type='text' name=price" + table_len + " value=" + new_country + "></td>\n\
+                            <td><input type='button' value='Delete' class='delete' onclick='delete_row(" + table_len + ")'></td></tr>";
+
+
+
+        document.getElementById("new_name").value = "";
+        document.getElementById("new_country").value = "";
+        //document.getElementById("new_age").value = "";
+    }
+
     function validateForm2() {
         var u = document.forms["myForm2"]["addcat"].value;
         if (u == null || u == "") {
@@ -6,6 +35,8 @@
             return false;
         }
     }
+
+
     function validateForm() {
         var x = document.forms["myForm"]["txtBrandName"].value;
         var y = document.forms["myForm"]["txtGenericName"].value;
@@ -105,16 +136,40 @@ $content = "<h2 style='text-align:center;'>Add New Medicine</h2>
             <label for='image'>Add image: </label>
             <input type='file' name='fileToUpload' id='fileToUpload'>
             <p></p>
-            <input type='submit' name = 'btnSubmit' location.href = 'AddMedicine.php'></span><br/> 
+            
+
+            
+            <label for='image' style=padding-top:30px;'>Add Dosage: </label>
+            number of dasges: <input type='number' name='dcount' id='dcount' style='margin-top:30px; width:40px;'>
+            <div id='wrapper' style=padding-top:30px;'>
+            <table cellspacing=1 cellpadding=3 id='data_table' border=1 style='display:none;'>
+                <tr>
+                    <th>Dosage</th>
+                    <th>Price</th>
+                </tr>
+                
+
+               
+
+            </table>
+        </div>
+        
+
+            
+            <label for='image' style=padding-top:30px;'> </label>
+            <p> .</p>
+            <input type='submit' name = 'btnSubmit' location.href = 'AddMedicine.php'><br/> 
             <p></p>
         </fieldset>
     </form>
    
-    <button id='myBtn' onclick='myFunction()' style='position:absolute; top:300px; right:270px; background-color: rgb(106,184,42); color: white;
+    <button id='myBtn' onclick='myFunction()' style='position:absolute; top:310px; right:210px; background-color: rgb(106,184,42); color: white;
     padding: 5px 5px;
     border: none;
     border-radius: 4px;
-    cursor: pointer;'>New</button><br/>
+    cursor: pointer;'>New Category</button><br/>
+    
+
     <div id='myModal' class='modal'>
         <div class='modal-content'>
           <span class='close'>x</span>
@@ -169,6 +224,8 @@ if (isset($_POST['btnSubmitcat'])) {
 
 if (isset($_POST['btnSubmit'])) {
 
+
+
     $brand_name = $_POST["txtBrandName"];
     $generic_name = $_POST["txtGenericName"];
     $type = $_POST["type"];
@@ -201,14 +258,7 @@ if (isset($_POST['btnSubmit'])) {
         $supplier_id = $row[0];
 
 
-        $query = "INSERT INTO drug
-            (medicine_name,generic_name,type,category,supplier_id,discription,image,group_name)
-             VALUES
-             ('$brand_name','$generic_name','$type','$category','$supplier_id','$discription','$image','$group')";
 
-
-        mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-        mysqli_close($mysqli);
 
         //specifies the directory where the file is going to be placed
         $target_dir = "../public/image/drug/";
@@ -226,54 +276,63 @@ if (isset($_POST['btnSubmit'])) {
 
         // check a file to upload is selected or not
         if (empty($_FILES["fileToUpload"]["name"])) {
-            $message = "Please select an image to upload..";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-            $uploadOk = 0;
+            $query = "INSERT INTO drug
+            (medicine_name,generic_name,type,category,supplier_id,discription,group_name)
+             VALUES
+             ('$brand_name','$generic_name','$type','$category','$supplier_id','$discription','$group')";
+            mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+            echo '<script language="javascript">';
+            echo 'alert("Medicine is added successfully")';
+            echo '</script>';
         }
 
-        //check the file is already exist or not
-        if (file_exists($target_file)) {
-            $message = "Sorry, file already exists.";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-            // echo "Sorry, file already exists.<br>";
-            $uploadOk = 0;
-        }
-
+        //check the file is already exist or no
         // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 1000000) {
-            $message = "Sorry, your file is too large.";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-            // echo "Sorry, your file is too large.<br>";
-            $uploadOk = 0;
-        }
-
         // Allow certain file cairo_format_stride_for_width(format, width)
-        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-            $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-            // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.<br>";
-            $uploadOk = 0;
-        }
-
         // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            $message = "Sorry, your file was not uploaded.";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-
-            // echo "Sorry, your file was not uploaded.";
-        }
         // if everything is ok, try to upload file
-        else {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo '<script language="javascript">';
-                echo 'alert("Medicine is added successfully")';
-                echo '</script>';
-            } else {
-                $message = "Sorry, there was an error uploading your file.";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-                // echo "Sorry, there was an error uploading your file.";
+
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+            $query = "INSERT INTO drug
+            (medicine_name,generic_name,type,category,supplier_id,discription,image,group_name)
+             VALUES
+             ('$brand_name','$generic_name','$type','$category','$supplier_id','$discription','$image','$group')";
+            mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+
+            $q = "SELECT id FROM drug WHERE medicine_name ='$brand_name'";
+            $result = mysqli_query($mysqli, $q) or die(mysqli_error($mysqli));
+            $rowy = mysqli_fetch_array($result);
+
+            $idm = $rowy[0];
+            if (isset($_POST['dcount'])) {
+                $x = $_POST['dcount'];
+                for ($i = 1; $i <= $x; $i++) {
+                    $d = "dosage" . $i;
+                    $p = "price" . $i;
+
+                    if (!empty($_POST[$d])) {
+
+
+                        $dosa = $_POST[$d];
+                        $pri = $_POST[$p];
+                        $queryd = "INSERT INTO drug_price
+            (medicine_id,dosage,price)
+             VALUES
+             ('$idm','$dosa','$pri')";
+                        mysqli_query($mysqli, $queryd) or die(mysqli_error($mysqli));
+                    }
+                }
             }
+            mysqli_close($mysqli);
+            echo '<script language="javascript">';
+            echo 'alert("Medicine is added successfully")';
+            echo '</script>';
         }
+//        else {
+//            $message = "Sorry, there was an error uploading your file.";
+//            echo "<script type='text/javascript'>alert('$message');</script>";
+//            // echo "Sorry, there was an error uploading your file.";
+//        }
     }
 }
 include './MedicineTemplate.php';
@@ -329,4 +388,40 @@ include './MedicineTemplate.php';
         });
     });
 
+    $(document).ready(function() {
+        $('#dcount').keyup(function() {
+            var no = $(this).val();
+
+            var table = document.getElementById("data_table");
+            var i = 0;
+
+            if (no != '')
+            {
+                $('#data_table').show();
+                for (i = 1; i <= no; i++) {
+
+                    var row = table.insertRow(1).outerHTML =
+                            "<tr id='row" + i + "'>\n\
+                            <td id='name_row" + i + "'><input type='text' name=dosage" + i + "></td>\n\
+                            <td id='country_row" + i + "'><input type='text' name=price" + i + "></td>\n\
+             </tr>";
+                }
+            }
+            else {
+                var len = (table.rows.length);
+
+                for (i = 1; i < len; i++) {
+                    document.getElementById("data_table").deleteRow(1);
+
+                }
+                $('#data_table').hide();
+            }
+
+
+        });
+
+    });
+
 </script>
+
+
