@@ -42,6 +42,7 @@
              }
         }).done(function(data) {
             data = JSON.parse(data);
+            console.log(data);
             medi_name = data.name;
             unitprice = data['price'];
             dosage = data['dosage'];
@@ -56,9 +57,9 @@
         var row = table.insertRow(-1);
         var numberCell = row.insertCell(0);
         var medicineCell = row.insertCell(1);
-        var quantityCell = row.insertCell(2);
-        var dosageCell = row.insertCell(3);
-        var unitPriceCell = row.insertCell(4);
+        var dosageCell = row.insertCell(2);
+        var unitPriceCell = row.insertCell(3);
+        var quantityCell = row.insertCell(4);
         var totalPriceCell = row.insertCell(5);
 
         var totalPrice = parseInt(unitprice) * parseInt(quantity);
@@ -67,9 +68,9 @@
 
         numberCell.innerHTML = number;
         medicineCell.innerHTML = medi_name;
-        quantityCell.innerHTML = quantity;
         dosageCell.innerHTML = dosage;
         unitPriceCell.innerHTML = unitprice;
+        quantityCell.innerHTML = quantity;
         totalPriceCell.innerHTML = totalPrice;
 
         total += totalPrice;
@@ -94,6 +95,8 @@
     }
     
     function printTable() {
+        $('.nav').hide();
+        $('#input_panel').hide();
     	var divToPrint = document.getElementById("div_to_print");
     	newWin = window.open("");
     	newWin.document.write(divToPrint.outerHTML);
@@ -149,7 +152,7 @@
         </div>
         <button onclick='printTable()'>Print</button>
 
-        <div style="float: right; width: 35%">
+        <div id="input_panel" style="float: right; width: 35%">
             <form>
                 Medicine Name: 
                 <select id='medicine_list'>

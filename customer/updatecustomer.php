@@ -28,8 +28,7 @@
                 })
                 .done(function(data){
                     var records = JSON.parse(data);
-                    var tbl_bdy =
-                    document.getElementById("table_body");
+                    var tbl_bdy = document.getElementById("table_body");
                     tbl_bdy.innerHTML = '';
                     for(var i=0; i < records.length; i++){
                         var name = records[i].first_name + " " + records[i].last_name;
@@ -172,19 +171,6 @@
         Last Name: <input type='text' name='lname' id='lname' /> <br>
         Email: <input type='text' name='email' id="cemail" /> <br>
         Contact Number: <input type='tel' name='tp' id="ctp" /> <br>
-        <table border="0" style="width:100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Medicine Name</th>
-                <th>Duration</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-            </tr>    
-            </thead>
-            <tbody id="ctbl">
-            </tbody>
-            </table>
             <input type="button" onclick="update()" value = "Update" style="width:100px"/>
         </div>
     </div>
