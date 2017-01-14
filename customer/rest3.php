@@ -23,7 +23,7 @@ switch($type) {
         } else {
             $sql = "SELECT * FROM customer";
         }
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($mysqli, $sql);
         $res_data = array();
         while($row = mysqli_fetch_assoc($result)) {
             

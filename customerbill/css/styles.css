@@ -1,0 +1,88 @@
+html {
+    font-family: Segoe,Segoe UI,Optima,Arial,sans-serif;
+}
+
+
+
+.top-bar {
+    width: 90%;
+    margin-top: 20px;
+    margin: 20px auto;
+    height: 50px;
+}
+
+.top-bar select {
+    width: 200px;
+    margin-left: 15px;
+}
+
+.top-bar .left-float {
+    margin-left: 10px;
+    float: left;
+}
+
+.top-bar .icon {
+    margin-left: 16px;
+}
+
+.content {
+    width: 98%;
+    margin: 20px auto;
+}
+
+.content table {
+    border-collapse: collapse;
+    border-color: #6AB82A;
+    width: 100%;
+}
+
+.content table th {
+    font-family: inherit;
+    font-weight: 100 !important;
+    color: black;
+    background-color: rgb(214,244,185);
+    height: 30px;
+}
+
+.content table td {
+       border-color: #6AB82A;
+    padding: 4px 0px 4px 8px;    
+}
+
+.content table tr {
+    border-color: #6AB82A;
+    color: black;
+}
+
+.content table tr:hover {
+    background-color: rgb(229,249,212);
+    color: black;
+    
+}
+
+#medicine-form {
+    width: 38%;
+    height: 500px;
+    float: left;
+    margin-left: 14px;
+}
+
+#popup {
+    z-index: 10000;
+    position: fixed;
+    height: 80%;
+    width: 70%;
+    top: 10%;
+    left: 20%;
+    background-color: white;
+}
+h2 {
+  text-align:center; 
+  color: #777777; 
+  font-family: SourceSansPro;
+  font-size: 2.4em;
+  line-height: 1em;
+  font-weight: normal;
+  margin: 0  0 10px 0;
+  margin-bottom: 30px;
+}
