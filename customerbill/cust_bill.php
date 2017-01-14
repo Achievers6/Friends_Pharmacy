@@ -29,6 +29,7 @@
     <script>
     var number = 1;
     var medicines = [];
+    var quantities = [];
     var total = 0;
     function add() {
         var quantity = $('#quantity').val();
@@ -94,19 +95,18 @@
     }
 
     function finish() {
-        var customerNic = document.getElementById("customer_nic").value;
+        var packet = {};
+        packet['medicines'] = medicines;
+        packet['quantities'] = quantities;
+        packet['total'];
         $.ajax({
             url: "bill_helper.php",
             async: true,
             type: "POST",
-            data: {
-                total: total,
-                customer_nic: customerNic,
-                // NOT DONE HERE
-            }
-        }).done(function() {
-
-        })
+            data: JSON.stringify(packet)
+        }).done(function(data) {
+            
+        });
     }
     
     function printTable() {
