@@ -12,12 +12,12 @@ include '../database/dbconnect.php';
       {  
            while($row = mysqli_fetch_array($result))  
            {  
-                $output .= '<li>'.$row["nic"].'</li>';  
+                $output .= '<li id="lin">'.$row["nic"].'</li>';  
            }  
       }  
       else  
       {  
-           $output .= '<li>NIC not found</li>';  
+           $output .= '<li id="lin">NIC not found</li>';  
       }  
       $output .= '</ul>';  
       echo $output;  

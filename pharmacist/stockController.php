@@ -3,7 +3,7 @@
     function showConfirm(id)
     {
         // build the confirmation box
-        var c = confirm("Are you sure you wish to Delete this item?");
+        var c = confirm("Are you sure, you wish to Delete this item?");
 
         // if true, delete item and refresh
         if (c)
@@ -71,7 +71,7 @@ class stockController {
                
                 <tr>
                     
-                    <td><a href='#' onClick=showConfirm($stock->id) style='color:red;'>Delete</td>
+                    <td><a href='#' onClick=showConfirm($stock->id) style='color:red;'>DELETE</td>
                     <td><b>$stock->batch_no</b></td>
                     <td><b>$stock->quantity</b></td>
                     <td><b>$stock->price</b></td>
@@ -181,7 +181,7 @@ class stockController {
         $result = "";
         $result = "
        
-       <h3 style='text-align:center;'>$medicine_Name<h3>
+       <h2 style='text-align:center;'>$medicine_Name<h3>
         
           <table class='sortable'>
                 <tr>
@@ -202,7 +202,7 @@ class stockController {
                 
                 <tr>
                     
-                        <td><a href='updateStock1.php?update=$stock->id' >UPDATE</td>
+                        <td><a href='updateStock1.php?update=$stock->id' style='color:blue;'>UPDATE</td>
                     <td><b>$stock->batch_no</b></td>
                     <td><b>$stock->quantity</b></td>
                     <td><b>$stock->dosage</b></td>

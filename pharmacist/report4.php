@@ -114,8 +114,8 @@ $content = "<h2 style='text-align:center;'>DAILY REPORT</h2>" ?>
 					<fieldset class="explicit-width" style="background-color: rgb(229, 249, 212); height: 400px;"> 
 							<legend>Report Method:</legend>
 					<?php $sql = "SELECT  * FROM staff";
-					$con = mysqli_connect("localhost","root","","friends_pharmacy");
-					$result = mysqli_query($con,$sql);
+					//$con = mysqli_connect("localhost","root","","friends_pharmacy");
+					$result = mysqli_query($mysqli,$sql);
 					$rows = mysqli_num_rows($result);					?>
 					<table class="tableNormal" cellspacing="0" cellpadding="0" style="background-color: rgb(229, 249, 212);">
 					
@@ -132,7 +132,7 @@ $content = "<h2 style='text-align:center;'>DAILY REPORT</h2>" ?>
 												} ?> </select></td>
 					</tr>
 					<?php $sql = "SELECT * FROM drug";
-					$result = mysqli_query($con,$sql);
+					$result = mysqli_query($mysqli,$sql);
 					$rows = mysqli_num_rows($result);					?>
 					<tr><td><input type="radio"   name="as" <?php if (isset($as) && $as=="Medicine Name") echo "checked";?> value="Medicine Name"><label for="choice">Medicine Name : </label></td><td><select name="name" required><option value="all">All</option><?php
 					

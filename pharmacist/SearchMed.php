@@ -12,12 +12,12 @@ include '../database/dbconnect.php';
       {  
            while($row = mysqli_fetch_array($result))  
            {  
-                $output .= '<li>'.$row["medicine_name"].'</li>';  
+                $output .= '<li id="lim">'.$row["medicine_name"].'</li>';  
            }  
       }  
       else  
       {  
-           $output .= '<li>Medicine not found</li>';  
+           $output .= '<li id="lim">Medicine not found</li>';  
       }  
       $output .= '</ul>';  
       echo $output;  

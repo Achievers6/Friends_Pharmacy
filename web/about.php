@@ -1,3 +1,7 @@
+<?php
+	session_start(); 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,13 +10,15 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="../public/css/web/aboutStyle.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script scr="../public/js/jquery-2.0.0.js" ></script>
-	<script scr="../public/js/comment.js"></script>
+	<script src="../public/js/jquery-2.0.0.js" ></script>
+	<script src="../public/js/comment.js"></script>
 </head>
 <body>
 
-    <?php require '../includes/customer_header.php';?>
-    <?php require '../includes/slideshow.php';?>
+    <?php 
+    require '../includes/customer_header.php';
+    require '../includes/slideshow.php';
+    ?>
     
 	<div class="content">
 		<div class="sideContent">
@@ -80,15 +86,18 @@
 				</form><br>
 				<?php
 
-					$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
-
+					//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
+				 	
+				 	$email = $_SESSION['email'];
+                    include '../database/dbconnect.php';
 					if(isset($_POST['comment']) && !empty($_POST['comment']))
 					{							
 						$msg = nl2br($_POST['comment']);
-						$day = date("Y-m-d");				
+						$day = date("Y-m-d");		
+						$name = "SELECT first_name FROM customer WHERE email='$email'";		
 
-						$sql = "INSERT INTO comment (post, day) VALUES ('$msg', '$day')";
-						if(mysqli_query($conn, $sql))
+						$sql = "INSERT INTO comment (user_name, post, day) VALUES ('$name', $msg', '$day')";
+						if(mysqli_query($mysqli, $sql))
 					    {
 					    	echo'<script>alert("Your comment is recorded successfully.\n\tThank You."); window.location.href="about.php";</script>';  
 					    }
@@ -99,7 +108,7 @@
 						
 					}
 
-					$post_query = mysqli_query($conn, "SELECT * FROM comment");
+					$post_query = mysqli_query($mysqli, "SELECT * FROM comment");
 					while ($run_post = mysqli_fetch_array($post_query)) 
 					{
 						$post_id = $run_post['id'];
@@ -111,7 +120,7 @@
 				<div class="box">
 					<b><?php echo $post_user?></b> <font style="color: #967979; font-size: 12px;"><?php echo $post_day?> </font><br>
 					<div style="margin-left: 8px;"><?php echo $post?></div>	
-					<input type="text" name="reply" class="reply" placeholder="reply..." post_id="<?php echo $post_id?>">		
+					<!-- <input type="text" name="reply" class="reply" placeholder="reply..." post_id="<?php echo $post_id?>">	 -->	
 				</div><br>
 
 				<?php

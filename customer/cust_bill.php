@@ -1,5 +1,3 @@
-
-
 <html>
 <head>
 	
@@ -10,12 +8,8 @@
     <title><?php echo $title; ?></title>
     
     <script>
-
-
     function searchForm() {
         var x = document.forms["myForm"]["txtMedicinedName"].value;
-
-
         if (x == null || x == "" ) {
             alert("field must be filled out");
             return false;
@@ -63,7 +57,7 @@
         var numberCell = row.insertCell(0);
         var medicineCell = row.insertCell(1);
         var quantityCell = row.insertCell(2);
-        var dosageCell = row.insertCell(3)
+        var dosageCell = row.insertCell(3);
         var unitPriceCell = row.insertCell(4);
         var totalPriceCell = row.insertCell(5);
 
@@ -149,6 +143,7 @@
                     <th>Total Price</th>
                 </tr>
             </table>
+
             <h3 style="width:100%; text-align:center">Total: Rs.<span id="total"></span></h3>
 
         </div>
@@ -158,14 +153,15 @@
             <form>
                 Medicine Name: 
                 <select id='medicine_list'>
-<?php
-    $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-    $sql = "SELECT * FROM drug_price";
-    $result = mysqli_query($conn, $sql);
-    while(($row = mysqli_fetch_assoc($result)) != null) {
-        echo "<option value='" . $row['id'] . "'>" . $row['medicine_name'] . " " . $row['dosage'] . "</option>";
-    }
-?>
+                <?php
+                    include '../database/dbconnect.php';
+                    //$conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                    $sql = "SELECT * FROM drug_price";
+                    $result = mysqli_query($mysqli, $sql);
+                    while(($row = mysqli_fetch_assoc($result)) != null) {
+                        echo "<option value='" . $row['id'] . "'>" . $row['medicine_name'] . " " . $row['dosage'] . "</option>";
+                    }
+                ?>
                 </select>
                 <script>
                 $('#medicine_list').selectize({
@@ -181,17 +177,12 @@
             <input type="button" onclick="finish()" value="Finish">
         </div>
     </div>		
-	
     
     <?php require_once('../includes/_footer.php') ?>
     
 </body>
 
 </html>
-
-
-
-
 
 <script>
 $(document).ready(function(){  

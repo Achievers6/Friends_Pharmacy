@@ -67,7 +67,7 @@ $content = "<h2 style='text-align:center;'>Add New Stock</h2>
                 </td>
            </tr>
           </table>
-        <div id='medicineList'></div> 
+        <div id='medicineList' style='top:-8px;'></div> 
         
         <table>
         <tr>
@@ -152,11 +152,7 @@ if (isset($_POST['btnSubmit'])) {
     $price = $_POST['price'];
 
 
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
 
     if (!mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM drug WHERE medicine_name ='$MedicineName'"))) {
@@ -208,7 +204,7 @@ include 'template.php';
                 });
             }
         });
-        $(document).on('click', 'li', function() {
+        $(document).on('click', '#lim', function() {
             $('#txtMedicineName').val($(this).text());
             $('#medicineList').fadeOut();
 

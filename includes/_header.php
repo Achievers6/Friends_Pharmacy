@@ -1,10 +1,6 @@
 <?php
 require ("../Entities/stockEntityHead.php");
-$host = "localhost";
-$user = "root";
-$passwd = "";
-$database = "friends_pharmacy";
-$mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+include '../database/dbconnect.php';
 $query = mysqli_query($mysqli, "SELECT * FROM stock where 21>DATEDIFF(expire_date,CURDATE()) and 0<DATEDIFF(expire_date,CURDATE());");
 $query2 = mysqli_query($mysqli, "SELECT * FROM cust_orders where status = 'not confirmed';");
 
@@ -34,7 +30,7 @@ while ($row = mysqli_fetch_array($query)) {
 <html>
     <head>
 
-        <script src="../public/js/jquery-2.0.0.js"></script>
+<!--        <script src="../public/js/jquery-2.0.0.js"></script>-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script>

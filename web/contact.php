@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-    <?php require '../includes/customer_header.php';?>
+    <?php session_start(); require '../includes/customer_header.php';?>
     <?php require '../includes/slideshow.php';?>
     
 	<div class="mainContent">	
@@ -59,11 +59,11 @@
 		$email = $_POST['email'];
 		$msg = $_POST['msg'];
 		$day = date("Y-m-d");	
-		$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
+		//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
 		
 		$sql = "INSERT INTO feedback (name, email, message, day) VALUES ('$name', '$email', '$msg', '$day')";
 
-		if(mysqli_query($conn, $sql))
+		if(mysqli_query($mysqli, $sql))
 	    {
 	    	echo'<script>alert("Your feedback is submited successfully.\nThank You."); window.location.href="contact.php";</script>';  
 	    }
@@ -72,7 +72,7 @@
 	    	echo '<script>alert("Your feedback was not submited.\nPlease try again.); window.location.href="contact.php";</script>';
 	    }
 
-	    mysqli_close($conn);	
+	    mysqli_close($mysqli);	
 	}
 
 ?>

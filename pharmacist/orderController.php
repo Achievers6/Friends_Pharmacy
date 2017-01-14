@@ -101,7 +101,7 @@ class orderController {
                     <td><b>$row[1]</b></td>
                     <td><b>$row[2]</b></td>
                     <td><b>$row[3]</b></td>
-                    <td><a href='cust_orders.php?order_no=$row[0]' >List items</td>
+                    <td><a href='cust_orders.php?order_no=$row[0]' style='color:blue;'>List items</td>
                     <td><a href='#' onClick=showConfirm1($row[0])><img  class='confirm' src='../public/image/reject.png' style='width: 25px; height: 25px;'></a></td>
                     <td><a href='#' onClick=showConfirm2($row[0])><img  class='confirm' src='../public/image/OK.png' style='width: 25px; height: 25px;'></a></td>
                  </tr>

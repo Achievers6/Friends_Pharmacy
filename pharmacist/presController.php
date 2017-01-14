@@ -29,7 +29,7 @@ class presController {
                 <td><b>$row[1]</b></td>
                 <td><b>$row[2]</b></td>
                 <td><b>$row[4]</b></td>
-                <td><a href='viewPrescription.php'><img  class='confirm' src='../public/image/view.png' style='width: 25px; height: 25px;'></a></td>
+                <td><a href='viewPrescription.php?prescription_id=$row[0]'><img  class='confirm' src='../public/image/view.png' style='width: 25px; height: 25px;'></a></td>
                 <td><a href='#'><img  class='confirm' src='../public/image/reject.png' style='width: 25px; height: 25px;'></a></td>
                 
              </tr>";

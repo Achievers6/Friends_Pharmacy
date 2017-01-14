@@ -1,4 +1,6 @@
-
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +18,11 @@
 		<article class="description">
 				
 			<p>Ordering from our online pharmacy is easy, we promise! There is a convenient way to order your prescription medication from Friends Pharmacy. The fastest way to order is to  Create a Friends Pharmacy account on this website and place your online drug order right over the web by uploading a clear image of the prescription. You can speak to one of our friendly Patient Service Representatives by calling us at 0112556556 or simply <br><a href="contact.php">Contact Us</a>.</p> 
-			
-			<hr style="margin-top: 8%">
-
-			<p style="font-size: 20px"><b>Upload Your Prescription Here</b></p>
+				
+			<p><b>Upload Your Prescription Here</b></p>
 			
 			<form action=" " method="post" enctype="multipart/form-data">
-			    Select an image to upload: <br><br>
+			    Select image to upload: <br><br>
 			    <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
 			    <input type="submit" value="Upload Image" name="submit">
 			</form>
@@ -31,41 +31,25 @@
 	</div>
 
 <?php
-	session_start();
-	$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
-	//get the current user email
-	$email = $_SESSION['email'];
-	$current_nic = "SELECT * FROM customer WHERE email='$email'";
-	//get the system date
-	$order_date = date("Y-m-d");
-	//set current state to new
-	$status = "new";
-	//set msg to be sent as 0
-	$msg = 0;
-
+	
 	if(isset($_POST['submit']))
-	{		
+	{
 		if(isset($_SESSION['email']) && !empty($_SESSION['email']))
 		{
-			$target_dir = "";
-			//check if the folder is exist, otherwise create it
-			if(file_exists("../customer/uploads/" . "$current_nic"))
-			{
-				//specifies the directory where the file is going to be placed
-				$target_dir = "../customer/uploads/" . "$current_nic";
-			}
-			else
-			{
-				$dirname = "../customer/uploads/" . "$current_nic";
-				mkdir($dirname);
-				//specifies the directory where the file is going to be placed
-				$target_dir = "../customer/uploads/" . "$current_nic";
-			}			
+			include '../database/dbconnect.php';
+			//specifies the directory where the file is going to be placed
+			$target_dir = "../customer/uploads/";
+			//get current user
+			$email = $_SESSION['email'];
+			//get system date
+			$order_date = date("Y-m-d");
+			//set the state as new
+			$status = "new";
+			//set message to be sent
+			$msg = 0;
 
 			//specifies the path of the file to be uploaded
 			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-
-			//get the image name 
 
 			//check whether the file already exists in the "uploads" folder.
 			$uploadOk = 1;
@@ -124,17 +108,16 @@
 			// if everything is ok, try to upload file
 			else 
 			{
-			    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
-			    {
-			    	$image = $current_nic;
-			    	$sql = "INSERT INTO prescription (email, order_date, image, status, msg) VALUES ('$email', '$order_date', '$image', '$status', '$msg')";
+				$image = basename( $_FILES["fileToUpload"]["name"]);
+				
+				$sql = "INSERT INTO prescription (email, order_date, image, status, msg) VALUES ('$email', '$order_date', '$image', '$status', '$msg')";
 
-			    	if(mysqli_query($conn, $sql))
-			    	{
-			    		$message = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully uploaded.";
-						echo "<script type='text/javascript'>alert('$message');</script>";					
-						exit();
-			    	}			    	
+			    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file) and mysqli_query($mysqli, $sql)) 
+			    {	
+			    	$message = "Your prescription has been successfully uploaded.";
+					echo "<script type='text/javascript'>alert('$message');</script>";
+					// echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully uploaded.";
+					exit();
 			    } 
 			    else 
 			    {
@@ -147,7 +130,7 @@
 		}
 		else
 		{
-			echo'<script>alert("\t\t\tYou are not logged in.\nPlease logged in before uploading a prescription."); window.location.href="prescription.php";</script>';  
+			echo'<script>alert("\t\t\tYou are not logged in.\nPlease logged in before uploading a prescription."); window.location.href="prescription.php";</script></script>';  
 		}
 		
 	}	

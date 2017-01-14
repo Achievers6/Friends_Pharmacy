@@ -1,7 +1,8 @@
 
 <?php 
-   $con=mysqli_connect("localhost","root","") or die("coudn't connect") ;
-    mysqli_select_db($con,"friends_pharmacy");
+   //$con=mysqli_connect("localhost","root","") or die("coudn't connect") ;
+    include '../database/dbconnect.php';
+    mysqli_select_db($mysqli,"friends_pharmacy");
     if(isset($_POST['cname'])){
             $cname=$_POST['cname'];
         }
@@ -23,7 +24,7 @@
           
 if(isset($_POST['go'])){
     
-   $query= mysqli_query($con,"SELECT * FROM supplier WHERE company_name='$cname'");
+   $query= mysqli_query($mysqli,"SELECT * FROM supplier WHERE company_name='$cname'");
     $numrows=mysqli_num_rows($query);
     if($numrows!=0){ ?>
                 <script>
@@ -34,7 +35,7 @@ if(isset($_POST['go'])){
     }
     else{
     
-            mysqli_query($con,"INSERT INTO supplier (company_name,address,telephone,mobile,email,fax) VALUES ('$cname','$add','$mno','$lno','$mail','$fax');") or die("coudn't connect");
+            mysqli_query($mysqli,"INSERT INTO supplier (company_name,address,telephone,mobile,email,fax) VALUES ('$cname','$add','$mno','$lno','$mail','$fax');") or die("coudn't connect");
         ?>
 <script>
     alert("Added successfully");
@@ -59,23 +60,22 @@ if(isset($_POST['go'])){
    <script src="js/jquery.validate.min.js"></script>
     <script src="js/addsupplier.js"></script>
 <style>
-            .error {
-                    color: #ff0000;
-                    position:relative;
-                    top:5px;
-  
-                }
+              .error {
+                color: #ff0000;
+
+
+            }
 
             label.error {
-                        display:block;
-                        height:17px;
-                        margin-left:9px;
-                        padding:1px 5px 0px 5px;
-                        font-size:medium;
-                        position:absolute;
-                        left:270px;
-    
-                }
+                display:block;
+                height:17px;
+                margin-left:9px;
+                font-size:15px;
+                position:relative;
+                top:1px;
+
+
+            }
 </style>
  
 </head>
@@ -99,7 +99,7 @@ if(isset($_POST['go'])){
             <td><input type="text" id="cname" name="cname" autocomplete="off"></td>
             </tr>
             <tr height=60>
-            <td><span class="star">*</span>Address </td>.
+            <td><span class="star">*</span>Address </td>
                 <td><textarea rows="4" cols="22" type="text" id="add" name="add" autocomplete="off"></textarea></td>
             </tr>
              <tr height=60>

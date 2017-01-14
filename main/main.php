@@ -33,7 +33,7 @@ $content = '<div class="row1">
 		<table>
 			<tr>
 				<td><a href="#"> <img src="images/bill.png" width="100" height="100" border="0"> </td>
-				<td><a href="../pharmacist/report4.php"> <img src="images/report.png" width="100" height="100" border="0"> </td>
+				<td><a href="../dailly/p.php"> <img src="images/report.png" width="100" height="100" border="0"> </td>
 				<td><a href="../web/index.php"> <img src="images/web.png" width="100" height="100" border="0"> </td>
 			</tr>
 		<table>

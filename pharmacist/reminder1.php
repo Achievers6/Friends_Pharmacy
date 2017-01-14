@@ -3,6 +3,17 @@
         <?php require("../includes/_header.php"); ?>
         <link rel="stylesheet" type="text/css" href="css/reminder.css" />
         <title>Reminders</title>
+        <style>
+            #medicineList {
+                background-color: white;
+                width: 280px;
+                position: relative;
+                left: 160px;
+                top: -15px;
+                list-style: none;
+
+            }
+        </style>
         <script>
             $(document).ready(function() {
                 $("#ch1").click(function() {
@@ -30,6 +41,30 @@
                 });
 
             });
+            $(document).ready(function() {
+                $('#txtmedname').keyup(function() {
+                    var query = $(this).val();
+                    if (query != '')
+                    {
+                        $.ajax({
+                            url: "Search.php",
+                            method: "POST",
+                            data: {query: query},
+                            success: function(data)
+                            {
+                                $('#medicineList').fadeIn();
+                                $('#medicineList').html(data);
+                            }
+                        });
+                    }
+                });
+                $(document).on('click', '#lim', function() {
+                    $('#txtmedname').val($(this).text());
+                    $('#medicineList').fadeOut();
+
+
+                });
+            });
 
             $(document).ready(function() {
                 $('#nic').keyup(function() {
@@ -48,7 +83,7 @@
                         });
                     }
                 });
-                $(document).on('click', 'li', function() {
+                $(document).on('click', '#lin', function() {
                     $('#nic').val($(this).text());
                     $('#nicList').fadeOut();
 
@@ -66,7 +101,8 @@
             <form name="myForm" action="#" method ="post">
                 <fieldset>
                     <label>Medicine Name: </label>
-                    <input type="text" class="inputField" name="txtmedname" autocomplete="off" placeholder="Ex: Amoxil"/><br/>
+                    <input type="text" class="inputField" name="txtmedname" id='txtmedname' autocomplete="off" placeholder="Ex: Amoxil"/><br/>
+                    <div id='medicineList'></div> 
                     <p></p>
                     <label>Customer NIC: </label>
                     <input type="text" class="inputField" name="txtnic" id="nic" class="nic" autocomplete="off" placeholder="Ex: XXXXXXXXXV"/><br/>
@@ -296,11 +332,7 @@
 </html>
 <?php
 if (isset($_POST['btnsubmitrem'])) {
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
 
     $nic = $_POST["txtnic"];

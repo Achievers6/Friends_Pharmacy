@@ -145,11 +145,7 @@ $content = "<h2 style='text-align:center;'>Add New Medicine</h2>
 
 if (isset($_POST['btnSubmitcat'])) {
     $cat = $_POST["addcat"];
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
     if (mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM category WHERE category_name ='$cat'"))) {
         echo '<script language="javascript">';
@@ -182,11 +178,7 @@ if (isset($_POST['btnSubmit'])) {
     $group = $_POST["group"];
     $image = "../public/image/drug/" . basename($_FILES["fileToUpload"]["name"]);
 
-    $host = "localhost";
-    $user = "root";
-    $passwd = "";
-    $database = "friends_pharmacy";
-    $mysqli = mysqli_connect($host, $user, $passwd, $database) or die(mysqli_error());
+    include '../database/dbconnect.php';
 
 
     if (mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM drug WHERE medicine_name ='$brand_name'"))) {

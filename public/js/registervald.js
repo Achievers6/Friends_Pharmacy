@@ -1,11 +1,26 @@
 $(document).ready(function(){
-    $("#submit").click(function(){
+   
         jQuery.validator.addMethod("lettersonly", function(value, element) {
   return this.optional(element) || /^[a-z]+$/i.test(value);
 }, "Letters only please"); 
        
-    });
- 
+  
+ jQuery.validator.addMethod('NICNumber', function (value) { 
+    return this.optional(element) || /^[0-9]{9}[vV]$/.test(value); 
+}, "Please enter a valid National Identity Card Number");
+        
+
+   
+        
+        jQuery.validator.addMethod("greaterThan", function(value, element, params) {
+
+    if (!/Invalid|NaN/.test(new Date(value))) {
+        return new Date(value) > new Date($(params).val());
+    }
+
+    return isNaN(value) && isNaN($(params).val()) 
+        || (Number(value) > Number($(params).val())); 
+},'Must be less than {0}.');
     
     $('#main').validate({ 
         rules:{
@@ -23,6 +38,7 @@ $(document).ready(function(){
           },
           nic:{
                 required:true,
+                NICNumber:true,
                 maxlength:10,
                 minlength:10
                 },
@@ -39,6 +55,7 @@ $(document).ready(function(){
                 },
          bday:{
              required:true,
+             greaterThan:"today",
          },
          contact:{
               required:true,

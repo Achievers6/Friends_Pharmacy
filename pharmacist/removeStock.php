@@ -20,7 +20,7 @@ $content="
       <fieldset>
         <label class='lblf' for='medicineName'>Medicine name: </label>
         <input type ='text' id='medicine' class='drugBox' name='txtMedicinedName' autocomplete='off' />
-        <div id='medicineList'></div> 
+        <div id='medicineList' style='top:0px; left:200px;'></div> 
         
         <p></p>
         <input type='submit' name = 'btnView' value='View' >

@@ -3,7 +3,7 @@
     <title></title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../public/css/web/customer_header.css" type="text/css" />
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+     <script src="../public/js/jquery-2.0.0.js"></script>
     <script src="../public/js/nav.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -21,7 +21,7 @@
             <li><a href="../web/contact.php">Contact Us </a></li>
             <div class="user">
               <?php 
-                //session_start();
+                
                 if(isset($_SESSION['email']) && !empty($_SESSION['email']))
                 {
                 ?>  <li>                        

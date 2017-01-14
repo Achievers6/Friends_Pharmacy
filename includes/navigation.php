@@ -59,9 +59,9 @@
 
         <li><span><a href="#" id="menu">Report</a></span></li>
         <ul class="submenu">
-            <li><span><a href="../pharmacist/report4.php">Daily Report</a></span></li>
-            <li><span><a href="../pharmacist/report2.php">Sales of each Medicine</a></span></li>
-            <li><span><a href="../pharmacist/report3.php">Cashier Wise Report</a></span></li>
+            <li><span><a href="../dailly/p.php">Daily Report</a></span></li>
+            <li><span><a href="../medicine/sales.php">Sales of each Medicine</a></span></li>
+            <li><span><a href="../cashier/b.php">Cashier Wise Report</a></span></li>
 
         </ul>
         <li><span><a href="#" id="menu">Reminder</a></span></li>
@@ -72,8 +72,12 @@
         <li><span><a href="#" id="menu">Web Customer Orders</a></span></li>
         <ul class="submenu">
             <li><span><a href="../pharmacist/cust_orders.php">New Orders</a></span></li>
-            <li><span><a href="../pharmacist/confiredOrder.php">Confirmed Orders</a></span></li>
-            
+            <li><span><a href="../pharmacist/confiredOrder.php">Confirmed Orders</a></span></li>            
+        </ul>
+        <li><span><a href="#" id="menu">Prescription Orders</a></span></li>
+        <ul class="submenu">
+            <li><span><a href="../pharmacist/prescription.php">New Prescriptions</a></span></li>
+            <li><span><a href="../pharmacist/confirmedPres.php">Confirmed Prescriptions</a></span></li>            
         </ul>
     </ul>
 </div>
