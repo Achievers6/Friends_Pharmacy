@@ -3,7 +3,9 @@
   <?php require('../includes/_header.php'); ?>
 <title>View supplier details</title> 
 <link href="css/viewsupplier.css" type="text/css" rel="stylesheet">
-<script src="js/jquery-3.1.0.min.js"></script>
+<!--<script src="js/jquery-3.1.0.min.js"></script>-->
+<link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     <script>
         
         
@@ -54,7 +56,7 @@
         <center>
        
            <div class="d2">  
-                <table border="1">
+                <table border="1" id="tbl3">
                 <thead>
                     <th >Company name</th>
                    
@@ -77,7 +79,14 @@
             
             </form>
     </div>
-   
+   <script>
+        $(document).ready(function(){
+    $('#tbl3').DataTable();
+});
+
+        
+        
+    </script>
 
 <?php require_once('../includes/_footer.php') ?>
 

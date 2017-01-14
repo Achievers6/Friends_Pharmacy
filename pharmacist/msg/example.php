@@ -7,7 +7,7 @@ class text {
 	
 
 	include ( "src/NexmoMessage.php" );
-	$msg = "take ".$medname." ".$quantity." pills ".$instruction;
+	$msg = $instruction." ".$medname." ".$quantity." pills ";
 
 
 	/**

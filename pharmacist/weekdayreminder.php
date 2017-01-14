@@ -9,7 +9,7 @@ include '../database/dbconnect.php';
 $today = date("l");
 $curhour = date("H");
 $m = date("i");
-
+echo $today." ".$curhour." ".$m;
 
 $query = "SELECT * FROM reminderweekday where $today=1 AND time=$curhour AND min=$m";
 $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));

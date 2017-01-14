@@ -53,6 +53,7 @@ else if (isset($_POST["btnsub"]))
 else if (isset($_GET["confirmed"])) 
 {
     $orderController->confirmOrder($_GET["confirmed"]);
+    //$contact=$orderController->getContact($_GET["confirmed"]);
     $orderTable = $orderController->orderTable("not confirmed");
     $content = $orderTable;
 } 

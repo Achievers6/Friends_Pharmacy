@@ -29,11 +29,11 @@
     <script>
     var number = 1;
     var medicines = [];
+    var quantities = [];
     var total = 0;
     function add() {
         var quantity = $('#quantity').val();
         var medi_id = $('#medicine_list').val();
-        var discount = $('#discount').val();
         medicines.push(medi_id);
 
         var unitprice;
@@ -69,8 +69,6 @@
         var totalPriceCell = row.insertCell(5);
 
         var totalPrice = parseInt(unitprice) * parseInt(quantity);
-        // apply discount
-        totalPrice = totalPrice - (totalPrice * parseInt(discount)/100);
 
         numberCell.innerHTML = number;
         medicineCell.innerHTML = medi_name;
@@ -82,22 +80,33 @@
         total += totalPrice;
         number += 1;
         document.getElementById("total").innerHTML = total;
+        
+        discountCalculation();
+    }
+        
+    function discountCalculation() {
+        var rate = $('#discount').val();
+        if (rate == 0) {
+            document.getElementById("final_price").innerHTML = total;
+            return;
+        }
+        var final_price = total * rate / 100;
+        document.getElementById("final_price").innerHTML = final_price;
     }
 
     function finish() {
-        var customerNic = document.getElementById("customer_nic").value;
+        var packet = {};
+        packet['medicines'] = medicines;
+        packet['quantities'] = quantities;
+        packet['total'];
         $.ajax({
             url: "bill_helper.php",
             async: true,
             type: "POST",
-            data: {
-                total: total,
-                customer_nic: customerNic,
-                // NOT DONE HERE
-            }
-        }).done(function() {
-
-        })
+            data: JSON.stringify(packet)
+        }).done(function(data) {
+            
+        });
     }
     
     function printTable() {
@@ -168,7 +177,7 @@
           </tr>
         </thead>
           
-        <tbody>
+        <tbody id="tbl">
 
         </tbody>
           
@@ -176,18 +185,18 @@
           <tr>
             <td colspan="1"></td>
             <td colspan="4">SUBTOTAL</td>
-            <td>Rs 0.00</td>
+            <td id="total">Rs 0.00</td>
           </tr>
             
           <tr>
             <td colspan="2"></td>
             <td colspan="3">DISCOUNT</td>
-            <td><input type="number" name="discount" id="discount" value="0" style="width:30px; direction: rtl;">%</td>
+            <td><input type="number" name="discount" id="discount" value="0" max="100" min="0" onchange="discountCalculation()" style="width:50px;">%</td>
           </tr>
           <tr>
             <td colspan="2"></td>
             <td colspan="3">GRAND TOTAL</td>
-              <td><p id="p1">Rs.0.00</p></td>
+              <td><p id="final_price">Rs.0.00</p></td>
           </tr>
         </tfoot>
       </table>

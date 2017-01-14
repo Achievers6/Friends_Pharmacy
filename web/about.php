@@ -1,7 +1,3 @@
-<?php
-	session_start(); 
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,21 +6,14 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="../public/css/web/aboutStyle.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-	<script src="../public/js/jquery-2.0.0.js" ></script>
-	<script src="../public/js/comment.js"></script>
-=======
         <script src="../public/js/jquery-2.0.0.js"></script>
         <script src="../public/js/comment.js"></script>    
        
->>>>>>> 14012b55763a7c0da40d548d6bb371f66bebe22e
 </head>
 <body>
 
-    <?php 
-    require '../includes/customer_header.php';
-    require '../includes/slideshow.php';
-    ?>
+    <?php  session_start(); require '../includes/customer_header.php';?>
+    <?php require '../includes/slideshow.php';?>
     
 	<div class="content">
 		<div class="sideContent">
@@ -93,16 +82,18 @@
 				<?php
 
 					//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
-				 	
-				 	$email = $_SESSION['email'];
-                    include '../database/dbconnect.php';
-					if(isset($_POST['comment']) && !empty($_POST['comment']))
-					{							
+                                        include '../database/dbconnect.php';
+					if(isset($_POST['comment']) && !empty($_POST['comment']) && isset($_SESSION['email']))
+					{	$email = $_SESSION['email'];						
 						$msg = nl2br($_POST['comment']);
-						$day = date("Y-m-d");		
-						$name = "SELECT first_name FROM customer WHERE email='$email'";		
-
-						$sql = "INSERT INTO comment (user_name, post, day) VALUES ('$name', $msg', '$day')";
+						$day = date("Y-m-d");	
+                                               
+					    
+                                                $q = "select first_name from customer where email='$email'";
+                                                $result=mysqli_query($mysqli, $q);
+                                                $row = mysqli_fetch_array($result);
+                                                $uname = $row[0];
+                                                $sql = "INSERT INTO comment (user_name,post, day) VALUES ('$uname','$msg', '$day')";
 						if(mysqli_query($mysqli, $sql))
 					    {
 					    	echo'<script>alert("Your comment is recorded successfully.\n\tThank You."); window.location.href="about.php";</script>';  
@@ -126,7 +117,7 @@
 				<div class="box">
 					<b><?php echo $post_user?></b> <font style="color: #967979; font-size: 12px;"><?php echo $post_day?> </font><br>
 					<div style="margin-left: 8px;"><?php echo $post?></div>	
-					<!-- <input type="text" name="reply" class="reply" placeholder="reply..." post_id="<?php echo $post_id?>">	 -->	
+					<input type="text" name="reply" class="reply" placeholder="reply..." post_id="<?php echo $post_id?>">		
 				</div><br>
 
 				<?php

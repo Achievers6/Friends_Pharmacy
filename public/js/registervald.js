@@ -1,6 +1,7 @@
+
 $(document).ready(function(){
-   
-        jQuery.validator.addMethod("lettersonly", function(value, element) {
+    
+    jQuery.validator.addMethod("lettersonly", function(value, element) {
   return this.optional(element) || /^[a-z]+$/i.test(value);
 }, "Letters only please"); 
        
@@ -10,19 +11,9 @@ $(document).ready(function(){
 }, "Please enter a valid National Identity Card Number");
         
 
+
    
-        
-        jQuery.validator.addMethod("greaterThan", function(value, element, params) {
-
-    if (!/Invalid|NaN/.test(new Date(value))) {
-        return new Date(value) > new Date($(params).val());
-    }
-
-    return isNaN(value) && isNaN($(params).val()) 
-        || (Number(value) > Number($(params).val())); 
-},'Must be less than {0}.');
-    
-    $('#main').validate({ 
+$('#main').validate({ 
         rules:{
           
           lname:{
@@ -33,14 +24,11 @@ $(document).ready(function(){
          fname:{
                 required:true,
                 lettersonly:true,
-                
-                
-          },
+                },
           nic:{
                 required:true,
                 NICNumber:true,
-//                maxlength:10,
-//                minlength:10
+
                 },
          
          password:{
@@ -55,7 +43,7 @@ $(document).ready(function(){
                 },
          bday:{
              required:true,
-             greaterThan:"today",
+            
          },
          contact:{
               required:true,
@@ -107,10 +95,9 @@ $(document).ready(function(){
     }
        
    }); 
-
-    
-    
-    
-    
+   
+ 
+ 
+  
     
 });

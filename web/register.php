@@ -6,10 +6,12 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../public/css/web/register.css" type="text/css" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script type="text/javascript"></script>
         <script src="../public/js/jquery-3.1.1.min.js"></script>
-        <script src="../public/js/jquery.validate.min.js"></script>    
+        <script src="../public/js/jquery.validate.min.js"></script>
         <script src="../public/js/registervald.js"></script>
+         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
         <style>
             .error {
@@ -55,13 +57,13 @@
                     </tr>
                     <tr>
                         <td><span class='star' style="color:red">*</span>Birthday:</td>
-                        <td> <input type="date" name="bday" id="bday"></td>
+                        <td> <input type="text" name="bday" id="bday"  ></td>
                     </tr>
                     <tr>
                         
                     <form action="">
                         <td><span class='star' style="color:red">*</span>Gender:</td>
-                        <td><input type="radio" name="gender" value="male"> Male<br></td>
+                        <td><input type="radio" name="gender" value="male" checked> Male<br></td>
                         <td><input type="radio" name="gender" value="female"> Female<br></td>
                     </form>
 
@@ -80,3 +82,8 @@
 
     </body>
 </html>
+<script>
+ $(function() {
+    $( "#bday" ).datepicker({  maxDate: new Date() });
+  });
+    </script>

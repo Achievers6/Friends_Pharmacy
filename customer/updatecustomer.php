@@ -15,6 +15,7 @@
                 $("#medicine-form").hide();
             });
             function loadcustomers(){
+                console.log("loadcustomers");
                 $.ajax({
                     url:"rest3.php",
                     async:true,
@@ -27,13 +28,12 @@
                 })
                 .done(function(data){
                     var records = JSON.parse(data);
-                    var tbl_bdy =
-                    document.getElementById("table_body");
+                    var tbl_bdy = document.getElementById("table_body");
                     tbl_bdy.innerHTML = '';
                     for(var i=0; i < records.length; i++){
                         var name = records[i].first_name + " " + records[i].last_name;
-                        var row = "<tr class='records' onclick='loadDetails(";
-                        row += records[i].nic + ",\""; 
+                        var row = "<tr class='records' onclick='loadDetails(\"";
+                        row += records[i].nic + "\",\""; 
                         row += records[i].first_name + "\",\"";
                         row += records[i].last_name + "\",\"";
                         row += records[i].email + "\",";
@@ -44,6 +44,7 @@
                         row +="<td>" + records[i].email + "</td>";
                         row +="<td>" + records[i].contact_number + "</td>";
                         row += "</tr>";
+                        console.log(row);
                         tbl_bdy.innerHTML += row;
                     }
 
@@ -54,10 +55,11 @@
             function close() {
                 console.log("close");
                 $("#popup").fadeOut(500);
-                $(".customer_template_container").fadeOut(500);
+//                $(".customer_template_container").fadeOut(500);
             }
             
             function loadDetails(nic, fname, lname, email, tp) {
+                console.log("loadDetails");
                 $("#medicine-form").show();
                 
                 $("#popup").fadeIn(500);
@@ -72,9 +74,9 @@
                     }
                 })
                 .done(function(data) {
-                    
+                    console.log(JSON.stringify(data));
                     var records = JSON.parse(data);
-                    $('#cnic').html(nic);
+                    $("#cnic").html(nic);
                     $("#fname").val(fname);
                     $("#lname").val(lname)
                     $("#cemail").val(email);
@@ -169,19 +171,6 @@
         Last Name: <input type='text' name='lname' id='lname' /> <br>
         Email: <input type='text' name='email' id="cemail" /> <br>
         Contact Number: <input type='tel' name='tp' id="ctp" /> <br>
-        <table border="0" style="width:100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Medicine Name</th>
-                <th>Duration</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-            </tr>    
-            </thead>
-            <tbody id="ctbl">
-            </tbody>
-            </table>
             <input type="button" onclick="update()" value = "Update" style="width:100px"/>
         </div>
     </div>

@@ -1,13 +1,30 @@
 $(document).ready(function(){
+    jQuery.validator.addMethod("lettersonly", function(value, element) {
+  return this.optional(element) || /^[a-z]+$/i.test(value);
+}, "Letters only please"); 
+       
+  
+ jQuery.validator.addMethod('NICNumber', function (value,element) { 
+    return this.optional(element) || /^[0-9]{9}[vV]$/.test(value); 
+}, "Please enter a valid National Identity Card Number");
+        
+
     $("#form").validate({ 
      rules:{
-          fname:"required",
-          lname:"required",
+          
           dob:"required",
-                
+          fname:{
+              required:true,
+              lettersonly:true,
+          },
+         lname:{
+             required:true,
+             lettrsonly:true,
+         },
           email:{
                 required:true,
                 mail:true,
+                
                 },
         
            mobile:{
@@ -18,8 +35,7 @@ $(document).ready(function(){
                 },
            nic:{
                 required:true,
-                maxlength:10,
-                minlength:10,
+                NICNumber:true,
            },
                     
             

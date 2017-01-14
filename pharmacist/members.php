@@ -5,10 +5,11 @@
 	<meta charset="utf-8" />	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/member.css" type="text/css" rel="stylesheet">
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!--     <script src="js/jquery-3.1.0.min.js"></script>-->
     <?php require('../includes/_header.php'); ?>
     <script src="js/jquery.validate.min.js"></script>
-    
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/members.js"></script>
     
     <style>
@@ -58,12 +59,12 @@
         </tr>
 		<tr height="50px">
             <td><span class="star" style="color:red">*</span>Gender </td>
-            <td> <Input type="radio" name="gender" value="male" >Male</td>
+            <td> <Input type="radio" name="gender" value="male" checked>Male</td>
             <td> <Input type="radio" name="gender" value="female" >Female</td>
         </tr>
 		<tr height="50px">
             <td><span class="star" style="color:red">*</span>Birthday </td>
-            <td> <input type="date" name="bday"></td>
+            <td> <input type="text" id="bday" name="bday"></td>
         </tr>
 		<tr height="50px">
             <td><span class="star" style="color:red">*</span>NIC </td>
@@ -88,7 +89,7 @@
         </tr>
 		<tr height="50px">
             <td><span class="star" style="color:red">*</span>Occupation </td>
-            <td> <Input type="radio" name="occupation" value="assistant" >Assistant</td>
+            <td> <Input type="radio" name="occupation" value="assistant" checked >Assistant</td>
             <td> <Input type="radio" name="occupation" value="cashier" >Cashier</td>
         </tr>
 		<tr height="50px">
@@ -109,3 +110,9 @@
 
 </body>
 </html>
+    <script>
+ $(function() {
+    $( "#bday" ).datepicker({  maxDate: new Date() });
+  });
+    </script>
+
