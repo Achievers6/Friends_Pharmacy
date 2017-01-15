@@ -82,18 +82,18 @@
 				<?php
 
 					//$conn = mysqli_connect('localhost', 'root', '', 'friends_pharmacy') or die(mysqli_error());
-                                        include '../database/dbconnect.php';
+                    include '../database/dbconnect.php';
 					if(isset($_POST['comment']) && !empty($_POST['comment']) && isset($_SESSION['email']))
 					{	$email = $_SESSION['email'];						
 						$msg = nl2br($_POST['comment']);
-						$day = date("Y-m-d");	
-                                               
+						$day = date("Y-m-d");	                                               
 					    
-                                                $q = "select first_name from customer where email='$email'";
-                                                $result=mysqli_query($mysqli, $q);
-                                                $row = mysqli_fetch_array($result);
-                                                $uname = $row[0];
-                                                $sql = "INSERT INTO comment (user_name,post, day) VALUES ('$uname','$msg', '$day')";
+                        $q = "select first_name from customer where email='$email'";
+                        $result=mysqli_query($mysqli, $q);
+                        $row = mysqli_fetch_array($result);
+                        $uname = $row[0];
+                        $sql = "INSERT INTO comment (user_name,post, day) VALUES ('$uname','$msg', '$day')";
+                        
 						if(mysqli_query($mysqli, $sql))
 					    {
 					    	echo'<script>alert("Your comment is recorded successfully.\n\tThank You."); window.location.href="about.php";</script>';  

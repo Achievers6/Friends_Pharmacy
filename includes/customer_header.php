@@ -18,7 +18,7 @@
             <li><a href="../web/about.php">About Us </a></li>
             <li><a href="../web/otc.php">Over the Counter Products </a></li>
             <li><a href="../web/prescription.php">Prescription Products </a></li>
-            <li><a href="../web/events.php">Events </a></li>
+            <!-- <li><a href="../web/events.php">Events </a></li> -->
             <li><a href="../web/contact.php">Contact Us </a></li>
             <div class="user">
               <?php 
@@ -32,11 +32,7 @@
                           </a>                          
                           <div id="myDropdown" class="dropdown-content">
                             <a href="profile.php">My Profile</a>
-                            <hr style="margin: 0">
-                            <a href="#">OTC Oders</a>
-                            <hr style="margin: 0">
-                            <a href="#">Prescriptions</a>
-                            <hr style="margin: 0">
+                            <hr style="margin: 0">              
                             <a href="logout.php">Logout</a>
                           </div> 
                         </div>                        

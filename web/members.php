@@ -30,7 +30,8 @@ include 'template.php';
 		<tr><td>Contact Number:</td><td> <input type="tel" name="contact" required="required"></td></tr>
 		<tr><td>Email:</td><td> <input type="email" name="email" required="required"></td></tr>
 		<tr><td>Password:</td><td> <input type="password" name="password" required="required"></td></tr>
-		<tr><td>Occupation: </td><td> <Input type="radio" name="occupation" value="assistant" required="required">Assistant</td>
+		<tr><td>Occupation: </td>
+		<td><Input type="radio" name="occupation" value="assistant" required="required">Assistant</td>
 								 <td> <Input type="radio" name="occupation" value="cashier" required="required">Cashier</td></tr>
 		<tr><td>Joining Date: </td><td> <input type="date" name="date" required="required"></td></tr>
 		<tr><td><input type="submit" name="submit" id="submit"></td></tr>

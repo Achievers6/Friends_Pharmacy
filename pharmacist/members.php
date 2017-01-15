@@ -37,11 +37,7 @@
      <h2>Add a member</h2> 
 <?php
  require_once("../includes/navigation.php");
-          
-//$title = "Create New Account";
-
-//$content = '
-    ?>
+?>
    
     <div id="d1">
     <form action="newMember.php" method="POST" id="main" enctype="multipart/form-data">
@@ -89,7 +85,8 @@
         </tr>
 		<tr height="50px">
             <td><span class="star" style="color:red">*</span>Occupation </td>
-            <td> <Input type="radio" name="occupation" value="assistant" checked >Assistant</td>
+            <td> <Input type="radio" name="occupation" value="pharmacist" checked >Pharmacist</td>
+            <td> <Input type="radio" name="occupation" value="assistant">Assistant</td>
             <td> <Input type="radio" name="occupation" value="cashier" >Cashier</td>
         </tr>
 		<tr height="50px">
@@ -110,9 +107,10 @@
 
 </body>
 </html>
-    <script>
+    <!-- <script>
  $(function() {
     $( "#bday" ).datepicker({  maxDate: new Date() });
   });
     </script>
 
+ -->

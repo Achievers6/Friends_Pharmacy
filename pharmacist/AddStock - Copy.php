@@ -1,3 +1,4 @@
+
 <script>
 //    function validateForm() {
 //        var x = document.forms["myForm"]["txtMedicineName"].value;

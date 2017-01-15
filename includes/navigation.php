@@ -1,4 +1,7 @@
-
+<?php
+    //session_start();
+    include '../database/dbconnect.php';
+?>
 <!--Header content goes here-->
 <style>
 
@@ -31,7 +34,7 @@
         <ul class="submenu">
 
             <li><span><a href="../pharmacist/AddStock.php">Add stock</a></span></li>
-            <li><span><a href="../pharmacist/updateStock1.php">Update stock</a></span></li>
+            <li><span><a href="../pharmacist/updateStock1.php">Update stock</a></span></li>            
             <li><span><a href="../pharmacist/removeStock.php">Delete stock</a></span></li>
             <li><span><a href="../pharmacist/viewStock.php">View stock</a></span></li>
             <li><span><a href="../pharmacist/viewusage.php">View stock usage</a></span></li>
@@ -55,7 +58,45 @@
             <li><span><a href="../supplier/updatesupplier.php">Update supplier</a></span></li>
             <li><span><a href="../supplier/deletesupplier.php">Delete supplier</a></span></li>
             <li><span><a href="../supplier/viewsupplier.php">View supplier</a></span></li>
+            <?php
+            if(isset($_SESSION['email']) && !empty($_SESSION['email']))
+            {   
+                $email = $_SESSION['email'];
+                $result = mysqli_query($mysqli, "SELECT occupation from staff WHERE email='$email'");
+                $row = mysqli_fetch_array($result);
+                $job = $row[0];
+                if($job == "pharmacist")
+                {
+                ?>
+                    <li><span><a href="#">Place orders</a></span></li>
+                    <li><span><a href="#">View orders</a></span></li>
+                <?php    
+                }
+            }      
+
+        ?>
+            
         </ul>
+
+        <?php
+            if(isset($_SESSION['email']) && !empty($_SESSION['email']))
+            {   
+                $email = $_SESSION['email'];
+                $result = mysqli_query($mysqli, "SELECT occupation from staff WHERE email='$email'");
+                $row = mysqli_fetch_array($result);
+                $job = $row[0];
+                if($job == "pharmacist")
+                {
+                ?>
+                    <li><span><a href="#" id="menu">Staff</a></span></li>
+                    <ul class="submenu">
+                        <li><span><a href="../pharmacist/members.php">Add members</a></span></li>
+                    </ul>
+                <?php    
+                }
+            }      
+
+        ?>
 
         <li><span><a href="#" id="menu">Report</a></span></li>
         <ul class="submenu">

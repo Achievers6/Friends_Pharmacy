@@ -4,6 +4,7 @@ session_start();
 
 require ("../Entities/stockEntityHead.php");
 include '../database/dbconnect.php';
+
 $query = mysqli_query($mysqli, "SELECT * FROM stock where 21>DATEDIFF(expire_date,CURDATE()) and 0<DATEDIFF(expire_date,CURDATE());");
 $query2 = mysqli_query($mysqli, "SELECT * FROM cust_orders where status = 'not confirmed';");
 
@@ -12,7 +13,8 @@ $orderrows = mysqli_num_rows($query2);
 
 $stockArray = array();
 
-while ($row = mysqli_fetch_array($query)) {
+while ($row = mysqli_fetch_array($query)) 
+{
     $id = $row[0];
     $medicineName = $row[1];
     $batchNumber = $row[2];
@@ -283,29 +285,38 @@ while ($row = mysqli_fetch_array($query)) {
             .nav {
                 overflow: scroll;
             }
-
+            #current_user{
+                float: right;
+                margin-right: 3%;
+            }
 
         </style>
     </head>
-
 
     <body style="margin:0;padding:0;">
         <div>
             <ul class="ul">
                 <?php
+                
                 if(isset($_SESSION['email']) && !empty($_SESSION['email']))
-                {
-                ?>  
-                <li class="li"> 
-                    <div>
-                        <a href="">Signed in as <?php echo "$_SESSION['email']"; ?></a>
+                {                    
+                    $email = $_SESSION['email'];
+                    $result = mysqli_query($mysqli, "SELECT occupation from staff WHERE email='$email'");
+                    $row = mysqli_fetch_array($result);
+                    $name = $row[0];
+
+                ?>      
+                <li class="li" id="current_user"> 
+                    <div>                        
+                        <a href="#">Logged in as <?php echo "$name"; ?></a>
+                        <a href="../web/logout.php">Logout</a>
                     </div>
                 </li>
                 <?php
                 }
                 ?>
-                <li class="li" id="logout"><a href="../web/logout.php">Logout</a></li>
-
+                
+               <!--  <li class="li" style="float: right;"><a href="../web/logout.php">Logout</a></li> -->
                 <li class="li" id="orders">
                     <div id="order_Counter"></div> 
                     <div id="order_Button">
@@ -322,7 +333,6 @@ while ($row = mysqli_fetch_array($query)) {
                         <div>
                             <img  src="../public/image/exp.png"  style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position: relative; top: -5px;">    
                         </div>
-
                     </div>   
                     <div id="lblexp" style="position: absolute; right:-30px;  top:33px; width:80px; ">
                         short expiry
@@ -353,7 +363,7 @@ while ($row = mysqli_fetch_array($query)) {
                  <li class="li" id="prescriptions">
                     <div id="pres_Counter"></div> 
                     <div id="pres_Button">
-                        <a href="../pharmacist/prescription.php"><img  src="../public/image/pres.png" style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position:relative; left:1065px; top:-25px; "></a>   
+                        <a href="../pharmacist/prescription.php"><img  src="../public/image/pres.png" style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position:relative; left:1030px; top:-25px; "></a>   
                     </div>
                     <div id="lblpres" style="position: absolute; right:190px;  top:50px; width:150px; ">new prescriptions</div>
                 </li>
