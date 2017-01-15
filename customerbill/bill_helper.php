@@ -20,7 +20,7 @@ function sendPrice() {
 
     $row = mysqli_fetch_assoc($result);
     
-    $response = array('name'=>$row['medicine_name'], 'price'=>$row['price'], 'dosage'=>$row['dosage']);
+    $response = array('name'=>$row['medicine_name'], 'dosage'=>$row['dosage'], 'price'=>$row['price']);
     echo json_encode($response);
 }
 

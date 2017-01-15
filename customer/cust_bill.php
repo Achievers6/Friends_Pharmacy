@@ -140,9 +140,9 @@
                 <tr>
                     <th>Number</th>
                     <th>Medicine Name</th>
-                    <th>Quantity</th>
                     <th>Dosage</th>
                     <th>Unit Price</th>
+                    <th>Quantity</th>
                     <th>Total Price</th>
                 </tr>
             </table>
