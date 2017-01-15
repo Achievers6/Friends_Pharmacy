@@ -12,7 +12,10 @@
 
        <script>
  $(function() {
-    $( "#dob" ).datepicker({  maxDate: new Date() });
+    $( "#dob" ).datepicker({
+    	dateFormat: "yy-mm-dd",
+    	maxDate: new Date() 
+    });
   });
     </script>
 
@@ -137,7 +140,7 @@
                         </tr>
                         <tr>
                             <td><span class="star">*</span>Date Of Birth</td>
-                            <td><input type="text" name="dob" id="dob" class="input"></td>
+                            <td><input type="date" name="dob" id="dob" class="input"></td>
                         </tr>
                         <tr>
                             <td>Gender</td>
