@@ -4,7 +4,7 @@ body{
 h2{
     position: absolute;
     font-family: SourceSansPro;
-    right: 2500px;
+    right: 500px;
     top:70px;
     font-size: 2.4em;
     line-height: 1em;
@@ -44,25 +44,39 @@ li{
 	list-style: none;
 }
 #btn{
-     
-    height:40px;
-    cursor: pointer;
-   
-    width:60px;
     position: absolute;
-    top:300px;
-    left:400px;
+    top:400px;
+    left:300px;
+    display: block;
+	text-align: center;
+	background-color: rgb(106,184,42);
+    height:auto;
+    cursor: pointer;
+    width:60px;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 10px;
+    margin: 8px 0;
+    border: none
+     
+   ;
 }
 #load{
+    position: absolute;
+    left:90px;
 	display: block;
 	text-align: center;
-	width:50%;
-	margin: 0 auto;
-	
-   
-    
-   height:25px;
+	background-color: rgb(106,184,42);
+    height:auto;
     cursor: pointer;
+    width:60px;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 10px;
+    margin: 8px 0;
+    border: none;
+    
+  
   
     
 	
@@ -92,6 +106,8 @@ li{
 
 
 #d1{
+    position: absolute;
+    top:-30px;
 	width: 24%;
 	border-top: 1px solid #CFD8DC;
 	border-bottom: 2px solid #CFD8DC ;
@@ -104,7 +120,7 @@ li{
 #alldiv{
     width:70%;
     position: absolute;
-    left: 45%;
+    left: 450px;
     top: 35%;
 }
 #tbl {
@@ -125,7 +141,7 @@ li{
     font-weight: 100 !important;
     padding: 10px 0 10px 0;
     color: white;
-    background-color: rgb(214,244,185);
+    background-color: rgb(106,184,42);
 }
 
 #tbl td {
@@ -138,6 +154,6 @@ li{
 }
 
 #tbl tr:hover {
-    background-color: rgb(229,249,212);
+    background-color: rgb(229, 249, 212);
     color: white;
 }

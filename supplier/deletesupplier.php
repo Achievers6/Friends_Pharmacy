@@ -43,7 +43,7 @@
                                     $supid = $row['supplier_id'];
                                     echo "<h4>Supplier : $companyname</h4>";
                                     echo "<input id='btn' type='submit' name='delete' value='Delete' />";
-                                    $drugs = mysqli_query($mysqli, "SELECT * FROM drug_price WHERE id='$supid' ");
+                                    $drugs = mysqli_query($mysqli, "SELECT * FROM drug_price WHERE supplier_id='$supid' ");
                                     echo "<tr><th>Medicine Name</th><th>Dosage</th><th>Price</th></tr>";
                                     if (mysqli_num_rows($drugs) > 0) {
                                         while ($drugrow = mysqli_fetch_assoc($drugs)) {

@@ -1,0 +1,35 @@
+h2{
+    position: absolute;
+    top:55px;
+    right: 500px;
+    color: black; 
+    font-family: SourceSansPro;
+    font-size: 2.4em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0  0 50px 0;
+}
+#main{
+    position: absolute;
+    left:400px;
+    top:200px;
+}
+#tbl td{
+    align-content: center;
+}
+
+
+.result_row:hover{
+    background-color: rgb(229, 249, 212);
+}
+
+#thead{
+   background-color:  rgb(106,184,42);
+}
+
+/*
+#tbl{
+    border-style: groove;
+}
+*/
+

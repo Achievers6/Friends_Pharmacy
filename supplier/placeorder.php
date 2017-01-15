@@ -8,47 +8,38 @@ $output='';
 ?>
 <html>
         <head>
+             <?php require('../includes/_header.php'); ?>
             <title>Place order</title>
-              <?php require('../includes/_header.php'); ?>
+           
             <link href="css/placeorder.css" rel="stylesheet" type="text/css">
              <script type="text/javascript"></script>
              <script src="js/jquery-3.1.0.min.js"></script>
         </head>
     <body>
+        <?php require_once("../includes/navigation.php") ?>
             <h2>Place order</h2>
-         <?php require_once("../includes/navigation.php") ?>
-        <div id="tbl1">
-            <table class="sortable" id="tbl" >
-                    <thead>
-                        <tr>
-                            <th>Supplier</th>
-                            <th>Medicine</th>
-                            <th>Dosage</th>
-                            <th>Amount</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                
-                    </tbody>
-            
-            </table>
-        
-         </div>
+<!--         -->
+       
         <div id="srch">
-        <form method="post" action="">
+            
+        <form method="post" action="placeorder.php">
             <?php if(isset($_POST['search'])){ $medname=$_POST['med'];} else {$medname = '';} ?>
             <input type="text" id="med" name="med" placeholder="Medicine name" value = "<?php echo $medname; ?>" autocomplete="off">
              <div id="medList"><?php echo $output ?></div><br><br>
             <input type="submit" id="search" value="Search" name="search">
         </form>
         </div>
+        
         <div id="frm">
-        <form action="placeorder.php" method="post">
+            <fieldset>
+        <form action="add_order.php" method="post">
               <table>
+                    <tr>
+                        <td>Medicine</td>
+                        <td><input class="input" type="text" name="medicine" value="<?php echo $medname ; ?>"></td></tr>
                     <tr height="50">
                         <td>Supplier</td>
-                        <td><select>
+                        <td><select name="sup">
 
                             <?php
                                 if(isset($_POST['search'])){
@@ -71,6 +62,7 @@ $output='';
                                     }
                                     
                                 }
+                 
                                 
                                 
                                 
@@ -79,30 +71,35 @@ $output='';
                    </tr>
                    <tr height="50">
                         <td>Dosage</td>
-                        <td><input type="text" id="dos" name="dos"></td>
+                        <td><input class="input"type="text" id="dos" name="dos" placeholder="EX:20mg"></td>
                    </tr>
                   
                    <tr height="50">
                         <td>Amount</td>
-                        <td><input type="text" id="amnt" name="amnt"></td>
+                        <td><input class="input" type="text" id="amnt" name="amnt"></td>
                    </tr>
                    <tr height="50">
                         <td>Deliver before</td>
-                        <td><input type="date" id="date" name="date"></td>
+                        <td><input class="input" type="date" id="date" name="date"></td>
                    </tr>
                   
                   
              </table>  
-                <input type="submit" value="Add" name="add" id="add" onclick="return addData();">
-            
+                <input type="submit" value="Add" name="add" id="add" >
             
             </form>
+                </fieldset>
     </div>
+        
     </body>
 </html>
     <script>
-    
-            function addData(){
+   function deleterow(src) {
+    var row = src.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
+            
+        function addData(){
              
                 var raws ="";
                 var supplier= document.getElementById('sup').value;
@@ -112,7 +109,7 @@ $output='';
                 var dos =document.getElementById('dos').value;
                 
                 
-                raws += "<tr><td>" + supplier + "</td><td>" + med + "</td><td>"+ dos + "</td><td>" + amount + "</td><td>" +date+"</td><td><a href='mailto:'><img  class='confirm' src='../public/image/msg.png' style='width: 25px; height: 25px;'></a></td> <td><a href=''><img class='confirm' src='../public/image/reject.png' style='width: 25px; height: 25px;'></a></td> </tr>" ;
+                raws += "<tr><td>" + supplier + "</td><td>" + med + "</td><td>"+ dos + "</td><td>" + amount + "</td><td>" +date+"</td><td><a href=''> <img class='bla' src='../public/image/msg.png' style='width: 25px; height: 25px;'></a></td> <td><a  href=''><img class='confirm' src='../public/image/reject.png' onclick='deleterow()' style='width: 25px; height: 25px;'></a></td> </tr>" ;
               $(raws).appendTo("#tbl tbody");
                 
                 return false;
@@ -144,9 +141,11 @@ $output='';
             $('#med').val($(this).text());
             $('#medList').fadeOut();
 
-
+ 
         });
-
+//        $('.sortable tr:last ').click(function(){
+//         $('.sortable tr').hide();
+//            });
     });
 
 </script>
