@@ -1,8 +1,4 @@
 
-
-
-
-
 <html>
     <head>
         <title>Add Supplier</title>
@@ -85,8 +81,8 @@
             <body>
                 <?php
                 // define variables and set to empty values
-                $nameErr = $dateErr = $methodeErr = "";
-                $name = $dates = $dates2 = $methode = "";
+                $nameErr = $dateErr = "";
+                $name = $dates = $dates2 = "";
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (empty($_POST["name"])) {
@@ -114,11 +110,7 @@
                         $dates2 = test_input($_POST["dates2"]);
                     }
 
-                    if (empty($_POST["methode"])) {
-                        $methodeErr = "Method is required";
-                    } else {
-                        $methode = test_input($_POST["methode"]);
-                    }
+                    
                 }
 
                 function test_input($data) {
@@ -137,9 +129,8 @@
                         <form name='myform' action="aomcn.php" method ='post' >
                             <?php
                             $sql = "SELECT * FROM drug";
-                            //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-                            include '../database/dbconnect.php';
-                            $result = mysqli_query($mysqli, $sql);
+                            $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                            $result = mysqli_query($con, $sql);
                             $rows = mysqli_num_rows($result);
                             ?>
                             <table class="tableNormal" cellspacing="5" cellpadding="5">
@@ -151,7 +142,7 @@
                                                     echo '<option value="' . $record['medicine_name'] . '">' . $record['medicine_name'] . '</option>';
                                                 }
                                             }
-                                            ?> </select></td></tr><span class="error">* <?php echo $nameErr; ?></span>
+                                            ?> </select></td></tr><span class="error"> <?php echo $nameErr; ?></span>
 
                                 <tr><td><label for="sdate">Start Date</label></td>
                                     <td><input type="date" id="sdate" name="dates" value="<?php echo date("Y-m-d") ?>"></br></td></tr>
@@ -166,7 +157,7 @@
 
 </select></td></tr>-->
 
-                                <tr><td></td><td><input type="submit" value="Submit" ></td></tr>
+                                <tr><td></td><td><input type="submit" value="Submit" name="submitReport"></td></tr>
                         </form>
                     </fieldset>
                 </div>

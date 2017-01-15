@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html >
     <head>
-        <meta charset="UTF-8">
         <title>Animated bar chart</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -22,18 +21,46 @@
         <div id="chart">
             <ul id="numbers">
                 <?php
+                
                 $max = round(max($price), -2, PHP_ROUND_HALF_UP);
                 $x = $max;
                 $y = $max / 10;
                 while ($x >= 0) {
                     ?>
-                    <li><span><?php echo $x; ?></span></li>
+                    <li><span><?php echo round($x, 0, PHP_ROUND_HALF_UP); ?></span></li>
 
                     <?php
                     $x = $x - $y;
                 }
                 ?>
+                
+                <div style="position: relative; transform: rotate(-90deg);top:-200px;left: -35px; font-weight: 900;"><?php echo "Income"; ?></div>
+
             </ul>
+            <?php 
+            if(($rw<=10)&& ($rw>7)){
+                ?>
+            <div style="position: absolute; left: 250px; top: 470px; font-weight: 900;"><?php echo "Medicine Name"; ?></div>
+                <?php
+            }  elseif (($rw<=7)&& ($rw>5)) {
+                ?>
+            <div style="position: absolute; left: 200px; top: 470px; font-weight: 900;"><?php echo "Medicine Name"; ?></div>
+            <?php
+            }  elseif (($rw<=5)&& ($rw>=4)) {
+                ?>
+            <div style="position: absolute; left: 150px; top: 470px; font-weight: 900;"><?php echo "Medicine Name"; ?></div>
+            <?php
+            }  elseif (($rw<=3)&& ($rw>=2)) {
+                ?>
+            <div style="position: absolute; left: 100px; top: 470px; font-weight: 900;"><?php echo "Medicine Name"; ?></div>
+            <?php
+            }  else {
+                ?>
+            <div style="position: absolute; left: 50px; top: 470px; font-weight: 900;"><?php echo "Medicine Name"; ?></div>
+             <?php   
+            }?>
+            
+            
 
 
 
@@ -62,9 +89,9 @@ foreach ($medicine as $keys => $values) {
                 <ul id="bars">
                     <li><div data-percentage=<?php echo $price[$keys]; ?> class="bar vertical-text"  ></div><span><?php echo $values; ?></span></li>
                 </ul>
-                <?php
-            }
-            ?>
+    <?php
+}
+?>
 
 
 

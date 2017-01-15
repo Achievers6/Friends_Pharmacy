@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<?php
+if ($_POST['submitReport']) {
+
+    $dates = $_POST['dates'];
+    $dates2 = $_POST['dates2'];
+
+
+    $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+
+    $sql1 = "SELECT distinct(concat_ws(' ',staff.first_name,staff.last_name)) AS cashier,sum(bill_table.total) AS amount
+                            FROM staff,bill_table WHERE bill_table.date BETWEEN '$dates' AND '$dates2' AND
+                            staff.member_id=bill_table.staff_ID GROUP BY staff_ID; ";
+
+    $result1 = mysqli_query($con, $sql1);
+
+    if (mysqli_num_rows($result1) == 0) {
+        echo '<script>alert("Data is not allowed")</script>';
+        echo '<script>window.location="b.php"</script>';
+    }
+}
+?>
+
 <html>
     <head>
         <title>Add Supplier</title>
@@ -25,7 +47,7 @@
                 cursor: pointer;
             }
 
-            
+
 
             div.net {
                 border-radius: 5px;
@@ -143,13 +165,13 @@
                     $dates2 = $_POST['dates2'];
 
 
-                    //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                    $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
 
                     $sql1 = "SELECT distinct(concat_ws(' ',staff.first_name,staff.last_name)) AS cashier,sum(bill_table.total) AS amount
                             FROM staff,bill_table WHERE bill_table.date BETWEEN '$dates' AND '$dates2' AND
                             staff.member_id=bill_table.staff_ID GROUP BY staff_ID; ";
 
-                    $result1 = mysqli_query($mysqli, $sql1);
+                    $result1 = mysqli_query($con, $sql1);
 
 
 
@@ -158,66 +180,72 @@
                       $result = mysqli_fetch_array($price1); */
 
 
+                    if (mysqli_num_rows($result1) > 0) {
+                        echo "<table>";
+                        echo "<tr><th>Cashier Name</th><th>Total (Rs)</th></tr>";
 
-                    echo "<table>";
-                    echo "<tr><th>Cashier Name</th><th>Total (Rs)</th></tr>";
+                        //$ar=array();
+                        $name = array();
+                        $price = array();
+                        $counttotal = 0;
+                        while ($row = mysqli_fetch_array($result1)) {
+                            array_push($name, $row['cashier']);
+                            array_push($price, $row['amount']);
 
-                    //$ar=array();
-                    $name = array();
-                    $price = array();
-                    $counttotal = 0;
-                    while ($row = mysqli_fetch_array($result1)) {
-                        array_push($name, $row['cashier']);
-                        array_push($price, $row['amount']);
+                            //if(count(array_keys($ar, $row ['date']))==1){ 
+                            //array_push($date, $row['date']);
+                            /* if($counttotal != 0) {
 
-                        //if(count(array_keys($ar, $row ['date']))==1){ 
-                        //array_push($date, $row['date']);
-                        /* if($counttotal != 0) {
-
-                          //echo "<tr><td>"."TOTAL AMOUNT (Rs)" ."</td><td><hr/>".number_format($counttotal,2,'.','')."<hr/><hr/></td><tr>";
+                              //echo "<tr><td>"."TOTAL AMOUNT (Rs)" ."</td><td><hr/>".number_format($counttotal,2,'.','')."<hr/><hr/></td><tr>";
 
 
-                          array_push($price,$counttotal);
+                              array_push($price,$counttotal);
 
-                          } */
+                              } */
+                            //array_push($price,$counttotal);
+                            //$counttotal=$row['amount'];
+                            echo"<tr><td>" . $row ['cashier'] . "</td><td style='text-align:center; position:reletive;'>" . "Rs &nbsp&nbsp&nbsp" . $row ['amount'] . "</td></tr>";
+                            $counttotal+=$row['amount'];
+
+                            //}
+                            /* else{
+                              echo"<tr><td>".""."</td><td>".$row ['cashier']."</td><td>".$row ['total']."</td><td>"."Rs &nbsp&nbsp&nbsp".$row ['discount']."</td><td>"."Rs &nbsp&nbsp&nbsp".$row ['amount']."</td></tr>";
+                              $counttotal+=$row['amount'];
+
+
+                             */
+
+
+                            //echo"<tr><td>".$row ['cashier']."</td><td>"."Rs &nbsp&nbsp&nbsp".$row ['amount']."</td></tr>";
+                            //echo "<br>ID : ".$row{'m_code'}."m_name : ".$row{'m_name'}."com_name : ".$row{'com_name'}."shelf_no :".$row{'shelf_no'};
+                        }
+
+                        echo "<tr><td>" . "TOTAL AMOUNT " . "</td><td><hr/>" . "Rs &nbsp&nbsp&nbsp" . number_format($counttotal, 2, '.', '') . "<hr/><hr/></td><tr>";
+
+
                         //array_push($price,$counttotal);
-                        //$counttotal=$row['amount'];
-                        echo"<tr><td>" . $row ['cashier'] . "</td><td style='text-align:center; position:reletive;'>" . "Rs &nbsp&nbsp&nbsp" . $row ['amount'] . "</td></tr>";
-                        $counttotal+=$row['amount'];
-
-                        //}
-                        /* else{
-                          echo"<tr><td>".""."</td><td>".$row ['cashier']."</td><td>".$row ['total']."</td><td>"."Rs &nbsp&nbsp&nbsp".$row ['discount']."</td><td>"."Rs &nbsp&nbsp&nbsp".$row ['amount']."</td></tr>";
-                          $counttotal+=$row['amount'];
 
 
-                         */
-
-
-                        //echo"<tr><td>".$row ['cashier']."</td><td>"."Rs &nbsp&nbsp&nbsp".$row ['amount']."</td></tr>";
-                        //echo "<br>ID : ".$row{'m_code'}."m_name : ".$row{'m_name'}."com_name : ".$row{'com_name'}."shelf_no :".$row{'shelf_no'};
-                    }
-
-                    echo "<tr><td>" . "TOTAL AMOUNT " . "</td><td><hr/>" . "Rs &nbsp&nbsp&nbsp" . number_format($counttotal, 2, '.', '') . "<hr/><hr/></td><tr>";
-
-
-                    //array_push($price,$counttotal);
-
-
-                    /* echo "<tr><td>"."</td><td>"."TOTAL AMOUNT" ."</td><td>"."</td><td>"."</td><td>"."</td><td>"."</td><td>".$result['SUM(selling_table.quantity * selling_table.unit_price)']."</td><tr>"; */
+                        /* echo "<tr><td>"."</td><td>"."TOTAL AMOUNT" ."</td><td>"."</td><td>"."</td><td>"."</td><td>"."</td><td>".$result['SUM(selling_table.quantity * selling_table.unit_price)']."</td><tr>"; */
 
 
 
-                    echo "</table>";
+                        echo "</table>";
 
-                    /* print_r($name);
-                      print_r($price); */
-                    ?>
-
-                    <div  class="graph" style="position: relative; right: 150px; top: 30px">
-                        <?php include("index.php");
+                        /* print_r($name);
+                          print_r($price); */
                         ?>
-                    </div>
+
+                        <div  class="graph" style="position: relative; right: 150px; top: 30px">
+                            <?php include("index.php");
+                            ?>
+                        </div>
+                        <?php
+                    } else {
+                        echo '<script>alert("Data is not allowed")</script>';
+                        echo '<script>window.location="b.php"</script>';
+                    }
+                    ?>
 
 
 

@@ -85,8 +85,8 @@
 
             <?php
             // define variables and set to empty values
-            $cnameErr = $datesErr = $dates2Err = $methodErr = "";
-            $cname = $dates = $dates2 = $method = "";
+            $cnameErr = $datesErr = $dates2Err = "";
+            $cname = $dates = $dates2 =  "";
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (empty($_POST["cname"])) {
@@ -114,11 +114,7 @@
                     $dates2 = test_input($_POST["dates2"]);
                 }
 
-                if (empty($_POST["method"])) {
-                    $methodeErr = "Method is required";
-                } else {
-                    $methode = test_input($_POST["method"]);
-                }
+                
             }
 
             function test_input($data) {
@@ -136,22 +132,20 @@
                 <fieldset class='explicit'>
                     <form name='myform' action="casier_wise2.php" method ='post' >
                         <?php
-                        include '../database/dbconnect.php';
                         $sql = "SELECT  * FROM staff";
-                        //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-                        $result = mysqli_query($mysqli, $sql);
+                        $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                        $result = mysqli_query($con, $sql);
                         $rows = mysqli_num_rows($result);
                         ?>
                         <table class="tableNormal" cellspacing="5" cellpadding="5">
-                            <!--<tr><td><label for="name">Cashier Name</label></td><td><select name="cname" required><option value="all">All</option><?php
-                                        /*if ($rows > 0) {
-                                            for ($i = 0; $i < $rows; $i++) {
-                                                mysqli_data_seek($result, $i);
-                                                $record = mysqli_fetch_assoc($result);
-                                                echo '<option value="' . $record['member_id'] . '">' . $record['first_name'] . '</option>';
-                                            }
-                                        }
-                                        */?> </select></td></tr><span class="error">* <?php //echo $cnameErr; ?></span>-->
+                            <!--<tr><td><label for="name">Cashier Name</label></td><td><select name="cname" required><option value="all">All</option><?php /* if ($rows > 0) {
+                          for ($i = 0; $i < $rows; $i++) {
+                          mysqli_data_seek($result, $i);
+                          $record = mysqli_fetch_assoc($result);
+                          echo '<option value="' . $record['member_id'] . '">' . $record['first_name'] . '</option>';
+                          }
+                          }
+                         */ ?> </select></td></tr><span class="error">* <?php //echo $cnameErr; ?></span>-->
 
                             <tr><td><label for="sdate">Start Date</label></td>
                                 <td><input type="date" id="sdate" name="dates" value="<?php echo date("Y-m-d") ?>"></br></td></tr>
@@ -166,16 +160,21 @@
 
 </select></td></tr>-->
 
-                            <tr><td></td><td><input type="submit" value="Submit" ></td></tr>
+                            <tr><td></td><td><input type="submit" value="Submit" name="submitReport"></td></tr>
+
+
+
                     </form>
                 </fieldset>
             </div>
         </div>
+        
 
 
         <?php require_once('../includes/_footer.php') ?>
     </body>
 </html>
+
 
 
 

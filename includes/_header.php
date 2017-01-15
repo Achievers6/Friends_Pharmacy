@@ -1,20 +1,17 @@
 <?php
-
-session_start();
-
 require ("../Entities/stockEntityHead.php");
 include '../database/dbconnect.php';
-
 $query = mysqli_query($mysqli, "SELECT * FROM stock where 21>DATEDIFF(expire_date,CURDATE()) and 0<DATEDIFF(expire_date,CURDATE());");
 $query2 = mysqli_query($mysqli, "SELECT * FROM cust_orders where status = 'not confirmed';");
+$query3 = mysqli_query($mysqli, "SELECT * FROM prescription where status = 'new';");
 
 $rows = mysqli_num_rows($query);
 $orderrows = mysqli_num_rows($query2);
 
+$presrpws = mysqli_num_rows($query3);
 $stockArray = array();
 
-while ($row = mysqli_fetch_array($query)) 
-{
+while ($row = mysqli_fetch_array($query)) {
     $id = $row[0];
     $medicineName = $row[1];
     $batchNumber = $row[2];
@@ -40,7 +37,12 @@ while ($row = mysqli_fetch_array($query))
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script>
             $(document).ready(function() {
-
+                // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.
+                $('#pres_Counter')
+                        .css({opacity: 0})
+                        .text('<?php echo $presrpws ?>')               // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+                        .css({top: '-10px'})
+                        .animate({top: '-2px', opacity: 1}, 500);
                 // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.
                 $('#order_Counter')
                         .css({opacity: 0})
@@ -186,6 +188,21 @@ while ($row = mysqli_fetch_array($query))
                 -webkit-border-radius:2px;
                 z-index:1;
             }
+            #pres_Counter {
+                display:block;
+               
+                
+                background:#E1141E;
+                color:#FFF;
+                font-size:12px;
+                font-weight:normal;
+                padding:1px 3px;
+                margin:-8px 0 0 25px;
+                border-radius:2px;
+                -moz-border-radius:2px; 
+                -webkit-border-radius:2px;
+                z-index:1;
+            }
 
             /* THE NOTIFICAIONS WINDOW. THIS REMAINS HIDDEN WHEN THE PAGE LOADS. */
             #notifications {
@@ -278,45 +295,24 @@ while ($row = mysqli_fetch_array($query))
                 text-decoration: none;
                 color:#000000;
             }
-          
+
             a:visited {color:#808080;}  /* visited link */
             a:active {color:#0000FF;} 
 
             .nav {
                 overflow: scroll;
             }
-            #current_user{
-                float: right;
-                margin-right: 3%;
-            }
+
 
         </style>
     </head>
 
+
     <body style="margin:0;padding:0;">
         <div>
             <ul class="ul">
-                <?php
-                
-                if(isset($_SESSION['email']) && !empty($_SESSION['email']))
-                {                    
-                    $email = $_SESSION['email'];
-                    $result = mysqli_query($mysqli, "SELECT occupation from staff WHERE email='$email'");
-                    $row = mysqli_fetch_array($result);
-                    $name = $row[0];
+                <li class="li" id="logout"><a href="logout.php">Logout</a></li>
 
-                ?>      
-                <li class="li" id="current_user"> 
-                    <div>                        
-                        <a href="#">Logged in as <?php echo "$name"; ?></a>
-                        <a href="../web/logout.php">Logout</a>
-                    </div>
-                </li>
-                <?php
-                }
-                ?>
-                
-               <!--  <li class="li" style="float: right;"><a href="../web/logout.php">Logout</a></li> -->
                 <li class="li" id="orders">
                     <div id="order_Counter"></div> 
                     <div id="order_Button">
@@ -333,6 +329,7 @@ while ($row = mysqli_fetch_array($query))
                         <div>
                             <img  src="../public/image/exp.png"  style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position: relative; top: -5px;">    
                         </div>
+
                     </div>   
                     <div id="lblexp" style="position: absolute; right:-30px;  top:33px; width:80px; ">
                         short expiry
@@ -342,9 +339,9 @@ while ($row = mysqli_fetch_array($query))
                         <?php
                         foreach ($stockArray as $key => $stock) {
                             $resultim = mysqli_query($mysqli, "SELECT image FROM drug where medicine_name = '$stock->medicine_name';");
-                            $rowim= mysqli_fetch_array($resultim);
-                           $medname = urlencode($stock->medicine_name);
-                          
+                            $rowim = mysqli_fetch_array($resultim);
+                            $medname = urlencode($stock->medicine_name);
+
                             echo "<div id=inner_noti>
                                     <table>
                                     <tr>
@@ -355,15 +352,15 @@ while ($row = mysqli_fetch_array($query))
                                 </div>";
                         }
                         ?>
-                        
+
                         <div class="seeAll"><a href="../pharmacist/removeStock2.php?allOutDate=1;">All short expiry</a></div>
                     </div>
                 </li>
-                
-                 <li class="li" id="prescriptions">
-                    <div id="pres_Counter"></div> 
+
+                <li class="li" id="prescriptions">
+                    <div id="pres_Counter" style="position:relative; top:-100px; left:1070px;"></div> 
                     <div id="pres_Button">
-                        <a href="../pharmacist/prescription.php"><img  src="../public/image/pres.png" style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position:relative; left:1030px; top:-25px; "></a>   
+                        <a href="../pharmacist/prescription.php"><img  src="../public/image/pres.png" style="display: block; margin-left: auto; margin-right: auto; width:35px; height:35px; position:relative; left:1065px; top:-34px; "></a>   
                     </div>
                     <div id="lblpres" style="position: absolute; right:190px;  top:50px; width:150px; ">new prescriptions</div>
                 </li>

@@ -80,8 +80,8 @@
 
             <?php
             // define variables and set to empty values
-            $nameErr = $cnameErr = $dateErr = $methodErr = $spiceErr = "";
-            $name = $cname = $dates = $method = $spice = "";
+            $nameErr = $dateErr = "";
+            $name = $dates = "";
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (empty($_POST["name"])) {
@@ -94,31 +94,11 @@
                     }
                 }
 
-                if (empty($_POST["cname"])) {
-                    $cnameErr = "Name is required";
-                } else {
-                    $cname = test_input($_POST["cname"]);
-                    // check if name only contains letters and whitespace
-                    if (!preg_match("/^[a-zA-Z ]*$/", $cname)) {
-                        $cnameErr = "Only letters and white space allowed";
-                    }
-                }
-
-
-
 
                 if (empty($_POST["dates"])) {
                     $dateErr = "Date is required";
                 } else {
                     $dates = test_input($_POST["dates"]);
-                }
-
-
-
-                if (empty($_POST["spice"])) {
-                    $spiceErr = "spice is required";
-                } else {
-                    $spice = test_input($_POST["spice"]);
                 }
             }
 
@@ -148,38 +128,36 @@
                             <div id="myDIV">
                                 <?php
                                 $sql = "SELECT * FROM drug";
-                                //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-                                include '../database/dbconnect.php';
-                                $result = mysqli_query($mysqli, $sql);
+                                $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                                $result = mysqli_query($con, $sql);
                                 $rows = mysqli_num_rows($result);
                                 ?>
                                 <tr><td><label for="name">Medicine Name</label></td><td><select name="name" required><option value="all">All</option><?php
-                                            if ($rows > 0) {
-                                                for ($i = 0; $i < $rows; $i++) {
-                                                    mysqli_data_seek($result, $i);
-                                                    $record = mysqli_fetch_assoc($result);
-                                                    echo '<option value="' . $record['medicine_name'] . '">' . $record['medicine_name'] . '</option>';
-                                                }
-                                            }
-                                            ?> </select></td></tr><span class="error">* <?php echo $nameErr; ?></span>
+                                if ($rows > 0) {
+                                    for ($i = 0; $i < $rows; $i++) {
+                                        mysqli_data_seek($result, $i);
+                                        $record = mysqli_fetch_assoc($result);
+                                        echo '<option value="' . $record['medicine_name'] . '">' . $record['medicine_name'] . '</option>';
+                                    }
+                                }
+                                ?> </select></td></tr><span class="error"> <?php echo $nameErr; ?></span>
 
 
                                 <?php
-                                /*$sql = "SELECT  * FROM staff";
+                                /* $sql = "SELECT  * FROM staff";
 
-                                $result = mysqli_query($con, $sql);
-                                $rows = mysqli_num_rows($result);*/
+                                  $result = mysqli_query($con, $sql);
+                                  $rows = mysqli_num_rows($result); */
                                 ?>											
                                 <!--<tr><td><label for="name">Cashier Name</label></td><td><select name="cname" required><option value="all">All</option>
-                                    <?php
-                                            /*if ($rows > 0) {
-                                                for ($i = 0; $i < $rows; $i++) {
-                                                    mysqli_data_seek($result, $i);
-                                                    $record = mysqli_fetch_assoc($result);
-                                                    echo '<option value="' . $record['member_id'] . '">' . $record['first_name'] . '</option>';
-                                                }
-                                            }
-                                            */?> </select></td></tr><span class="error">* <?php //echo $cnameErr; ?></span>-->
+                                <?php /* if ($rows > 0) {
+                                  for ($i = 0; $i < $rows; $i++) {
+                                  mysqli_data_seek($result, $i);
+                                  $record = mysqli_fetch_assoc($result);
+                                  echo '<option value="' . $record['member_id'] . '">' . $record['first_name'] . '</option>';
+                                  }
+                                  }
+                                 */ ?> </select></td></tr><span class="error">* <?php //echo $cnameErr; ?></span>-->
                             </div>
 
                             <tr><td><label for="sdate">Date</label></td>
@@ -194,13 +172,13 @@
 
 </select></td></tr>-->
 
-                            <tr><td></td><td><input type="submit" value="Submit" ></td></tr>
+                            <tr><td></td><td><input type="submit" value="Submit" name="submitReport"></td></tr>
                     </form>
                 </fieldset>
             </div>
         </div>
 
-        <?php require_once('../includes/_footer.php') ?>
+<?php require_once('../includes/_footer.php') ?>
     </body>
 </html>
 

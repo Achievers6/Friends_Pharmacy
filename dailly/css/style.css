@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400+700);
 body {
-  background: #F1FE9;
+  background: #F1F8E9;
   /*font-family: Roboto;*/
   
 }
@@ -40,16 +40,16 @@ body {
 }
 #chart #bars {
   display: inline-block;
-  background:#F1FE9 ;
-  width: 100px;
+  background:#F1F8E9 ;
+  width: 30px;
   height: 300px;
   padding: 0;
   margin: 0;
-  box-shadow: 0 0 0 1px #F1FE9;
+  box-shadow: 0 1px 0 0 black;
 }
 #chart #bars li {
   display: table-cell;
-  width: 50px;
+  width: 20px;
   height: 300px;
   margin: 0;
   text-align: center;
@@ -57,14 +57,14 @@ body {
 }
 #chart #bars li .bar {
   display: block;
-  width: 50px;
-  margin-left: 25px;
-  background: #008000;
+  width: 20px;
+  margin-left: 15px;
+  background: #996600;
   position: absolute;
   bottom: 0;
 }
 #chart #bars li .bar:hover {
-  background: #FFA500;
+  background: #332200;
   cursor: pointer;
 }
 #chart #bars li .bar:hover:before {
@@ -78,17 +78,17 @@ body {
   color: black;
   width: 82px;
   position: absolute;
-  bottom: -2em;
+  bottom: -7em;
   left: 0;
   text-align: center;
   margin-left:10px;
   
   
-  /*transform: rotate(90deg);
-  transform-origin: left top 0;*/
+  transform: rotate(-90deg);
+  transform-origin: left top 0;
 }
 #bars{
-	background-color: #F1FE9 !important;
+	background-color: #F1F8E9 !important;
 }
 h1{
     position: relative;

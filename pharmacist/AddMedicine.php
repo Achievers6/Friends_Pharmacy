@@ -141,7 +141,7 @@ $content = "<h2 style='text-align:center;'>Add New Medicine</h2>
 
             
             <label for='image' style=padding-top:30px;'>Add Dosage: </label>
-            number of dasges: <input type='number' name='dcount' id='dcount' style='margin-top:30px; width:40px;'>
+            number of dasa  ges: <input type='number' name='dcount' id='dcount' style='margin-top:30px; width:40px;'>
             <div id='wrapper' style=padding-top:30px;'>
             <table cellspacing=1 cellpadding=3 id='data_table' border=1 style='display:none;'>
                 <tr>
