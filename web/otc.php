@@ -621,11 +621,11 @@ $t = sizeof($_SESSION['cart']);
                 </div>
             </article>
         </div>
-        <aside class="topSide">			
+        <aside class="topSide" style="position: relative; top:150;">			
             <img src="../public/image/add3.jpg">
         </aside>
 
-        <aside class="bottomSide">		
+        <aside class="bottomSide" style="position: relative; top:250; height: 1600px; ">		
             <img src="../public/image/add2.jpg">
         </aside>
 

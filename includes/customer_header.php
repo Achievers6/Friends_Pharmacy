@@ -28,7 +28,7 @@
                 ?>  <li>                        
                         <div class="dropdown">
                           <a href="#" onclick="myFunction()">
-                            <img src="../public/image/user.png" style="width: 50px; height: 50px; margin-left: 50px; position: relative; top: -10px;" class="dropbtn">
+                            <img src="../public/image/user.png" style="width: 40px; height: 40px; margin-left: 100px; position: relative; top: -5px;" class="dropbtn">
                           </a>                          
                           <div id="myDropdown" class="dropdown-content">
                             <a href="profile.php">My Profile</a>

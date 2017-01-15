@@ -122,7 +122,7 @@
         </style>
 
         <p></p>
-        <div id="jssor_1" style="position: relative; left: -8px; top:-17px; width: 561px; height: 364px; z-index: -1;">
+        <div id="jssor_1" style="position: relative; left: -8px; top:-17px; width: 561px; height: 364px; z-index: -1; margin-bottom: -100px;">
             <!-- Loading Screen -->
             <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
                 <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>

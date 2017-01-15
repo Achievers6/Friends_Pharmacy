@@ -47,7 +47,7 @@
             <li><span><a href="../customer/updatecustomer.php">Update customer</a></span></li>
             <li><span><a href="../customer/inactive.php">Delete customer</a></span></li>
             <li><span><a href="../customer/customerdetails.php">View customer</a></span></li>
-            <li><span><a href="../customer/reminder.php">Reminders</a></span></li>
+            
         </ul>
 
 

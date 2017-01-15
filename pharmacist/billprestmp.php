@@ -33,7 +33,7 @@
 
         <div id="details" class="clearfix">
             <div id="client">
-                <div class="to">INVOICE TO:</div>
+                
                 <h2 class="name"><?php echo $row[0] . ' ' . $row[1] ?></h2>
                 <div class="email"><a href=<?php $mail; ?> ><?php echo $mail; ?></a></div>
             </div>

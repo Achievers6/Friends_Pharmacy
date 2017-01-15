@@ -150,7 +150,7 @@
     <main>
       <div id="details" class="clearfix">
         <div id="invoice">
-          <h2>INVOICE</h2>
+          
           <div class="date">Date of Invoice: </div>
              <div id='date'>ad</div>
                 <script>
