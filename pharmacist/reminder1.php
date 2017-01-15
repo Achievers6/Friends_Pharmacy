@@ -354,7 +354,7 @@ if (isset($_POST['btnsubmitrem'])) {
         echo 'alert(" please enter valid NIC")';
         echo '</script>';
     } 
-    else if (!isset($_POST["txtcontact"]) or strlen($contactno) != 11) {
+    else if (!isset($_POST["txtcontact"]) or strlen($contactno) != 9) {
         echo '<script language="javascript">';
         echo 'alert(" please enter valid contact number")';
         echo '</script>';
