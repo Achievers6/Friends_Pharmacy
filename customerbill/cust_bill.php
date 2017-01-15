@@ -63,19 +63,18 @@
         var row = table.insertRow(-1);
         var numberCell = row.insertCell(0);
         var medicineCell = row.insertCell(1);
-        var quantityCell = row.insertCell(2);
-        var dosageCell = row.insertCell(3)
-        var unitPriceCell = row.insertCell(4);
+        var dosageCell = row.insertCell(2)
+        var unitPriceCell = row.insertCell(3);
+        var quantityCell = row.insertCell(4);
         var totalPriceCell = row.insertCell(5);
 
         var totalPrice = parseInt(unitprice) * parseInt(quantity);
 
         numberCell.innerHTML = number;
         medicineCell.innerHTML = medi_name;
-        quantityCell.innerHTML = quantity;
         dosageCell.innerHTML = dosage;
         unitPriceCell.innerHTML = unitprice;
-        totalPriceCell.innerHTML = totalPrice;
+        quantityCell.innerHTML = quantity;  totalPriceCell.innerHTML = totalPrice;
 
         total += totalPrice;
         number += 1;
@@ -132,7 +131,7 @@
     
     <!--content goes here -->
     <div class="customer_template_container" style=" padding-left:13px; padding-top:70px;">
-     <div id="div_to_print" style="float: left; width: 120%">
+     <div id="div_to_print" style="float: left; width: 120%; margin-left:50px;">
                
     <header class="clearfix">
       <div id="logo">
