@@ -25,7 +25,7 @@ if (isset($_GET["confirmed"])) {
 } 
 else if(isset($_GET["smsemail"])) {
     $msg = "your order is ready.Order number is: ".$_GET['orderNo'];
-    //$orderController->sendSms($_GET["smsemail"],$msg);
+    $orderController->sendSms($_GET["smsemail"],$msg);
     $orderTable = $orderController->orderConfirmTable("confirmed");
     $content = "<div style='float:left'>
         <h2 style='text-align:center; position:relative; left:100px;'>Confirmed orders List<h2>
