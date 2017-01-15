@@ -1,19 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+<?php
 
-<table style="width:100%;font-weight:100;">
-	<tr>
-		<th>Medicine Name</th>
-		<th>Dosage</th>
-		<th>Unit Price (Rs.)</th>
-		<th>Quantity</th>
-		<th>Amount (Rs.)</th>
-	</tr>
+require 'presController.php';
+$title = "Prescription orders";
+$presController = new presController();
 
-</table>
-</body>
-</html>
+
+if (isset($_GET["pres_no"])) {
+
+    $presListTable = $presController->presListTable($_GET["pres_no"]);
+
+    $content = $presListTable . "<a href='confirmedPres.php'><img  class='confirm' src='../public/image/back.png' style='width: 100px;; height: 35px; position: relative; left:400px;'></a>";
+} else if (isset($_GET["del"])) {
+    $presController->reject($_GET["del"]);
+    $conPresTable = $presController->conPresTable();
+    $content = $conPresTable;
+} else if (isset($_GET["smsemail"])) {
+    $msg = "your precription order is ready.prescription order number is: " . $_GET['presNo'];
+    $presController->sendSms($_GET["smsemail"],$msg);
+    $conPresTable = $presController->conPresTable();
+    $content = $conPresTable;
+} else {
+    $conPresTable = $presController->conPresTable();
+    $content = $conPresTable;
+}
+include 'template.php';
+?>
