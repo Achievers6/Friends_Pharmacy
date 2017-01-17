@@ -1,10 +1,17 @@
 <html>
     <head>
         <title>View suppliers</title>
+        <?php require('../includes/_header.php'); ?>
+        <link href="css/viewsupplier.css" type="text/css" rel="stylesheet">
+       <script src="js/jquery-3.1.0.min.js"></script>
+        <script src="../customer/js/jquery.dataTables.min.js"></script>
+         <link href="../customer/css/jquery.dataTables.min.css">
     </head>
 <body>
+    <h2>View Suppliers</h2>
+    <?php require_once("../includes/navigation.php") ?>
     <div id="main">
-    <table>
+    <table id="tbl" border="1">
                 <thead>
                     <th>Supplier</th>
                     <th>Mobile</th>
@@ -29,6 +36,7 @@ $res=mysqli_query($mysqli,$sql);
 while($row=mysqli_fetch_assoc($res)){
     $sup=$row['company_name'];
     $mob=$row['mobile'];
+    $tel=$row['telephone'];
     $fax=$row['fax'];
     $med=$row['medicine_name'];
     $dos=$row['dosage'];
@@ -41,6 +49,7 @@ while($row=mysqli_fetch_assoc($res)){
                     <tr>
                         <td><?php echo $sup ?></td>
                         <td><?php echo $mob ?> </td>
+                        <td><?php echo $tel ?></td>
                         <td><?php echo $fax ?> </td>
                         <td><?php echo $med ?></td>
                         <td><?php echo $dos ?></td>
@@ -60,3 +69,9 @@ while($row=mysqli_fetch_assoc($res)){
     </div>
     </body> 
 </html>
+<script>
+    $(document).ready(function(){
+        $('#tbl').DataTable();
+    });
+
+</script>

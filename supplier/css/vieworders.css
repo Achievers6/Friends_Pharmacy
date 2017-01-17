@@ -1,5 +1,5 @@
 body{
-    font-family: calibri;
+    font-family: Arial, Helvetica, sans-serif;
 }
 h2{
     position: absolute;
@@ -22,12 +22,17 @@ h2{
 }
 
 
-.result_row:hover{
+#tbl tr:hover{
     background-color: rgb(229, 249, 212);
+    height:25px;
 }
 
 #thead{
+    height: 25px;
    background-color: rgb(214, 247, 185);
+}
+#tbl{
+    border-color: lawngreen;
 }
 
 #email{

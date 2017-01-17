@@ -1,62 +1,35 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
 }
-#d1{
-    position: absolute;
-    float:right;
-    top:230px;
-    right:300px;
-}
-body{
-    font-family: Arial;
-
-}
-#search {
-    height: 30px;
-    font-size: 18px;
+#main{
+    position:absolute;
+    left:400px;
+    top:200px;
 }
 h2{
+    position: absolute;
+    left:600px;
+    top:50px;
     font-family: SourceSansPro;
     font-size: 2.4em;
     line-height: 1em;
     font-weight: normal;
     margin: 0  0 10px 0;
-    position: relative;
-    float: right;
-    right:550px;
-    top:45px;
 }
-.d2 table {
+#tbl{
+    width:700px;
+    border: 1;
     border-collapse: collapse;
-    width: 100%;
-    border-spacing: 5px;
+    border-color: lawngreen;
 }
-.d2 table border, tr, td {
-    
- border-color: #6AB82A;
-
+#tbl th{
+    height:40px;
+    background-color: rgb(214, 247, 185);
 }
-
-.d2 table th {
-    font-family: inherit;
-    font-weight: 100 !important;
-    padding: 10px 0 10px 0;
-    
-    background-color: rgb(214,244,185);
+#tbl tr{
+    height:35px;
+}
+#tbl tr:hover{
+    background-color: rgb(229, 249, 212);  
 }
 
-.d2 table td {
-    padding: 4px 0px 4px 8px;    
-}
-
-.d2 table tr {
-    color: black;
-}
-
-.d2 table tr:hover {
-    background-color: rgb(229,249,212);
-   
-}
-#tbl td{
-    width:100px;
-}

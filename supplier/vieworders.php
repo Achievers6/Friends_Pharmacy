@@ -14,8 +14,8 @@
         <h2>View Orders</h2>
         
         <div id="main">
-        <table id="tbl">
-            <thead id="thead">
+        <table id="tbl" border="1">
+            <thead id="thead" >
         
                 <th>Supplier</th>
                 <th>Medicine</th>
