@@ -9,14 +9,15 @@ if (isset($_GET['medi_id'])) {
 
 function sendPrice() {
     $medi_id = $_GET['medi_id'];
-    $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-    if (!$conn) {
+    //$mysqli = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+    include '../database/dbconnect.php';
+    if (!$mysqli) {
         echo "Error";
     }
 
     $sql = "SELECT * FROM drug_price WHERE id='$medi_id'";
 
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($mysqli, $sql);
 
     $row = mysqli_fetch_assoc($result);
     

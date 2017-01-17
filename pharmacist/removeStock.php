@@ -1,14 +1,4 @@
-<script>
-function searchForm() {
-    var x = document.forms["myForm"]["txtMedicinedName"].value;
-   
-    if (x == null || x == "") {
-        alert("Medicine name must be filled out");
-        return false;
-    }
-}
 
-</script>
 <?php
 
 $title = "Remove Stock";

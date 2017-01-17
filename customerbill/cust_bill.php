@@ -89,7 +89,7 @@
             document.getElementById("final_price").innerHTML = total;
             return;
         }
-        var final_price = total * rate / 100;
+        var final_price = total-total * rate / 100;
         document.getElementById("final_price").innerHTML = final_price;
     }
 
@@ -170,9 +170,9 @@
             <th class="no">#</th>
             <th class="desc">DESCRIPTION</th>
             <th class="dosage">DOSAGE</th>
-            <th class="unit">UNIT PRICE</th>
+            <th class="unit">UNIT PRICE(Rs)</th>
             <th class="qty">QUANTITY</th>
-            <th class="total">AMOUNT</th>
+            <th class="total">AMOUNT(Rs)</th>
           </tr>
         </thead>
           
@@ -183,8 +183,8 @@
         <tfoot>
           <tr>
             <td colspan="1"></td>
-            <td colspan="4">SUBTOTAL</td>
-            <td id="total">Rs 0.00</td>
+            <td colspan="4">SUBTOTAL(Rs)</td>
+            <td id="total">0.00</td>
           </tr>
             
           <tr>
@@ -194,8 +194,8 @@
           </tr>
           <tr>
             <td colspan="2"></td>
-            <td colspan="3">GRAND TOTAL</td>
-              <td><p id="final_price">Rs.0.00</p></td>
+            <td colspan="3">GRAND TOTAL(Rs)</td>
+              <td><p id="final_price">0.00</p></td>
           </tr>
         </tfoot>
       </table>
@@ -226,9 +226,10 @@
 
                 <select id='medicine_list'>
 <?php
-    $conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+    //$conn = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+include '../database/dbconnect.php';
     $sql = "SELECT * FROM drug_price";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($mysqli, $sql);
     while(($row = mysqli_fetch_assoc($result)) != null) {
         echo "<option value='" . $row['id'] . "'>" . $row['medicine_name'] . " " . $row['dosage'] . "</option>";
     }
@@ -244,7 +245,7 @@
                 Quantity : <input type="number" name="quantity" id="quantity" > <br>
                 <input type="button" onclick="add()" value="Add"> <input type="reset" value="Clear">
             </form>
-            <input type="button" onclick="finish()" value="Finish">
+<!--            <input type="button" onclick="finish()" value="Finish">-->
         </div>
     </div>		
 	

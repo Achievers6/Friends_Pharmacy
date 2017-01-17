@@ -264,16 +264,14 @@ class orderController {
         $fname = $row2["first_name"];
         $lname = $row2["last_name"];
         $cno = $row2["contact_number"];
-        $message = "Dear " . $fname . $lname ." ". $msg;
+        $message = "Dear " . $fname ." ".$lname .",". $msg." From Friends Pharmacy";
         
         include '../msg/example.php';
         $text = new text();
         $no =  "94".substr($cno, 1);
         
         $text->msg($no, $message);
-        echo '<script language="javascript">';
-        echo 'alert("Confirmed order has been sent successfully")';
-        echo '</script>';
+        
     }
 
 }

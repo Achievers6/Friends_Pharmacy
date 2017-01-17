@@ -7,10 +7,10 @@
                 $database = 'friends_pharmacy';
 
                 //create connection
-                $conn = mysqli_connect($server, $username, $password, $database);
+                //$conn = mysqli_connect($server, $username, $password, $database);
 
                 //check connection
-                if (!$conn){
+                if (!$mysqli){
                     die("Connection faied: ".mysqli_connect_error());
                 }
 //                echo "connected successfully";
@@ -26,10 +26,10 @@
                
                 $sql = "INSERT INTO customer (nic,first_name,last_name,birthday,gender,email,contact_number) VALUES ('$nic', '$firstname', '$lastname', '$dob', '$gender', '$email', '$mobile')";
 
-                if (mysqli_query($conn, $sql)) {
+                if (mysqli_query($mysqli, $sql)) {
 //                    echo "insert successful";
 				} else {
-//                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+//                    echo "Error: " . $sql . "<br>" . mysqli_error($mysqli);
                 }
 
             }

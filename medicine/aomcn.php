@@ -6,8 +6,8 @@ if ($_POST['submitReport']) {
     $dates = $_POST['dates'];
     $dates2 = $_POST['dates2'];
 
-
-    $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+    include '../database/dbconnect.php';
+    //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
 
     $sql1 = "  SELECT distinct(selling_table.medicine_name) AS medicine,
                                     sum(selling_table.quantity) AS quantity,selling_table.dosage,
@@ -15,7 +15,7 @@ if ($_POST['submitReport']) {
                                     WHERE bill_table.date BETWEEN '$dates' AND '$dates2' AND
                                     bill_table.bill_number=selling_table.bill_number GROUP BY selling_table.medicine_name,selling_table.dosage;";
 
-    $result1 = mysqli_query($con, $sql1);
+    $result1 = mysqli_query($mysqli, $sql1);
             
             if (mysqli_num_rows($result1) == 0) {
                 echo '<script>alert("Data is not allowed")</script>';
@@ -153,8 +153,8 @@ if ($_POST['submitReport']) {
                     $dates = $_POST['dates'];
                     $dates2 = $_POST['dates2'];
 
-
-                    $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                    include '../database/dbconnect.php';
+                    //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
                     if ($name == 'all') {
                         $sql1 = "  SELECT distinct(selling_table.medicine_name) AS medicine,
                                     sum(selling_table.quantity) AS quantity,selling_table.dosage,
@@ -162,7 +162,7 @@ if ($_POST['submitReport']) {
                                     WHERE bill_table.date BETWEEN '$dates' AND '$dates2' AND
                                     bill_table.bill_number=selling_table.bill_number GROUP BY selling_table.medicine_name,selling_table.dosage;";
 
-                        $result1 = mysqli_query($con, $sql1);
+                        $result1 = mysqli_query($mysqli, $sql1);
 
                         if (mysqli_num_rows($result1) > 0) {
                             $rw = mysqli_num_rows($result1);
@@ -238,7 +238,7 @@ if ($_POST['submitReport']) {
                                     WHERE bill_table.date BETWEEN '$dates' AND '$dates2' AND selling_table.medicine_name='$name'
                                     AND bill_table.bill_number=selling_table.bill_number GROUP BY selling_table.medicine_name,selling_table.dosage;";
 
-                        $result1 = mysqli_query($con, $sql2);
+                        $result1 = mysqli_query($mysqli, $sql2);
 
 
                         //$price2 = mysqli_query($con," SELECT SUM(quantity * selling_price) FROM selling WHERE medicine_id='$name';");

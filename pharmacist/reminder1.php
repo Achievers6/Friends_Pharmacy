@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <?php require("../includes/_header.php"); ?>
         <link rel="stylesheet" type="text/css" href="css/reminder.css" />
         <title>Reminders</title>
@@ -109,7 +110,7 @@
                     <div id='nicList'></div> 
                     <p></p>
                     <label>Contact number: </label>
-                    <input type="text" class="inputField" name="txtcontact" autocomplete="off" placeholder="Ex: Enter without zero"/><br/>
+                    <input type="text" class="inputField" name="txtcontact" autocomplete="off" placeholder="Ex: 071XXXXXXX"/><br/>
                     <p></p>
                     <label>Instruction: </label>
                     <select class = "type" name="ins">

@@ -10,7 +10,7 @@
         <link type="text/css" rel="stylesheet" href="css/deletesupplier.css"/>
     </head>
     <body>
-        <h2>Delete Supplier</h2>
+        <h2 style="position: relative; left:640px;">Delete Supplier</h2>
         <?php require_once("../includes/navigation.php") ?>
         <?php
 //         session_start();

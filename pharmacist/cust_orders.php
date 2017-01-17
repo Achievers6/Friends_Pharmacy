@@ -44,7 +44,7 @@ else if (isset($_POST["btnsub"]))
     $msg = $_POST["txtarea"];
     $orderController->reject($no, $msg);
     echo '<script language="javascript">';
-    echo 'alert("Notification is sent to the customer!");';
+    echo 'alert("Order is rejected!");';
     echo '</script>';
     $orderTable = $orderController->orderTable("not confirmed");
     $content = $orderTable;
@@ -64,9 +64,9 @@ else
 }
 
 $content = $content . "<div id='confirmBox' class='confirmBox'>
-        <div class='modal-content' style = 'width:700px; height:250px'>
+        <div class='modal-content' style = 'width:700px; height:350px'>
           <span class='close'>x</a></span>
-          <h3 style='text-align:center;'>Reject order</h3>
+          <h4 style='text-align:center'>Reject order</h4>
           <form name='myForm2' action='#'  method ='post' onsubmit='return validateForm2()'>
             <table>
                 <tr>
@@ -77,12 +77,16 @@ $content = $content . "<div id='confirmBox' class='confirmBox'>
                     <textarea rows='4' cols='50' name='txtarea'></textarea>
                     </td>
                 </tr>
+                <tr>
+                
+                <td> <input type='submit' name = 'btnsub' id = 'btnsub'></td>
 
+                </tr>
             </table>       
           
           <p></p>
           <input type='hidden' name = 'btnno' id = 'no'>
-          <input type='submit' name = 'btnsub' id = 'btnsub'>
+         
           
           </form>
         </div>

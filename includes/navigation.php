@@ -37,7 +37,7 @@
             <li><span><a href="../pharmacist/updateStock1.php">Update stock</a></span></li>            
             <li><span><a href="../pharmacist/removeStock.php">Delete stock</a></span></li>
             <li><span><a href="../pharmacist/viewStock.php">View stock</a></span></li>
-            <li><span><a href="../pharmacist/viewusage.php">View stock usage</a></span></li>
+<!--            <li><span><a href="../pharmacist/viewusage.php">View stock usage</a></span></li>-->
         </ul>
 
         <li><span><a href="#" id="menu">Customer</a></span></li>
@@ -57,7 +57,7 @@
             <li><span><a href="../supplier/addsupplier.php">Add supplier</a></span></li>
             <li><span><a href="../supplier/updatesupplier.php">Update supplier</a></span></li>
             <li><span><a href="../supplier/deletesupplier.php">Delete supplier</a></span></li>
-            <li><span><a href="../supplier/viewsupplier.php">View supplier</a></span></li>
+<!--            <li><span><a href="../supplier/viewsupplier.php">View supplier</a></span></li>-->
             <?php
             if(isset($_SESSION['email']) && !empty($_SESSION['email']))
             {   
@@ -108,7 +108,7 @@
         <li><span><a href="#" id="menu">Reminder</a></span></li>
         <ul class="submenu">
             <li><span><a href="../pharmacist/reminder1.php">Add Reminder</a></span></li>
-            <li><span><a href="../pharmacist/sms.php">Message</a></span></li>
+      <!--<li><span><a href="../pharmacist/sms.php">Message</a></span></li>-->
         </ul> 
         <li><span><a href="#" id="menu">Web Customer Orders</a></span></li>
         <ul class="submenu">

@@ -1,6 +1,6 @@
 
-h3 {
-    
+h2 {
+
     color: #777777; 
     font-family: SourceSansPro;
     font-size: 2.4em;
@@ -9,41 +9,84 @@ h3 {
     margin: 0  0 50px 0;
 }
 .shortcut-button {
-                border: 1px solid #ccc;
-                background: #f7f7f7 url('../images/shortcut-button-bg.gif') top left no-repeat;
-                display: block;
-                width: 120px;
-                margin: 0 0 20px 0;
-                }
+    border: 1px solid #ccc;
+    background: #f7f7f7 url('../images/shortcut-button-bg.gif') top left no-repeat;
+    display: block;
+    width: 120px;
+
+    margin: 0 0 20px 0;
+}
 
 .shortcut-button span {
-                border: 1px solid #fff;
-                display:block;
-                padding: 15px 10px 15px 10px;
-                text-align: center;
-                color: #555;
-                font-size: 13px;
-                line-height: 1.3em;
-                }
+    border: 1px solid #fff;
+    display:block;
+    padding: 15px 10px 15px 10px;
+    text-align: center;
+    color: #555;
+    font-size: 13px;
+    line-height: 1.3em;
+}
 
 .shortcut-button span img {
-                margin-bottom: 10px;
-                }
+    margin-bottom: 10px;
+}
 
 .shortcut-button:hover {
-                background: #fff;
-				
-                }
-				
+    background: #fff;
+
+}
+
 .shortcut-button span:hover {
-				color: #57a000; 
-                }
+    color: #57a000; 
+}
 
 ul.shortcut-buttons-set li {
-                float: left;
-                margin: 0 15px 0 0;
-				padding: 0 !important;
-				background: 0;
-                }
+    float: left;
+    margin: 0 15px 0 0;
+    padding: 0 !important;
+    background: 0;
+}
+
+/*************** Forms ***************/
+
+
+.shortcut-button1 {
+    border: 1px solid #ccc;
+    background: #f7f7f7 url('../images/shortcut-button-bg.gif') top left no-repeat;
+    display: block;
+    width: 120px;
+    height: 170px;
+    margin: 0 0 20px 0;
+}
+
+.shortcut-button1 span {
+    border: 1px solid #fff;
+    display:block;
+    padding: 15px 10px 15px 10px;
+    text-align: center;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.3em;
+}
+
+.shortcut-button1 span img {
+    margin-bottom: 10px;
+}
+
+.shortcut-button1:hover {
+    background: #fff;
+
+}
+
+.shortcut-button1 span:hover {
+    color: #57a000; 
+}
+
+ul.shortcut-buttons1-set li {
+    float: left;
+    margin: 0 15px 0 0;
+    padding: 0 !important;
+    background: 0;
+}
 
 /*************** Forms ***************/

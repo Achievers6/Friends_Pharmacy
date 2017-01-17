@@ -64,7 +64,7 @@
             }
             h2 {
                 text-align:center; 
-                color: #777777; 
+                color: black; 
                 font-family: SourceSansPro;
                 font-size: 2.4em;
                 line-height: 1em;
@@ -129,8 +129,9 @@
                         <form name='myform' action="aomcn.php" method ='post' >
                             <?php
                             $sql = "SELECT * FROM drug";
-                            $con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
-                            $result = mysqli_query($con, $sql);
+                            include '../database/dbconnect.php';
+                            //$con = mysqli_connect("localhost", "root", "", "friends_pharmacy");
+                            $result = mysqli_query($mysqli, $sql);
                             $rows = mysqli_num_rows($result);
                             ?>
                             <table class="tableNormal" cellspacing="5" cellpadding="5">

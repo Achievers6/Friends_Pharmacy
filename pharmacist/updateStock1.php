@@ -1,14 +1,4 @@
-<script>
-    function searchForm() {
-        var x = document.forms["myForm"]["txtMedicinedName"].value;
 
-        if (x == null || x == "") {
-            alert("Medicine name must be filled out");
-            return false;
-        }
-    }
-
-</script>
 <?php
 $title = "Update Stock";
 
@@ -115,15 +105,3 @@ if (isset($_GET["update2"])) {
 
 include 'template.php';
 ?>
-<script>
-    function showConfirm(qty)
-    {
-
-        if (isNaN(qty))
-        {
-            alert("Must input numbers");
-            return false;
-        }
-    }
-
-</script>

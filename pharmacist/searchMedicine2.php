@@ -1,32 +1,29 @@
 <?php
 $medicine_id = $_POST["txtMedicineID"];
-    include '../database/dbconnect.php';
+include '../database/dbconnect.php';
+$title='update stock';
+if (!mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM drug WHERE medicine_name ='$medicine_id'"))) {
+    echo '<script language="javascript">';
+    echo 'alert("Medicine is not found")';
+    echo '</script>';
+} else {
+    $query = "SELECT * FROM drug WHERE medicine_name LIKE '$medicine_id'";
+    $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
-    if (!mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM drug WHERE medicine_name ='$medicine_id'"))) {
-        echo '<script language="javascript">';
-        echo 'alert("Medicine is not found")';
-        echo '</script>';
-    } else {
+    $row = mysqli_fetch_array($result);
+    mysqli_close($mysqli);
 
+    $medicine_id = $row[0];
+    $brand_name = $row[1];
+    $generic_name = $row[2];
+    $type = $row[3];
+    $category = $row[4];
+    $supplier_id = $row[5];
+    $discription = $row[6];
+    $group = $row[8];
+    $image = $row[7];
 
-
-        $query = "SELECT * FROM drug WHERE medicine_name LIKE '$medicine_id'";
-        $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-
-        $row = mysqli_fetch_array($result);
-        mysqli_close($mysqli);
-
-        $medicine_id = $row[0];
-        $brand_name = $row[1];
-        $generic_name = $row[2];
-        $type = $row[3];
-        $category = $row[4];
-        $supplier_id = $row[5];
-        $discription = $row[6];
-        $group = $row[8];
-        $image = $row[7];
-
-        $content = "<h2 style='text-align:center;'>Update Medicine</h2>
+    $content = "<h2 style='text-align:center;'>Update Medicine</h2>
     <form action='searchMedicine.php?id=$medicine_id' method ='post' enctype='multipart/form-data'>
     
       <fieldset>
@@ -80,7 +77,7 @@ $medicine_id = $_POST["txtMedicineID"];
         <input type='submit' name = 'btnUpdate' value='update' ></span><br/> 
         </fieldset>
 </form> ";
-    }
+}
 
 if (isset($_GET["id"])) {
 
@@ -168,30 +165,7 @@ include './MedicineTemplate.php';
 ?>
 
 <script>
-    $(document).ready(function() {
-        $('#medicine').keyup(function() {
-            var query = $(this).val();
-            if (query != '')
-            {
-                $.ajax({
-                    url: "Search.php",
-                    method: "POST",
-                    data: {query: query},
-                    success: function(data)
-                    {
-                        $('#medicineList').fadeIn();
-                        $('#medicineList').html(data);
-                    }
-                });
-            }
-        });
-        $(document).on('click', '#lim', function() {
-            $('#medicine').val($(this).text());
-            $('#medicineList').fadeOut();
 
-
-        });
-    });
 
 
 </script>

@@ -311,7 +311,7 @@ while ($row = mysqli_fetch_array($query)) {
     <body style="margin:0;padding:0;">
         <div>
             <ul class="ul">
-                <li class="li" id="logout"><a href="logout.php">Logout</a></li>
+                <li class="li" id="logout"><a href="../web/logout.php">Logout</a></li>
 
                 <li class="li" id="orders">
                     <div id="order_Counter"></div> 

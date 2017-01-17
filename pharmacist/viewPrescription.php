@@ -356,7 +356,7 @@
                         <tr>
                             <td></td>
                             <td>
-                                <input type="button" class="add" onclick="add_row();" value="Add Row">
+                                <input type="button" class="add" onclick="add_row();" value="Add to list">
                             </td>
                         </tr>
                     </table>

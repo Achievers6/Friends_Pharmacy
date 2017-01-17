@@ -62,7 +62,7 @@
             }
             h2 {
                 text-align:center; 
-                color: #777777; 
+                color: black; 
                 font-family: SourceSansPro;
                 font-size: 2.4em;
                 line-height: 1em;

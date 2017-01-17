@@ -83,7 +83,7 @@ if (isset($_POST['go'])) {
     </head>
 
     <body>
-        <h2>Update supplier</h2>
+        <h2 style="position: relative; left:-540px;">Update supplier</h2>
 <?php require_once("../includes/navigation.php") ?>
         <div id="search_box">
             <form id="search_form" method="post" action="" >

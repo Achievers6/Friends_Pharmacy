@@ -382,7 +382,7 @@ class NexmoMessage {
 			}
 		}
 
-		return $ret;
+		return $tmp['status'];
 	}
 
 

@@ -255,7 +255,7 @@ class stockController {
     }
 
     function allOutDate() {
-        include '../database/dbconnect.php'; 
+        include '../database/dbconnect.php';
 
         $query = "SELECT * FROM stock where 21>DATEDIFF(expire_date,CURDATE()) and 0<DATEDIFF(expire_date,CURDATE());";
 

@@ -138,10 +138,12 @@
 
 ?>
 	<aside class="topSide">			
-            <img src="../public/image/add2.jpg" style="height: 500px; position: relative; top:-330px;">
+		<img src="../public/image/add3.jpg">
 	</aside>
 	
-	
+	<aside class="bottomSide">		
+		<img src="../public/image/add1.jpeg">
+	</aside>
 		
 	<?php require '../includes/customer_footer.php';?>
 
