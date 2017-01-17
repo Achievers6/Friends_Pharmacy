@@ -56,11 +56,14 @@ $output='';
                                     while($row=mysqli_fetch_assoc($result1)){
                                         $cname=$row['company_name'];
                                         ?>
-                                    <option value="<?php echo $cname;?>" id="sup"><?php echo $cname;?></option>    
+                                    <option value="<?php echo $cname;?>" id="sup"><?php echo $cname;?></option> 
+                                  
                                     <?php
-                        
+                                       
                                     }
                                     
+                            
+                           
                                 }
                  
                                 
@@ -93,32 +96,7 @@ $output='';
         
     </body>
 </html>
-    <script>
-   function deleterow(src) {
-    var row = src.parentNode.parentNode;
-    row.parentNode.removeChild(row);
-}
-            
-        function addData(){
-             
-                var raws ="";
-                var supplier= document.getElementById('sup').value;
-                var amount = document.getElementById('amnt').value;
-                var date =document.getElementById('date').value;
-                var med =document.getElementById('med').value;
-                var dos =document.getElementById('dos').value;
-                
-                
-                raws += "<tr><td>" + supplier + "</td><td>" + med + "</td><td>"+ dos + "</td><td>" + amount + "</td><td>" +date+"</td><td><a href=''> <img class='bla' src='../public/image/msg.png' style='width: 25px; height: 25px;'></a></td> <td><a  href=''><img class='confirm' src='../public/image/reject.png' onclick='deleterow()' style='width: 25px; height: 25px;'></a></td> </tr>" ;
-              $(raws).appendTo("#tbl tbody");
-                
-                return false;
-       
-            }
    
-    
-    
-    </script>
 <script>
     $(document).ready(function() {
         $('#med').keyup(function() {

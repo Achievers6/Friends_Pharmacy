@@ -26,7 +26,7 @@ h2{
     font-family: SourceSansPro;
      position: absolute;
     float: right;
-    right:600px;
+    right:500px;
     top:50px;
     font-size: 2.4em;
     line-height: 1em;
@@ -85,7 +85,9 @@ li{
 
 
 #search_box{
-	width: 24%;
+    width:300px;
+	position: absolute;
+    left:600px;
 	border-top: 1px solid #CFD8DC;
 	border-bottom: 2px solid #CFD8DC ;
 	border-right: 1px solid #CFD8DC ;
@@ -124,7 +126,7 @@ li{
     width: 80px;
     height: 30px;
     top:120px;
-    left: 140px;
+    left: 110px;
     background-color: rgb(106,184,42);
     color: white;
     padding: 10px 10px;
@@ -153,8 +155,7 @@ li{
 
 #update_box{
 	position: relative;
-    float: right;
-    left: 1%;
+    left:100px;
     top: 45%;
     width: 100%;
 }
@@ -190,4 +191,11 @@ fieldset{
 .star{
     color:red;
     font-weight: bold;
+}
+.name{
+    font-size: 18px;
+}
+.input{
+    width: 280px;
+    padding: 4px;
 }

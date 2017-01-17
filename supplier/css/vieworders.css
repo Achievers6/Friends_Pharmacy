@@ -1,3 +1,6 @@
+body{
+    font-family: calibri;
+}
 h2{
     position: absolute;
     top:55px;
@@ -24,12 +27,31 @@ h2{
 }
 
 #thead{
-   background-color:  rgb(106,184,42);
+   background-color: rgb(214, 247, 185);
 }
 
-/*
-#tbl{
-    border-style: groove;
+#email{
+    background-color: rgb(106,184,42);
+    height:25px;
+    cursor: pointer;
+    width:60px;
+    border-radius: 4px;
+    color: white;
+    padding: 5px 5px;
+    margin: 8px 0;
+    border: none;
+    margin-left:25px;
 }
-*/
+#cancel{
+      background-color: red;
+    height:25px;
+    cursor: pointer;
+    width:60px;
+    border-radius: 4px;
+    color: white;
+    padding: 5px 5px;
+    margin: 8px 0;
+    border: none;
+    
+}
 

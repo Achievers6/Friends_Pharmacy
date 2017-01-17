@@ -86,49 +86,47 @@ if (isset($_POST['go'])) {
         <?php require_once("../includes/navigation.php") ?>
 
 
-        <!--        gfh-->
+        
         <div id="d1" style="position: relative; left:-40px;">
             <center>
-                <fieldset>
-                    <center>
-                        <form method="post" action="addsupplier.php" id="form">
+        <form method="post" action="addsupplier.php" id="form">
+            
+        <table>
+            <tr height=60>
+            <td class="name" ><span class="star">*</span>Company name</td>
+            <td><input class="input" type="text" id="cname" name="cname" autocomplete="off"></td>
+            </tr>
+            <tr height=60>
+            <td class="name" ><span class="star">*</span>Address </td>
+                <td><textarea rows="4" cols="22" type="text" id="add" name="add" autocomplete="off"></textarea></td>
+            </tr>
+             <tr height=60>
+            <td class="name"><span class="star">*</span>Land number </td>
+            <td><input class="input" type="text" id="lno" name="lno" autocomplete="off"></td>
+            </tr>
+             <tr height=60>
+            <td class="name"><span class="star">*</span>Mobile number </td>
+            <td><input class="input" type="text" id="mno" name="mno" autocomplete="off"></td>
+            </tr>
+             <tr height=60>
+            <td class="name"><span class="star">*</span>Email </td>
+            <td><input class="input" type="text" id="mail" name="mail" autocomplete="off"></td>
+            </tr>
+             <tr height=60>
+            <td class="name">Fax </td>
+            <td><input class="input" type="text" id="fax" name="fax" autocomplete="off"></td>
+            </tr>
+        </table>
+            <input id="i1" type="submit" name="go" value="Add" >
+        
+           
+           
+           </form>
+                            
 
-                            <table>
-                                <tr height=60>
-                                    <td ><span class="star">*</span>Company name</td>
-                                    <td><input type="text" id="cname" name="cname" autocomplete="off"></td>
-                                </tr>
-                                <tr height=60>
-                                    <td><span class="star">*</span>Address </td>
-                                    <td><textarea rows="4" cols="22" type="text" id="add" name="add" autocomplete="off"></textarea></td>
-                                </tr>
-                                <tr height=60>
-                                    <td><span class="star">*</span>Land number </td>
-                                    <td><input type="text" id="lno" name="lno" autocomplete="off"></td>
-                                </tr>
-                                <tr height=60>
-                                    <td><span class="star">*</span>Mobile number </td>
-                                    <td><input type="text" id="mno" name="mno" autocomplete="off"></td>
-                                </tr>
-                                <tr height=60>
-                                    <td><span class="star">*</span>Email </td>
-                                    <td><input type="text" id="mail" name="mail" autocomplete="off"></td>
-                                </tr>
-                                <tr height=60>
-                                    <td>Fax </td>
-                                    <td><input type="text" id="fax" name="fax" autocomplete="off"></td>
-                                </tr>
-                            </table>
-                            <input id="i1" type="submit" name="go" value="Add" >
-
-
-
-                        </form>
-
-
-                    </center>
-                </fieldset>
-            </center>
+        </center>
+        </fieldset>
+        </center>
         </div>
 
 

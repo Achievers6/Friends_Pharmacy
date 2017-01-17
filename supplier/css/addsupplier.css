@@ -56,8 +56,13 @@ table {
     margin: 8px 0;
     border: none;
 }
-  
-   
+.input{
+  width: 280px;
+    padding: 4px;
+}
+.name{
+    font-size: 20px;
+}
    
    
 

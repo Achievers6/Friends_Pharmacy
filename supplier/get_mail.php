@@ -30,6 +30,21 @@ while($row=mysqli_fetch_assoc($result)){
     
 }
   }
+if(isset($_POST['cancel'])){
+    $supplier=$_POST["del_sup"];
+    $day=$_POST["del_date"];
+    $dos=$_POST["del_dos"];
+    $med=$_POST["del_drug"];
+    $amnt=$_POST["del_amnt"];
+    $id=$_POST["del_id"];
+    
+    $del="DELETE FROM orders WHERE order_id=$id ";
+    if(mysqli_query($mysqli,$del)){
+        echo "<script>alert('Order deleted');
+        window.location.href='vieworders.php'</script>";
+    
+  
+}
 
-
+}
 ?>

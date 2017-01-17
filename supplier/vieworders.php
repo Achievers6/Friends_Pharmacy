@@ -1,5 +1,6 @@
 <html>
     <head>
+        <title>View order</title>
         <?php require('../includes/_header.php'); ?>
     <link href="css/vieworders.css" type="text/css" rel="stylesheet">
         
@@ -10,7 +11,7 @@
     
     <body>
         <?php require_once("../includes/navigation.php") ?>
-        <h2>Supplier details</h2>
+        <h2>View Orders</h2>
         
         <div id="main">
         <table id="tbl">
@@ -22,7 +23,7 @@
                 <th>Amount</th>
                 <th>Date</th>
                 <th>Send Email</th>
-                <th>Delete</th>
+                <th>Cancel</th>
         
             </thead>
             
@@ -43,18 +44,30 @@ mysqli_select_db($mysqli, "friends_pharmacy") or die("Couldn't connect to databa
                      <td> <?php echo $row['amount'] ?></td>
                      <td> <?php echo $row['date'] ?></td>
                     <td><form method="post" action="get_mail.php" >
+                           
                             <input type="hidden" name="supplier_name" value="<?php echo $row['supplier']; ?>">
+                            <input type="hidden" name="drug" value="<?php echo $row['drug']; ?>">
                             <input type="hidden" name="amount" value="<?php echo $row['amount']; ?>">
                             <input type="hidden" name="dosage" value="<?php echo $row['dosage']; ?>">
-                        
-                            <input type="hidden" name="drug" value="<?php echo $row['drug']; ?>">
                             <input type="hidden" name="date" value="<?php echo $row['date']; ?>">
-
-
-                            <input type="submit" name="email" value="Email">
+                            <input type="submit" name="email" id="email" value="Email">
+                           
                         </form>
-                     <td><img src="../public/image/reject.png" style='width: 25px; height: 25px';></td>
-                
+                    </td>
+                    <td><form method="post" action="get_mail.php">
+                            <input type="hidden" name="del_id" value="<?php echo $row['order_id']; ?>">
+                            <input type="hidden" name="del_sup" value="<?php echo $row['supplier']; ?>">
+                            <input type="hidden" name="del_drug" value="<?php echo $row['date']; ?>">
+                            <input type="hidden" name="del_amnt" value="<?php echo $row['amount']; ?>">
+                            <input type="hidden" name="del_dos" value="<?php echo $row['dosage']; ?>">
+                            <input type="hidden" name="del_date" value="<?php echo $row['date'];?>">
+                            <input type="submit" name="cancel" id="cancel" value="Cancel" >
+                            
+                            
+                            </form>
+                    
+                    
+                        
                 </tr>
                 <?php
                         }

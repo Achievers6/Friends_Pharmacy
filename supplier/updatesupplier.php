@@ -102,28 +102,28 @@ if (isset($_POST['go'])) {
 
                         <table id="tbl">
                             <tr height=60>
-                                <td><span class="star">*</span>Company name</td>
-                                <td><input type="text" id="cname" name="cname"  value="<?php echo $rows['company_name']; ?>" ></td>
+                                <td class="name"><span class="star">*</span>Company name</td>
+                                <td><input class="input" type="text" id="cname" name="cname"  value="<?php echo $rows['company_name']; ?>" ></td>
                             </tr>
                             <tr height=60>
-                                <td><span class="star">*</span>Address </td>
+                                <td class="name"><span class="star">*</span>Address </td>
                                 <td><textarea cols="22" rows="4" type="text" id="add" name="add" value="<?php echo $rows['address']; ?> "><?php echo $rows['address']; ?> </textarea></td>
                             </tr>
                             <tr height=60>
-                                <td><span class="star">*</span>Land number </td>
-                                <td><input type="text" id="lno" name="lno" value="<?php echo $rows['telephone']; ?> "></td>
+                                <td class="name"><span class="star">*</span>Land number </td>
+                                <td><input  class="input" type="text" id="lno" name="lno" value="<?php echo $rows['telephone']; ?> "></td>
                             </tr>
                             <tr height=60>
-                                <td><span class="star">*</span>Mobile number </td>
-                                <td><input type="text" id="mno" name="mno" value="<?php echo $rows['mobile']; ?> "></td>
+                                <td class="name"><span class="star">*</span>Mobile number </td>
+                                <td><input  class="input" type="text" id="mno" name="mno" value="<?php echo $rows['mobile']; ?> "></td>
                             </tr>
                             <tr height=60>
-                                <td><span class="star">*</span>Email </td>
-                                <td><input type="text" id="mail" name="mail" value="<?php echo $rows['email']; ?>"></td>
+                                <td class="name"><span class="star">*</span>Email </td>
+                                <td><input  class="input" type="text" id="mail" name="mail" value="<?php echo $rows['email']; ?>"></td>
                             </tr>
                             <tr height=60>
-                                <td>Fax </td>
-                                <td><input type="text" id="fax" name="fax" value="<?php echo $rows['fax']; ?>"></td>
+                                <td class="name">Fax </td>
+                                <td><input  class="input" type="text" id="fax" name="fax" value="<?php echo $rows['fax']; ?>"></td>
                             </tr>
                         </table>
                         <input  type="submit" name="go" value="Update" id="update" >
