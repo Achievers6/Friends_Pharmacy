@@ -5,7 +5,7 @@ mysqli_select_db($mysqli, "friends_pharmacy") or die("Couldn't connect to databa
   if(isset($_POST['email'])){
       $sup= $_POST["supplier_name"];
       $date = $_POST["date"];
-      $dosge = $_POST["dosage"];
+      $dosage = $_POST["dosage"];
       $drug =$_POST["drug"];
       $amount=$_POST["amount"];
       //echo $sup;
@@ -15,7 +15,7 @@ $get="SELECT * FROM supplier WHERE company_name='$sup'";
 $result  = mysqli_query($mysqli,$get);
 while($row=mysqli_fetch_assoc($result)){
     $email = $row["email"];
-    echo $email;
+   
     
     
     
@@ -29,6 +29,7 @@ while($row=mysqli_fetch_assoc($result)){
     
     
 }
+      $up="UPDATE orders SET send='SENT'";
   }
 if(isset($_POST['cancel'])){
     $supplier=$_POST["del_sup"];

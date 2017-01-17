@@ -24,6 +24,7 @@
                 <th>Date</th>
                 <th>Send Email</th>
                 <th>Cancel</th>
+                <th>Status</th>
         
             </thead>
             
@@ -43,6 +44,7 @@ mysqli_select_db($mysqli, "friends_pharmacy") or die("Couldn't connect to databa
                      <td> <?php echo $row['dosage'] ?></td>
                      <td> <?php echo $row['amount'] ?></td>
                      <td> <?php echo $row['date'] ?></td>
+                     <td> <?php echo $row['send'] ?></td>
                     <td><form method="post" action="get_mail.php" >
                            
                             <input type="hidden" name="supplier_name" value="<?php echo $row['supplier']; ?>">
@@ -50,6 +52,7 @@ mysqli_select_db($mysqli, "friends_pharmacy") or die("Couldn't connect to databa
                             <input type="hidden" name="amount" value="<?php echo $row['amount']; ?>">
                             <input type="hidden" name="dosage" value="<?php echo $row['dosage']; ?>">
                             <input type="hidden" name="date" value="<?php echo $row['date']; ?>">
+                            
                             <input type="submit" name="email" id="email" value="Email">
                            
                         </form>
