@@ -30,6 +30,7 @@ while($row=mysqli_fetch_assoc($result)){
     
 }
       $up="UPDATE orders SET send='SENT'";
+      mysqli_query($mysqli,$up);
   }
 if(isset($_POST['cancel'])){
     $supplier=$_POST["del_sup"];

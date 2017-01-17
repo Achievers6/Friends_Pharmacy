@@ -14,9 +14,9 @@ mysqli_select_db($mysqli, "friends_pharmacy") or die("Couldn't connect to databa
                  
                 
                 $sql1= "INSERT INTO orders (drug,supplier,dosage,amount,date,send) values ('$med','$sup','$dos','$amnt','$date','NO')";
-               if(mysqli_query($mysqli,$sql1)){
-                    echo "<script>alert('Order added successfully');
-                    window.location.href='placeorder.php'</script>";
+                    if(mysqli_query($mysqli,$sql1)){
+                        echo "<script>alert('Order added successfully');
+                        window.location.href='placeorder.php'</script>";
     
   
 }

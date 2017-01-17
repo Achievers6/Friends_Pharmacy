@@ -2,7 +2,7 @@
     <head>
         <title>View order</title>
         <?php require('../includes/_header.php'); ?>
-    <link href="css/vieworders.css" type="text/css" rel="stylesheet">
+        <link href="css/vieworders.css" type="text/css" rel="stylesheet">
         
         <script src="js/jquery-3.1.0.min.js"></script>
         <script src="../customer/js/jquery.dataTables.min.js"></script>
@@ -67,7 +67,7 @@ mysqli_select_db($mysqli, "friends_pharmacy") or die("Couldn't connect to databa
                             <input type="submit" name="cancel" id="cancel" value="Cancel" >
                             
                             
-                            </form>
+                        </form>
                     
                     
                         
@@ -81,7 +81,7 @@ mysqli_select_db($mysqli, "friends_pharmacy") or die("Couldn't connect to databa
     
     </div>
     
-    </body>
+</body>
 </html>
 <script>
     $(document).ready(function(){

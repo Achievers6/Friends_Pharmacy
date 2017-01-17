@@ -9,9 +9,9 @@ $output='';
 <html>
         <head>
              <?php require('../includes/_header.php'); ?>
-            <title>Place order</title>
+             <title>Place order</title>
            
-            <link href="css/placeorder.css" rel="stylesheet" type="text/css">
+             <link href="css/placeorder.css" rel="stylesheet" type="text/css">
              <script type="text/javascript"></script>
              <script src="js/jquery-3.1.0.min.js"></script>
         </head>
@@ -70,7 +70,7 @@ $output='';
                                 
                                 
                             ?>
-                        </select></td>
+                          </select></td>
                    </tr>
                    <tr height="50">
                         <td>Dosage</td>
