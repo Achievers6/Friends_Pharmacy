@@ -88,6 +88,7 @@ if (isset($_POST['go'])) {
 
         
         <div id="d1" style="position: relative; left:-40px;">
+            <fieldset>
             <center>
         <form method="post" action="addsupplier.php" id="form">
             

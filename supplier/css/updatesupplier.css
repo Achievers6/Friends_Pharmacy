@@ -126,7 +126,7 @@ li{
     width: 80px;
     height: 30px;
     top:120px;
-    left: 110px;
+    left: 300px;
     background-color: rgb(106,184,42);
     color: white;
     padding: 10px 10px;
@@ -155,7 +155,7 @@ li{
 
 #update_box{
 	position: relative;
-    left:100px;
+    left:200px;
     top: 45%;
     width: 100%;
 }
