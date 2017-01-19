@@ -1,3 +1,12 @@
+#medicineList {
+    background-color: white;
+    width: 280px;
+    position: relative;
+    left: 160px;
+    top: -15px;
+    list-style: none;
+
+}
 #nicList {
     background-color: white;
     width: 280px;
@@ -10,7 +19,7 @@
 ul {
     list-style-type: none;
 
-   
+
 }
 .timeselect {
     position: relative;

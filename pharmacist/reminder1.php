@@ -16,25 +16,30 @@
             }
         </style>
         <script>
+
             $(document).ready(function() {
+                //if day reminder is clicked
                 $("#ch1").click(function() {
                     $(".weekdays").hide();
                     $(".day").toggle();
                 });
+                //if weekday reminder is clicked
                 $("#ch2").click(function() {
                     $(".day").hide();
                     $(".weekdays").toggle();
                 });
+                //if 1 time select
                 $("#t1").click(function() {
                     $(".ts1").toggle();
 
                 });
-
+                //if 2 times select
                 $("#t2").click(function() {
                     $(".ts1").toggle();
                     $(".ts2").toggle();
 
                 });
+                //if 3times select
                 $("#t3").click(function() {
                     $(".ts1").toggle();
                     $(".ts2").toggle();
@@ -43,6 +48,7 @@
 
             });
             $(document).ready(function() {
+                //get the value of medicine name input
                 $('#txtmedname').keyup(function() {
                     var query = $(this).val();
                     if (query != '')
@@ -59,14 +65,17 @@
                         });
                     }
                 });
+                //after medicine select from the list
                 $(document).on('click', '#lim', function() {
+                    //fill the list value to the input feild
                     $('#txtmedname').val($(this).text());
+                    //show off the list
                     $('#medicineList').fadeOut();
 
 
                 });
             });
-
+            //nic's fill
             $(document).ready(function() {
                 $('#nic').keyup(function() {
                     var query = $(this).val();
@@ -84,8 +93,11 @@
                         });
                     }
                 });
+                //after nic select from the list
                 $(document).on('click', '#lin', function() {
+                    //fill the list value to the input feild
                     $('#nic').val($(this).text());
+                    //show off the list
                     $('#nicList').fadeOut();
 
 
@@ -333,6 +345,7 @@
 </html>
 <?php
 if (isset($_POST['btnsubmitrem'])) {
+    //create connec tion
     include '../database/dbconnect.php';
     $nic = $_POST["txtnic"];
     $contactno = $_POST["txtcontact"];
@@ -346,20 +359,23 @@ if (isset($_POST['btnsubmitrem'])) {
     $min1 = 100;
     $min2 = 100;
     $min3 = 100;
+    //check entered medicine is in tha db
     if (!(mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM drug WHERE medicine_name ='$medname'")))) {
         echo '<script language="javascript">';
         echo 'alert(" please enter valid medicine name")';
         echo '</script>';
+    //check entered nic is in the db
     } else if (!(mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM customer WHERE nic ='$nic'")))) {
         echo '<script language="javascript">';
         echo 'alert(" please enter valid NIC")';
         echo '</script>';
-    } 
-    else if (!isset($_POST["txtcontact"]) or strlen($contactno) != 10) {
+    //check contact number length has 10 values
+    } else if (!isset($_POST["txtcontact"]) or strlen($contactno) != 10) {
         echo '<script language="javascript">';
         echo 'alert(" please enter valid contact number")';
         echo '</script>';
-    }else if ($quantity==NULL) {
+     //quantity should not be null
+    } else if ($quantity == NULL) {
         echo '<script language="javascript">';
         echo 'alert(" please enter valid quantity")';
         echo '</script>';
@@ -367,17 +383,19 @@ if (isset($_POST['btnsubmitrem'])) {
 
 
         if (isset($_POST["daybox"])) {
-
+            //if time 1 select,get the time entered
             if (isset($_POST["time1"])) {
                 $time1 = $_POST["daytime1"];
                 $min1 = $_POST["min1"];
             }
+            //if time 2 select,get the 2 time entered
             if (isset($_POST["time2"])) {
                 $time1 = $_POST["daytime1"];
                 $time2 = $_POST["daytime2"];
                 $min1 = $_POST["min1"];
                 $min2 = $_POST["min2"];
             }
+            //if time 3 select,get the 3 time entered
             if (isset($_POST["time3"])) {
                 $time1 = $_POST["daytime1"];
                 $time2 = $_POST["daytime2"];
@@ -395,12 +413,13 @@ if (isset($_POST['btnsubmitrem'])) {
              VALUES
              ('$nic', '$contactno','$medname', '$instruction', '$quantity', '$time1','$time2','$time3', CURDATE(), CURDATE()+ $dayadd,'$min1','$min2','$min3')";
 
-
+            //insert data to db and if it is succsess alert riminder is su
             if (mysqli_query($mysqli, $query)) {
                 echo '<script language="javascript">';
                 echo 'alert(" Day reminder is added Successfully")';
                 echo '</script>';
             }
+        //if weekday plan is clicked
         } else {
 
             $time = $_POST["weektime"];
@@ -415,8 +434,8 @@ if (isset($_POST['btnsubmitrem'])) {
             $Satday = 0;
             $Sunday = 0;
 
-
-
+            
+            //get the what days select
             if (isset($_POST["monday"])) {
                 $Monday = 1;
             }
@@ -444,7 +463,7 @@ if (isset($_POST['btnsubmitrem'])) {
              VALUES
              ('$nic', '$contactno','$medname', '$instruction', '$quantity','$time','$startdate','$enddate','$Monday','$Tuesday','$Wednesday','$Thursday','$Friday','$Satday','$Sunday',$min)";
 
-
+            //insert reminder in db and notify if it is success
             if (mysqli_query($mysqli, $query)) {
                 echo '<script language="javascript">';
                 echo 'alert(" week reminder is added Successfully")';
@@ -458,7 +477,7 @@ if (isset($_POST['btnsubmitrem'])) {
     }
 
 
-
+    //colse the connection
     mysqli_close($mysqli);
 }
 ?>

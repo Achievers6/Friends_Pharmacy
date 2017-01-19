@@ -2,16 +2,17 @@
 
 include ("../Entities/reminderEntity.php");
 require 'msg/example.php';
+//set defalt time zone ti asia/colombo
 date_default_timezone_set('Asia/Colombo');
-
+//create connection
 include '../database/dbconnect.php';
-
+//get the current day,hour and minute
 $today = date("l");
 $curhour = date("H");
-$m = date("i");
-echo $today." ".$curhour." ".$m;
+$minutes = date("i");
 
-$query = "SELECT * FROM reminderweekday where $today=1 AND time=$curhour AND min=$m";
+//get the values from db 
+$query = "SELECT * FROM reminderweekday where $today=1 AND time=$curhour AND min=$minutes";
 $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 $reminderArray = array();
 while ($row = mysqli_fetch_array($result)) {
@@ -37,6 +38,7 @@ while ($row = mysqli_fetch_array($result)) {
     $reminder = new reminderEntity($reminder_id, $nic, $contactno, $medname, $instruction, $quantity, $time, $startdate, $enddate, $Monday, $Tuesday, $Wednesday, $Thursday, $Friday, $Saturday, $Sunday);
     array_push($reminderArray, $reminder);
 }
+//close connection
 mysqli_close($mysqli);
 
 
@@ -51,7 +53,7 @@ foreach ($reminderArray as $key => $reminder) {
     echo $reminder->quantity;
     echo $reminder->time;
 
-    $text->msg($reminder->medname, $reminder->instruction, $reminder->quantity, $reminder->time,$reminder->contactno);
+    $text->msg($reminder->medname, $reminder->instruction, $reminder->quantity, $reminder->time, $reminder->contactno);
     //$reminder->contactno 
 }
 

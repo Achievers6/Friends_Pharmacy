@@ -29,7 +29,7 @@ class text {
             echo '</script>';
         } else if ('OK') {
             echo '<script language="javascript">';
-            echo "alert('Confirmed order has been sent successfully ')";
+            echo "alert('Confirmed order has been sent successfully,contact no is  $no ')";
             echo '</script>';
         }
         else{

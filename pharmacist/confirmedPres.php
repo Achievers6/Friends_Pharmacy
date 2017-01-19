@@ -3,8 +3,6 @@
 require 'presController.php';
 $title = "Prescription orders";
 $presController = new presController();
-
-
 if (isset($_GET["pres_no"])) {
 
     $presListTable = $presController->presListTable($_GET["pres_no"]);

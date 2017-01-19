@@ -1,14 +1,16 @@
+<!--to table sortble-->
 <script src="../public/js/sort.js"></script>
 <?php
 require 'stockController.php';
 $title = "Update Stock";
+//create instance of stockController
 $stockController = new stockController();
 
 if (isset($_POST['btnView'])) {
     $medicine_Name = $_POST["txtMedicinedName"];
-
+    //create conection
     include '../database/dbconnect.php';
-
+    //check the medicine is in the stock
     if (!mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM stock WHERE medicine_name ='$medicine_Name'"))) {
         echo '<script language="javascript">';
         echo 'alert("Stock is not found")';
@@ -28,6 +30,7 @@ if (isset($_POST['btnView'])) {
     </form> 
     ";
     } else {
+        //creat the table
         $stockTable = $stockController->UpdateStockTables($medicine_Name);
         $content = $stockTable;
     }

@@ -132,17 +132,17 @@ class presController {
         include '../database/dbconnect.php';
         $query = "SELECT * FROM prescription_items where pres_id = '$no'";
         $resultq = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-     
+
         include '../database/dbconnect.php';
 
-        
 
-        
+
+
 
         $sql = "SELECT * FROM Prescription WHERE prescription_id='$no'";
         $result = mysqli_query($mysqli, $sql);
-        $row = mysqli_fetch_array($result) ;
-           $result= "
+        $row = mysqli_fetch_array($result);
+        $result = "
                 <style>
                 #myImg {
                 border-radius: 5px;
@@ -255,10 +255,10 @@ class presController {
                 
                         
 ";
-        
-        
 
-$result =$result. "
+
+
+        $result = $result . "
 
 <h2 style='text-align:center;'>Order List - $no<h2>
         <table class='sortable' style='width:700px; position:absolute; right:400px;'>
@@ -270,7 +270,7 @@ $result =$result. "
                 <th><b>Quantity</b></th>
                 <th><b>Amount (Rs)</b></th>
             </tr>";
-            while ($row = mysqli_fetch_array($resultq)) {
+        while ($row = mysqli_fetch_array($resultq)) {
             $medname = $row[1];
             $queryp = "SELECT price FROM drug_price where medicine_name = '$medname' and dosage = '$row[2]' ";
             $resultp = mysqli_query($mysqli, $queryp) or die(mysqli_error($mysqli));
@@ -286,11 +286,12 @@ $result =$result. "
                 <td><b>$amount</b></td>
             </tr>
             ";
-            }
-            $result = $result . "</table>";
-        return $result;
         }
-        function sendsms($email, $msg) {
+        $result = $result . "</table>";
+        return $result;
+    }
+
+    function sendsms($email, $msg) {
         include '../database/dbconnect.php';
         $query2 = "SELECT first_name,last_name,contact_number FROM customer where email = '$email'";
         $result2 = mysqli_query($mysqli, $query2) or die(mysqli_error($mysqli));
@@ -298,15 +299,14 @@ $result =$result. "
         $fname = $row2["first_name"];
         $lname = $row2["last_name"];
         $cno = $row2["contact_number"];
-        $message = "Dear " . $fname ." ". $lname .", ". $msg;
+        $message = "Dear " . $fname . " " . $lname . ", " . $msg;
 
         include '../msg/example.php';
         $text = new text();
-        $no =  "94".substr($cno, 1);
+        $no = "94" . substr($cno, 1);
 
         $text->msg($no, $message);
+    }
 
-        }
-
-        }
-        ?>
+}
+?>

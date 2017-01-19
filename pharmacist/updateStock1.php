@@ -18,6 +18,7 @@ $content = "
 
 if (isset($_GET["update"])) {
     $id = $_GET["update"];
+    // Create connection
     include '../database/dbconnect.php';
 
     $query = "SELECT * FROM stock WHERE id LIKE ($id)";
@@ -69,10 +70,7 @@ if (isset($_GET["update"])) {
         
        <input type='submit' name = 'btnSubmit' onclick='showConfirm($quantity)'><br/> 
          <p></p>
-
-         
-      
-     </fieldset>
+    </fieldset>
 </form> ";
 }
 if (isset($_GET["update2"])) {
@@ -84,19 +82,14 @@ if (isset($_GET["update2"])) {
     $EXP_date = $_POST["EXP_date"];
     $dosage = $_POST["txtdosage"];
     $price = $_POST['price'];
-
+    
+    // Create connection
     include '../database/dbconnect.php';
-
-
-
     $query = "UPDATE stock
             SET quantity=$quantity,entry_date='$entry_date',production_date='$production_date',expire_date='$EXP_date',dosage='$dosage',price = '$price'
             WHERE id='$id'";
-
-
-
-
     mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+    //close connection
     mysqli_close($mysqli);
     echo '<script language="javascript">';
     echo 'alert("Updated successfully")';

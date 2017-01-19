@@ -224,7 +224,7 @@ class stockController {
     function DeleteStock($id) {
         include '../database/dbconnect.php';
         $query = "select medicine_name from stock where id=$id";
-//Execute query and close connection
+        //Execute query and close connection
         $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
         $row = mysqli_fetch_array($result);
         mysqli_close($mysqli);
